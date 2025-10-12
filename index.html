@@ -3,8 +3,28 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>PatoGo — Download Oficial (Unpacked)</title>
-  <meta name="description" content="Baixe a extensão PatoGo em modo desenvolvedor (unpacked). Instruções de instalação, atualização e política de privacidade."/>
+  <title>PatoGo — Extensão para extrair leads do Google Maps (Download Oficial)</title>
+
+  <!-- Descrição focada em intenção de busca -->
+  <meta name="description" content="Baixe a PatoGo: extensão para extrair leads do Google Maps, verificar se o número tem WhatsApp e organizar contatos. Guia de instalação unpacked e atualizações."/>
+
+  <!-- Canonical (use SEM www se essa for sua versão canônica) -->
+  <link rel="canonical" href="https://patogo.com.br/"/>
+
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="pt-BR" href="https://patogo.com.br/"/>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PatoGo — Download Oficial da Extensão">
+  <meta property="og:description" content="Extraia leads do Google Maps e verifique WhatsApp. Instalação unpacked, atualizações e política de privacidade.">
+  <meta property="og:url" content="https://patogo.com.br/">
+  <meta property="og:image" content="https://patogo.com.br/icons/pato.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="PatoGo — Extensão de Leads">
+  <meta name="twitter:description" content="Extraia leads do Google Maps e valide WhatsApp.">
+  <meta name="twitter:image" content="https://patogo.com.br/icons/pato.png">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="style.css"/>
 </head>
@@ -16,21 +36,25 @@
       </div>
       <div class="headings">
         <h1>PatoGo — Download Oficial</h1>
-        <p class="subtitle">Instale como <strong>unpacked</strong>, receba atualizações guiadas e mantenha tudo local, sem envio de dados.</p>
+        <p class="subtitle">
+          Extensão para Extrair leads do Google Maps e verificar WhatsApp.
+          
+        </p>
       </div>
     </header>
 
-    <section class="hero">
+    <!-- Seção Hero com âncora de download -->
+    <section class="hero" id="download">
       <div class="card">
         <div class="tag">Versão atual: <span id="cur-ver" class="mono">—</span></div>
-        <h2>Baixar</h2>
+        <h2>Baixar PatoGo</h2>
         <p class="muted">
           Clique para baixar o pacote ZIP e instalar no Chrome via
           <span class="code">chrome://extensions</span> → <b>Developer mode</b> → <b>Load unpacked</b>.
         </p>
         <div class="cta">
           <a id="dl" class="btn btn-primary" href="#" download aria-label="Baixar PatoGo">
-            <!-- Ícone: arrow-down-tray (estilo outline) -->
+            <!-- Ícone: arrow-down-tray -->
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1.5"/>
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v11m0 0l-4-4m4 4l4-4"/>
@@ -38,7 +62,7 @@
             <span>Baixar PatoGo (<span id="ver-a">—</span>)</span>
           </a>
 
-          <button id="how" class="btn btn-ghost" type="button">Como instalar</button>
+          <a class="btn btn-ghost" href="#instalacao">Como instalar</a>
           <a id="hash" class="btn btn-ghost" href="#" rel="noopener">SHA-256</a>
         </div>
         <div class="kvs">
@@ -52,9 +76,9 @@
       </div>
 
       <div class="card">
-        <h2>Atualizações</h2>
+        <h2>Atualizar a PatoGo: novas versões e changelog</h2>
         <p class="muted">
-          Quando houver nova versão, o PatoGo avisa dentro da extensão. Você pode atualizar manualmente ou usar o nosso
+          Quando houver nova versão, a PatoGo avisa dentro da extensão. Você pode atualizar manualmente ou usar o nosso
           <b>atualizador nativo</b> (opcional) para 1 clique no Windows.
         </p>
         <ul>
@@ -65,8 +89,18 @@
       </div>
     </section>
 
+    <!-- Seção explicativa com termos de busca (long-tail) -->
+    <section class="card">
+      <h2>O que é a PatoGo (em 1 minuto)</h2>
+      <ul>
+        <li><b>Extrair leads do Google Maps:</b> gere planilhas com nome e telefone de estabelecimentos.</li>
+        <li><b>Verificar se o número tem WhatsApp:</b> validação direta no WhatsApp Web, sem APIs externas.</li>
+        <li><b>Privado e local:</b> processamento no seu navegador; sem coleta de dados.</li>
+      </ul>
+    </section>
+
     <section class="card" id="instalacao">
-      <h2>Como instalar (Chrome)</h2>
+      <h2>Como instalar a extensão PatoGo no Chrome (unpacked)</h2>
       <ol class="steps">
         <li>Baixe o ZIP da versão: <a id="dl2" href="#">PatoGo <span id="ver-b">—</span></a>.</li>
         <li>Descompacte para uma pasta fixa, ex.: <span class="code">C:\\PatoGo\\Extension</span>.</li>
@@ -87,17 +121,17 @@
         <p class="muted">Opcional: use o atualizador nativo para fazer o passo 2 automaticamente.</p>
       </div>
 
-      <div class="card">
-        <h2 id="faq">FAQ</h2>
+      <div class="card" id="faq">
+        <h2>FAQ — Perguntas frequentes</h2>
         <dl class="faq">
-          <dt>Isso instala pela Chrome Web Store?</dt>
-          <dd>Não. Este é o pacote <em>unpacked</em> para uso em modo desenvolvedor. A Chrome Web Store não é utilizada aqui.</dd>
+          <dt>A PatoGo instala pela Chrome Web Store?</dt>
+          <dd>Não. É o pacote <em>unpacked</em> para modo desenvolvedor. Há um helper opcional para atualizar com 1 clique no Windows.</dd>
+
+          <dt>A PatoGo verifica se o número tem WhatsApp?</dt>
+          <dd>Sim. A extensão abre o WhatsApp Web com o número informado e retorna o status (válido ou não) diretamente no navegador.</dd>
 
           <dt>Recebo atualização automática?</dt>
-          <dd>O Chrome não atualiza pacotes <em>unpacked</em> automaticamente. A extensão avisa quando há nova versão e você atualiza seguindo os passos. Se instalar o helper nativo (Windows), o passo de substituir a pasta vira 1 clique.</dd>
-
-          <dt>É seguro?</dt>
-          <dd>Sim: o código é empacotado localmente; não há execução de código remoto. O site apenas fornece o ZIP e um <span class="code">selectors.json</span> com <strong>dados</strong> (não código) para manter compatibilidade de seletores.</dd>
+          <dd>O Chrome não atualiza pacotes <em>unpacked</em> automaticamente. A extensão avisa quando há nova versão e você atualiza seguindo os passos. Com o helper (Windows), a troca de pasta vira 1 clique.</dd>
 
           <dt>Privacidade</dt>
           <dd>Não coletamos dados pessoais. Todo o processamento é local. Veja a <a href="#privacidade">Política de Privacidade</a>.</dd>
@@ -112,14 +146,59 @@
         (<span class="code">activeTab</span>, <span class="code">scripting</span>, <span class="code">storage</span>)
         são usadas somente para operar na aba ativa mediante ação do usuário e para armazenar configurações/resultados localmente.
         Não coletamos, vendemos ou compartilhamos dados.
-        Contato: <a href="mailto:lucaspsimoes22@gmail.com">lucaspsimoes22@gmail.com</a>.
+        Contato: <a href="mailto:lucaspsimoes22@gmail.com">XXXXXXXX@gmail.com</a>.
       </p>
     </section>
 
     <footer class="footer">
       <p class="muted">© <span id="y"></span> PatoGo. Todos os direitos reservados. · <a id="releaseLink" href="#">Releases</a></p>
+      <nav class="footer-nav">
+        <a href="#download">Download</a> ·
+        <a href="#instalacao">Instalação</a> ·
+        <a href="#faq">FAQ</a> ·
+        <a href="#privacidade">Privacidade</a>
+      </nav>
     </footer>
   </div>
+
+  <!-- JSON-LD: FAQPage (rich snippet) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "A PatoGo instala pela Chrome Web Store?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Não. É um pacote unpacked para modo desenvolvedor com atualização guiada. Há um helper opcional para 1 clique no Windows." }
+    },{
+      "@type": "Question",
+      "name": "A PatoGo verifica se o número tem WhatsApp?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sim. A extensão abre o WhatsApp Web com o número informado e retorna o status (válido ou não) diretamente no navegador." }
+    },{
+      "@type": "Question",
+      "name": "Meus dados são coletados?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Não. O processamento é local no navegador; não coletamos, vendemos ou compartilhamos dados." }
+    }]
+  }
+  </script>
+
+  <!-- JSON-LD: SoftwareApplication (ajuda o Google a entender seu produto) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PatoGo",
+    "operatingSystem": "Windows, macOS, Linux (Chrome)",
+    "applicationCategory": "BrowserExtension",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+    "downloadUrl": "https://patogo.com.br/#download",
+    "softwareVersion": "1.0.0",
+    "description": "Extensão para extrair leads do Google Maps e verificar se números possuem WhatsApp.",
+    "author": { "@type": "Person", "name": "Lucas Pereira Simoes" },
+    "publisher": { "@type": "Organization", "name": "PatoGo" },
+    "inLanguage": "pt-BR"
+  }
+  </script>
 
   <script src="app.js" defer></script>
 </body>
