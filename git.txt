@@ -1,0 +1,16 @@
+# Meu comando para subir pro git
+
+#Verificar status
+git status
+
+#Adicionar todos os arquivos modificados
+git add .
+
+#Mensagem indicando qual o commit 
+git commit -m "Descrição clara e concisa das alterações"
+
+#Envie o commit para o github
+ git push origin main
+
+
+ 

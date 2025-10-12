@@ -5,68 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>PatoGo — Download Oficial (Unpacked)</title>
   <meta name="description" content="Baixe a extensão PatoGo em modo desenvolvedor (unpacked). Instruções de instalação, atualização e política de privacidade."/>
-  <style>
-    :root{
-      --bg:#0b1220; /* dark base */
-      --card:#0f172a;
-      --ink:#e2e8f0;
-      --muted:#94a3b8;
-      --accent:#0ea5e9;
-      --accent-2:#38bdf8;
-      --success:#22c55e;
-      --warn:#f59e0b;
-      --ring: rgba(14,165,233,.35);
-      --radius: 16px;
-      --shadow: 0 20px 60px rgba(2,6,23,.35);
-    }
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#f8fafc; --card:#ffffff; --ink:#0b1220; --muted:#475569; --shadow: 0 10px 30px rgba(2,6,23,.08); }
-    }
-    *{ box-sizing:border-box }
-    html,body{ margin:0; padding:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
-    a{ color:var(--accent-2); text-decoration:none }
-    a:hover{ text-decoration:underline }
-    .container{ max-width:1000px; margin:0 auto; padding:24px }
-    header{ display:flex; align-items:center; gap:16px; padding:16px 0 8px }
-    .logo{ width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg,#fde68a,#facc15); display:grid; place-items:center; color:#0b1220; font-weight:800; box-shadow:var(--shadow) }
-    h1{ margin:0; font-size:clamp(22px,4vw,34px); letter-spacing:.3px }
-    .subtitle{ color:var(--muted); margin:4px 0 0; font-size:14px }
-
-    .hero{ margin-top:12px; display:grid; grid-template-columns: 1.2fr .8fr; gap:24px }
-    .card{ background:var(--card); border:1px solid rgba(148,163,184,.15); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px }
-    .cta{ display:flex; gap:12px; flex-wrap:wrap; margin-top:12px }
-    .btn{ appearance:none; border:none; padding:12px 16px; border-radius:12px; cursor:pointer; font-weight:700; transition:.15s cubic-bezier(.2,.8,.2,1); color:#0b1220 }
-    .btn-primary{ background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:white }
-    .btn-primary:hover{ filter:brightness(1.05) }
-    .btn-ghost{ background:transparent; border:1px solid rgba(148,163,184,.3); color:var(--ink) }
-    .tag{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:rgba(14,165,233,.1); color:var(--accent-2); font-weight:700; font-size:12px }
-    .kvs{ display:grid; grid-template-columns: repeat(3,1fr); gap:16px; margin-top:16px }
-    .kv{ background:var(--card); border:1px solid rgba(148,163,184,.15); border-radius:12px; padding:14px }
-    .kv b{ display:block; font-size:13px }
-    .kv span{ color:var(--muted); font-size:12px }
-
-    h2{ margin:26px 0 10px; font-size:22px }
-    ol.steps{ margin:10px 0; padding-left:22px }
-    .code{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:rgba(148,163,184,.12); padding:2px 6px; border-radius:6px }
-
-    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:20px }
-    .faq dt{ font-weight:800; margin-top:10px }
-    .faq dd{ margin:6px 0 12px; color:var(--muted) }
-    footer{ color:var(--muted); font-size:13px; padding:24px 0 40px }
-    .muted{ color:var(--muted) }
-    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace }
-    .ok{ color:var(--success) }
-    .warn{ color:var(--warn) }
-
-    .notice{ border-left:4px solid var(--accent); background:rgba(14,165,233,.08); padding:12px 14px; border-radius:10px; }
-  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="logo">🦆</div>
-      <div>
-        <h1>PatoGo — Download oficial (modo desenvolvedor)</h1>
+    <header class="header">
+      <div class="logo">
+        <img src="icons/pato.png" alt="PatoGo" width="40" height="40" />
+      </div>
+      <div class="headings">
+        <h1>PatoGo — Download Oficial</h1>
         <p class="subtitle">Instale como <strong>unpacked</strong>, receba atualizações guiadas e mantenha tudo local, sem envio de dados.</p>
       </div>
     </header>
@@ -75,24 +24,39 @@
       <div class="card">
         <div class="tag">Versão atual: <span id="cur-ver" class="mono">—</span></div>
         <h2>Baixar</h2>
-        <p class="muted">Clique para baixar o pacote ZIP e instalar no Chrome via <span class="code">chrome://extensions</span> → <b>Developer mode</b> → <b>Load unpacked</b>.</p>
+        <p class="muted">
+          Clique para baixar o pacote ZIP e instalar no Chrome via
+          <span class="code">chrome://extensions</span> → <b>Developer mode</b> → <b>Load unpacked</b>.
+        </p>
         <div class="cta">
-          <a id="dl" class="btn btn-primary" href="#" download>⬇️ Baixar PatoGo (<span id="ver-a">—</span>)</a>
-          <button id="how" class="btn btn-ghost">Como instalar</button>
-          <a id="hash" class="btn btn-ghost" href="#">SHA-256</a>
+          <a id="dl" class="btn btn-primary" href="#" download aria-label="Baixar PatoGo">
+            <!-- Ícone: arrow-down-tray (estilo outline) -->
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1.5"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v11m0 0l-4-4m4 4l4-4"/>
+            </svg>
+            <span>Baixar PatoGo (<span id="ver-a">—</span>)</span>
+          </a>
+
+          <button id="how" class="btn btn-ghost" type="button">Como instalar</button>
+          <a id="hash" class="btn btn-ghost" href="#" rel="noopener">SHA-256</a>
         </div>
         <div class="kvs">
           <div class="kv"><b>Status</b><span id="st">Carregando…</span></div>
           <div class="kv"><b>Notas da versão</b><span id="notes" class="muted">—</span></div>
           <div class="kv"><b>Última atualização</b><span id="updated" class="muted">—</span></div>
         </div>
-        <div class="notice" style="margin-top:14px">
+        <div class="notice">
           <b>Privacidade:</b> todo o processamento é local no navegador. Não coletamos, vendemos ou compartilhamos dados.
         </div>
       </div>
+
       <div class="card">
         <h2>Atualizações</h2>
-        <p class="muted">Quando houver nova versão, o PatoGo avisa dentro da extensão. Você pode atualizar manualmente ou usar o nosso <b>atualizador nativo</b> (opcional) para 1 clique no Windows.</p>
+        <p class="muted">
+          Quando houver nova versão, o PatoGo avisa dentro da extensão. Você pode atualizar manualmente ou usar o nosso
+          <b>atualizador nativo</b> (opcional) para 1 clique no Windows.
+        </p>
         <ul>
           <li><b>Manual</b>: baixe o novo ZIP, substitua a pasta instalada e clique <span class="code">Update</span> em <span class="code">chrome://extensions</span>.</li>
           <li><b>1 clique (opcional)</b>: instale o helper nativo para atualização automática da pasta <span class="code">unpacked</span>.</li>
@@ -101,7 +65,7 @@
       </div>
     </section>
 
-    <section class="card" id="instalacao" style="margin-top:22px">
+    <section class="card" id="instalacao">
       <h2>Como instalar (Chrome)</h2>
       <ol class="steps">
         <li>Baixe o ZIP da versão: <a id="dl2" href="#">PatoGo <span id="ver-b">—</span></a>.</li>
@@ -112,7 +76,7 @@
       </ol>
     </section>
 
-    <section class="grid" style="margin-top:20px">
+    <section class="grid">
       <div class="card">
         <h2>Como atualizar</h2>
         <ol class="steps">
@@ -122,84 +86,41 @@
         </ol>
         <p class="muted">Opcional: use o atualizador nativo para fazer o passo 2 automaticamente.</p>
       </div>
+
       <div class="card">
         <h2 id="faq">FAQ</h2>
         <dl class="faq">
           <dt>Isso instala pela Chrome Web Store?</dt>
           <dd>Não. Este é o pacote <em>unpacked</em> para uso em modo desenvolvedor. A Chrome Web Store não é utilizada aqui.</dd>
+
           <dt>Recebo atualização automática?</dt>
           <dd>O Chrome não atualiza pacotes <em>unpacked</em> automaticamente. A extensão avisa quando há nova versão e você atualiza seguindo os passos. Se instalar o helper nativo (Windows), o passo de substituir a pasta vira 1 clique.</dd>
+
           <dt>É seguro?</dt>
           <dd>Sim: o código é empacotado localmente; não há execução de código remoto. O site apenas fornece o ZIP e um <span class="code">selectors.json</span> com <strong>dados</strong> (não código) para manter compatibilidade de seletores.</dd>
+
           <dt>Privacidade</dt>
           <dd>Não coletamos dados pessoais. Todo o processamento é local. Veja a <a href="#privacidade">Política de Privacidade</a>.</dd>
         </dl>
       </div>
     </section>
 
-    <section class="card" id="privacidade" style="margin-top:20px">
+    <section class="card" id="privacidade">
       <h2>Política de Privacidade (resumo)</h2>
-      <p>O PatoGo processa dados localmente no navegador do usuário. As permissões solicitadas (<span class="code">activeTab</span>, <span class="code">scripting</span>, <span class="code">storage</span>) são usadas somente para operar na aba ativa mediante ação do usuário e para armazenar configurações/resultados localmente. Não coletamos, vendemos ou compartilhamos dados. Contato: <a href="mailto:lucaspsimoes22@gmail.com">lucaspsimoes22@gmail.com</a>.</p>
+      <p>
+        O PatoGo processa dados localmente no navegador do usuário. As permissões solicitadas
+        (<span class="code">activeTab</span>, <span class="code">scripting</span>, <span class="code">storage</span>)
+        são usadas somente para operar na aba ativa mediante ação do usuário e para armazenar configurações/resultados localmente.
+        Não coletamos, vendemos ou compartilhamos dados.
+        Contato: <a href="mailto:lucaspsimoes22@gmail.com">lucaspsimoes22@gmail.com</a>.
+      </p>
     </section>
 
-    <footer>
+    <footer class="footer">
       <p class="muted">© <span id="y"></span> PatoGo. Todos os direitos reservados. · <a id="releaseLink" href="#">Releases</a></p>
     </footer>
   </div>
 
-  <script>
-    // ==== CONFIGURE AQUI AS SUAS URLs ====
-    const RELEASES = {
-      latestJson: 'https://seusite.com/releases/latest.json',
-      defaultZip: 'https://seusite.com/releases/patogo-latest.zip',
-      releasesPage: 'https://seusite.com/releases/',
-      sha256Page: 'https://seusite.com/releases/SHA256.txt'
-    };
-
-    const el = (id) => document.getElementById(id);
-
-    async function loadRelease() {
-      el('y').textContent = new Date().getFullYear();
-      el('st').textContent = 'Verificando…';
-      try{
-        const res = await fetch(RELEASES.latestJson, { cache: 'no-store' });
-        if(!res.ok) throw new Error('HTTP '+res.status);
-        const data = await res.json();
-        const ver = data.version || '—';
-        const zip = data.zip || RELEASES.defaultZip;
-        const notes = data.notes || '—';
-        const updated = data.updated || new Date().toISOString().slice(0,10);
-
-        el('cur-ver').textContent = ver;
-        el('ver-a').textContent = ver;
-        el('ver-b').textContent = ver;
-        el('dl').href = zip;
-        el('dl2').href = zip;
-        el('notes').textContent = notes;
-        el('updated').textContent = updated;
-        el('st').innerHTML = '<span class="ok">Pronto para baixar</span>';
-        el('hash').href = RELEASES.sha256Page;
-        el('releaseLink').href = RELEASES.releasesPage;
-      }catch(e){
-        // Fallback se não achar latest.json
-        el('cur-ver').textContent = 'indisponível';
-        el('ver-a').textContent = 'indisponível';
-        el('ver-b').textContent = 'indisponível';
-        el('dl').href = RELEASES.defaultZip;
-        el('dl2').href = RELEASES.defaultZip;
-        el('notes').textContent = 'Sem notas (offline)';
-        el('updated').textContent = '—';
-        el('st').innerHTML = '<span class="warn">Offline ou indisponível</span>';
-        el('hash').href = RELEASES.sha256Page;
-        el('releaseLink').href = RELEASES.releasesPage;
-      }
-    }
-
-    loadRelease();
-
-    el('how').addEventListener('click', () => {
-      document.getElementById('instalacao').scrollIntoView({ behavior:'smooth' });
-    });
-  </script>
+  <script src="app.js" defer></script>
 </body>
 </html>
