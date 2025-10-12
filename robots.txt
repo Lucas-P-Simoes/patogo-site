@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://patogo.com.br/sitemap.xml
