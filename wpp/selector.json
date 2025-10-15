@@ -1,7 +1,7 @@
 {
   "version": 3,
   "updated_at": "2025-10-15T12:00:00Z",
-  // ===== Seletores utilizados para o validador de contato whatsapp - foi usado como referencia o simbolo de + da conversa para pegar a classe
+  "note":"// ===== Seletores utilizados para o validador de contato whatsapp - foi usado como referencia o simbolo de + da conversa para pegar a classe"
   "selector_parts": [
     ".123xjb2p0i", ".xk390pu", ".x1ypdohk", ".xjbqb8w", ".x972fbf", ".x10w94by",
     ".x1qhh985", ".x14e42zd", ".x78zum5", ".xh8yej3", ".x5yr21d", ".x6s0dn4",
@@ -11,4 +11,5 @@
   ],
   "join": ""
 }
+
 
