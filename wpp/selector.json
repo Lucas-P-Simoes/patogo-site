@@ -1,7 +1,7 @@
 {
   "version": 3,
   "updated_at": "2025-10-15T12:00:00Z",
-  "note":"Seletores utilizados para o validador de contato whatsapp foi usado como referencia o simbolo de + da conversa para pegar a classe",
+  "note":"Seletores utilizado palavra Poll",
   "selector_parts": [
    ".xdod15v",
     ".x14ug900",
@@ -12,6 +12,7 @@
   ],
   "join": ""
 }
+
 
 
 
