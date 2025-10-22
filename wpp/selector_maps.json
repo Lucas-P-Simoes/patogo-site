@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "updated_at": "2025-10-22T00:00:00Z",
+  "default_engine": "auto",
+
+  "phone": {
+    "country_code": "55",
+    "regex_brazil": "(\\(?\\d{2}\\)?\\s?\\d{4,5}[-\\s]?\\d{4})",
+    "invalid_prefixes": ["0800", "0300", "0500", "4004", "3003", "3004"],
+    "strip_leading_zero_ddi": true,
+    "accept_lengths_after_ddi": [10, 11], 
+    "force_ddi_on_return": true
+  },
+
+  "timing": {
+    "smooth_scroll_steps": 6,
+    "smooth_scroll_min_ms": 800,
+    "smooth_scroll_max_ms": 2500,
+    "between_pages_min_ms": 3000,
+    "between_pages_max_ms": 8000,
+    "after_click_min_ms": 400,
+    "after_click_max_ms": 1200
+  },
+
+  "engines": {
+    "google_search_local": {
+      "detect": {
+        "host_contains": ["google."],
+        "path_contains_any": ["/search"],
+        "query_contains": ["tbm=lcl"]
+      },
+      "list": {
+        "cards": [".rllt__details", ".VkpGBb .rllt__details"],
+        "name_inside_card": [".dbg0pd", "h3", "[role='heading']", ":self:first-line"],
+        "phone_mode": "innerText_regex",
+        "phone_selectors_if_any": []
+      },
+      "pagination": {
+        "next": ["#pnnext", "a[aria-label*='Próxima']", "a[aria-label*='Next']", "a[role='button'][aria-label*='Próxima']"]
+      }
+    },
+
+    "google_maps": {
+      "detect": {
+        "host_contains": ["google."],
+        "path_starts_with_any": ["/maps"]
+      },
+      "list": {
+        "cards": [".Nv2PK"],
+        "name_inside_card": [".qBF1Pd", ".NrDZNb", "[role='heading']"],
+        "phone_mode": "prefer_tel_then_regex",
+        "phone_selectors_if_any": ["a[href^='tel:']"]
+      },
+      "place_panel": {
+        "open_card_action": "click", 
+        "name": ["h1.DUwDvf", "h1[role='heading']"],
+        "phone": ["a[href^='tel:']"],
+        "close_panel": ["button[aria-label*='Voltar']", "button[aria-label*='Back']", "div[role='button'][aria-label*='Voltar']"]
+      },
+      "pagination": {
+        "next": [] 
+      }
+    }
+  }
+}
