@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "updated_at": "2025-10-21T12:00:00Z",
+  "selectors": {
+    "highlight": [
+      "span.matched-text",
+      "span[class*=\"matched-text\"]"
+    ],
+    "row": [
+      "div[role=\"row\"]"
+    ],
+    "rowTitle": [
+      "[aria-colindex=\"2\"] span[title]",
+      "span[title]"
+    ],
+    "searchBox": [
+      "div[aria-label=\"Search input textbox\"]",
+      "div[role=\"search\"] div[contenteditable=\"true\"][role=\"textbox\"]"
+    ],
+    "composer": [
+      "footer [contenteditable=\"true\"][role=\"textbox\"]",
+      "[data-testid=\"conversation-compose-box\"] [contenteditable=\"true\"][role=\"textbox\"]",
+      "div[contenteditable=\"true\"][role=\"textbox\"][data-lexical-editor=\"true\"]"
+    ],
+    "headerTitle": [
+      "header [data-testid=\"conversation-info-header\"] span[title]",
+      "header span[title]"
+    ],
+    "sendButton": [
+      "[data-testid=\"compose-btn-send\"]",
+      "[data-icon=\"send\"]"
+    ]
+  }
+}
