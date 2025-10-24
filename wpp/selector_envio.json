@@ -19,7 +19,7 @@
     "composer": [
       "footer [contenteditable=\"true\"][role=\"textbox\"]",
       "div[contenteditable=\"true\"][role=\"textbox\"][data-lexical-editor=\"true\"]"
-    ],
+    ]
   }
 }
 
