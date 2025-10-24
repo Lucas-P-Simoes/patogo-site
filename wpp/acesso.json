@@ -1,0 +1,9 @@
+{
+  "updated_at": "2025-10-23T00:00:00Z",
+  "allow": [
+    "lucaspsimoes22@example.com",
+    "luana.pegoraro@example.com",
+    "cliente1@empresa.com.br",
+    "cliente2@empresa.com.br"
+  ]
+}
