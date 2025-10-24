@@ -14,21 +14,12 @@
       "span[title]"
     ],
     "searchBox": [
-      "div[aria-label=\"Search input textbox\"]",
-      "div[role=\"search\"] div[contenteditable=\"true\"][role=\"textbox\"]"
+      "div[aria-label=\"Search input textbox\"]"
     ],
     "composer": [
       "footer [contenteditable=\"true\"][role=\"textbox\"]",
-      "[data-testid=\"conversation-compose-box\"] [contenteditable=\"true\"][role=\"textbox\"]",
       "div[contenteditable=\"true\"][role=\"textbox\"][data-lexical-editor=\"true\"]"
     ],
-    "headerTitle": [
-      "header [data-testid=\"conversation-info-header\"] span[title]",
-      "header span[title]"
-    ],
-    "sendButton": [
-      "[data-testid=\"compose-btn-send\"]",
-      "[data-icon=\"send\"]"
-    ]
   }
 }
+
