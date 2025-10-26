@@ -1,4 +1,5 @@
 {
-  "checkout": "https://www.youtube.com.br",
+  "checkout": "https://www.mercadopago.com.br/checkout/v1/subscription/redirect/767e17ae-609a-432d-92dd-80b0989d400f/card-form/?preference-id=2926488920-29293cbe-8ec6-4fcb-b100-d3623a1ffed9&router-request-id=617413d9-25d1-400c-9171-ce0fbc0253a7&p=27b77a5f93b4e98ae2a9bec4fd684507",
   "updated_at": "2025-10-26T00:00:00Z"
 }
+
