@@ -19,6 +19,10 @@
     "composer": [
       "footer [contenteditable=\"true\"][role=\"textbox\"]",
       "div[contenteditable=\"true\"][role=\"textbox\"][data-lexical-editor=\"true\"]"
+    ],
+    "openTitle": [
+      "header [data-testid=\"conversation-info-header\"] span[title]",
+      "header span[title]"
     ]
   }
 }
