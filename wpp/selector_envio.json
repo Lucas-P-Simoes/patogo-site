@@ -14,7 +14,9 @@
       "span[title]"
     ],
     "searchBox": [
-      "div[aria-label=\"Search input textbox\"]"
+    "div[aria-label=\"Search input textbox\"]",
+    "div[aria-label=\"Caixa de texto de pesquisa\"]",
+    "div[aria-placeholder=\"Pesquisar ou começar uma nova conversa\"]"
     ],
     "composer": [
       "footer [contenteditable=\"true\"][role=\"textbox\"]",
@@ -26,4 +28,5 @@
     ]
   }
 }
+
 
