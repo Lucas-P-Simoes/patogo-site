@@ -1,0 +1,7 @@
+{
+  "version": "1.0.0",
+  "videos": {
+    "validator_use": "https://www.youtube.com/watch?v=COLOCA_AQUI_O_VIDEO_DE_USO",
+    "validator_update": "https://www.youtube.com/watch?v=COLOCA_AQUI_O_VIDEO_DE_ATUALIZACAO"
+  }
+}
