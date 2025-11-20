@@ -6,10 +6,14 @@
     "extract_use": "https://www.youtube.com/watch?v=9zMr02JW4qI",
     "send_use": "https://www.youtube.com/watch?v=K1k35lDpzdw&list=RDK1k35lDpzdw&start_radio=1",
     "human_use": "https://www.youtube.com/watch?v=Ix1HVSLHVCY"
-
+  },
+  "support": {
+    "site": "https://patogo.com.br",
+    "apoia": "https://apoia.se/patogo",
+    "email": "contato.patogo@gmail.com",
+    "facebook": "https://www.facebook.com/patogo",
+    "instagram": "https://www.instagram.com/patogo",
+    "tiktok": "https://www.tiktok.com/@patogo",
+    "youtube": "https://www.youtube.com/@patogo"
   }
 }
-
-
-
-
