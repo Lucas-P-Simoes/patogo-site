@@ -1,8 +1,9 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "videos": {
     "validator_use": "https://www.youtube.com/watch?v=IODmhx_04R4",
-    "validator_update": "https://www.youtube.com/watch?v=9WJrFwKGjuY"
+    "validator_update": "https://www.youtube.com/watch?v=9WJrFwKGjuY",
+    "extract_use": "https://www.youtube.com/watch?v=9zMr02JW4qI"
   }
 }
 
