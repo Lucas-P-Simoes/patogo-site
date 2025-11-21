@@ -35,10 +35,9 @@
         <img src="icons/pato.png" alt="PatoGo" width="40" height="40" />
       </div>
       <div class="headings">
-        <h1>PatoGo — Download Oficial</h1>
+        <h1>PatoGo | Download Oficial</h1>
         <p class="subtitle">
-          Extensão para Extrair leads do Google Maps e verificar WhatsApp.
-          
+          Extensão para extrair contatos, checar se o número tem WhatsApp e disparar mensagens.
         </p>
       </div>
     </header>
@@ -46,24 +45,26 @@
     <!-- Seção Hero com âncora de download -->
     <section class="hero" id="download">
       <div class="card">
-        <div class="tag">Versão atual: <span id="cur-ver" class="mono">—</span></div>
+        <div class="tag">Versão atual: <span id="cur-ver" class="mono">1.0.0</span></div>
         <h2>Baixar PatoGo</h2>
         <p class="muted">
           Clique para baixar o pacote ZIP e instalar no Chrome via
           <span class="code">chrome://extensions</span> → <b>Developer mode</b> → <b>Load unpacked</b>.
         </p>
         <div class="cta">
-          <a id="dl" class="btn btn-primary" href="downloads/PatoGo-1.0.0.zip" download aria-label="Baixar PatoGo">
+          <a id="dl" class="btn btn-primary"
+             href="downloads/PatoGo-1.0.0.zip"
+             download
+             aria-label="Baixar PatoGo">
             <!-- Ícone: arrow-down-tray -->
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1.5"/>
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v11m0 0l-4-4m4 4l4-4"/>
             </svg>
-            <span>Baixar PatoGo (<span id="ver-a">—</span>)</span>
+            <span>Baixar PatoGo (<span id="ver-a">1.0.0</span>)</span>
           </a>
 
           <a class="btn btn-ghost" href="#instalacao">Como instalar</a>
-          <a id="hash" class="btn btn-ghost" href="#" rel="noopener">SHA-256</a>
         </div>
         <div class="kvs">
           <div class="kv"><b>Status</b><span id="st">Carregando…</span></div>
@@ -76,33 +77,48 @@
       </div>
 
       <div class="card">
-        <h2>Atualizar a PatoGo: novas versões e changelog</h2>
+        <h2>Atualizar a PatoGo: novas versões.</h2>
         <p class="muted">
-          Quando houver nova versão, a PatoGo avisa dentro da extensão. Você pode atualizar manualmente ou usar o nosso
-          <b>atualizador nativo</b> (opcional) para 1 clique no Windows.
+          Quando houver nova versão, a PatoGo avisa dentro da extensão.
         </p>
         <ul>
-          <li><b>Manual</b>: baixe o novo ZIP, substitua a pasta instalada e clique <span class="code">Update</span> em <span class="code">chrome://extensions</span>.</li>
-          <li><b>1 clique (opcional)</b>: instale o helper nativo para atualização automática da pasta <span class="code">unpacked</span>.</li>
+          <li>Baixe o novo ZIP, substitua a pasta instalada e clique <span class="code">Update</span> em <span class="code">chrome://extensions</span>.</li>
         </ul>
         <p><a href="#faq">Ver perguntas frequentes →</a></p>
       </div>
     </section>
 
-    <!-- Seção explicativa com termos de busca (long-tail) -->
-    <section class="card">
-      <h2>O que é a PatoGo (em 1 minuto)</h2>
-      <ul>
-        <li><b>Extrair leads do Google Maps:</b> gere planilhas com nome e telefone de estabelecimentos.</li>
-        <li><b>Verificar se o número tem WhatsApp:</b> validação direta no WhatsApp Web, sem APIs externas.</li>
-        <li><b>Privado e local:</b> processamento no seu navegador; sem coleta de dados.</li>
-      </ul>
+    <!-- Vídeo de instalação -->
+    <section class="card" id="video-instalar">
+      <h2>Vídeo: como instalar a PatoGo (Passo a Passo)</h2>
+      <p class="muted">
+        Prefere ver na prática? Assista ao passo a passo em vídeo mostrando como baixar o ZIP,
+        ativar o modo desenvolvedor e carregar a extensão no Chrome.
+      </p>
+      <div class="video">
+        <div class="video-inner">
+          <!-- Troque VIDEO_ID_AQUI pelo ID real do seu vídeo no YouTube -->
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID_AQUI"
+            title="Como instalar a extensão PatoGo no Chrome"
+            frameborder="0"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
     </section>
 
+    <!-- Como instalar -->
     <section class="card" id="instalacao">
       <h2>Como instalar a extensão PatoGo no Chrome (unpacked)</h2>
       <ol class="steps">
-        <li>Baixe o ZIP da versão: <a id="dl2" href="downloads/PatoGo-1.0.0.zip">PatoGo <span id="ver-b">—</span></a>.</li>
+        <li>Baixe o ZIP da versão:
+          <a id="dl2" href="downloads/PatoGo-1.0.0.zip">
+            PatoGo <span id="ver-b">1.0.0</span>
+          </a>.
+        </li>
         <li>Descompacte para uma pasta fixa, ex.: <span class="code">C:\\PatoGo\\Extension</span>.</li>
         <li>Abra <span class="code">chrome://extensions</span> → ative <b>Developer mode</b> (canto superior direito).</li>
         <li>Clique em <b>Load unpacked</b> e selecione a pasta onde você extraiu.</li>
@@ -110,28 +126,29 @@
       </ol>
     </section>
 
+    
+
     <section class="grid">
       <div class="card">
         <h2>Como atualizar</h2>
         <ol class="steps">
-          <li>Quando a extensão avisar <span class="code">UP</span>, volte aqui e baixe o novo pacote.</li>
+          <li>Quando a extensão avisar, volte aqui e baixe o novo pacote.</li>
           <li>Substitua os arquivos na pasta de instalação (ex.: <span class="code">C:\\PatoGo\\Extension</span>).</li>
           <li>Abra <span class="code">chrome://extensions</span> e clique em <b>Update</b> (ou <b>Reload</b> na extensão).</li>
         </ol>
-        <p class="muted">Opcional: use o atualizador nativo para fazer o passo 2 automaticamente.</p>
       </div>
 
       <div class="card" id="faq">
         <h2>FAQ — Perguntas frequentes</h2>
         <dl class="faq">
           <dt>A PatoGo instala pela Chrome Web Store?</dt>
-          <dd>Não. É o pacote <em>unpacked</em> para modo desenvolvedor. Há um helper opcional para atualizar com 1 clique no Windows.</dd>
+          <dd>Não. O patogo foi feito para ser instalado pelo modo desenvolvedor, assim evitando bloqueios.</dd>
 
           <dt>A PatoGo verifica se o número tem WhatsApp?</dt>
           <dd>Sim. A extensão abre o WhatsApp Web com o número informado e retorna o status (válido ou não) diretamente no navegador.</dd>
 
           <dt>Recebo atualização automática?</dt>
-          <dd>O Chrome não atualiza pacotes <em>unpacked</em> automaticamente. A extensão avisa quando há nova versão e você atualiza seguindo os passos. Com o helper (Windows), a troca de pasta vira 1 clique.</dd>
+          <dd>A extensão avisa quando há nova versão e você atualiza seguindo os passos.</dd>
 
           <dt>Privacidade</dt>
           <dd>Não coletamos dados pessoais. Todo o processamento é local. Veja a <a href="#privacidade">Política de Privacidade</a>.</dd>
@@ -140,21 +157,25 @@
     </section>
 
     <section class="card" id="privacidade">
-      <h2>Política de Privacidade (resumo)</h2>
+      <h2>Política de Privacidade</h2>
       <p>
         O PatoGo processa dados localmente no navegador do usuário. As permissões solicitadas
         (<span class="code">activeTab</span>, <span class="code">scripting</span>, <span class="code">storage</span>)
         são usadas somente para operar na aba ativa mediante ação do usuário e para armazenar configurações/resultados localmente.
         Não coletamos, vendemos ou compartilhamos dados.
-        Contato: <a href="mailto:lucaspsimoes22@gmail.com">XXXXXXXX@gmail.com</a>.
+        Contato: <a href="mailto:contato.patogo@gmail.com">contato.patogo@gmail.com</a>.
       </p>
     </section>
 
     <footer class="footer">
-      <p class="muted">© <span id="y"></span> PatoGo. Todos os direitos reservados. · <a id="releaseLink" href="#">Releases</a></p>
+      <p class="muted">
+        © <span id="y"></span> PatoGo. Todos os direitos reservados. ·
+        <a id="releaseLink" href="#">Releases</a>
+      </p>
       <nav class="footer-nav">
         <a href="#download">Download</a> ·
         <a href="#instalacao">Instalação</a> ·
+        <a href="#video-instalar">Vídeo</a> ·
         <a href="#faq">FAQ</a> ·
         <a href="#privacidade">Privacidade</a>
       </nav>
@@ -169,7 +190,7 @@
     "mainEntity": [{
       "@type": "Question",
       "name": "A PatoGo instala pela Chrome Web Store?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Não. É um pacote unpacked para modo desenvolvedor com atualização guiada. Há um helper opcional para 1 clique no Windows." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Não. É um pacote unpacked para modo desenvolvedor com atualização guiada." }
     },{
       "@type": "Question",
       "name": "A PatoGo verifica se o número tem WhatsApp?",
