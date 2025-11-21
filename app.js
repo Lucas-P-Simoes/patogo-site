@@ -1,10 +1,19 @@
 // ==== CONFIGURE AQUI AS SUAS URLs ====
 const RELEASES = {
-  latestJson: 'https://seusite.com/releases/latest.json',
-  defaultZip: 'https://seusite.com/releases/patogo-latest.zip',
-  releasesPage: 'https://seusite.com/releases/',
-  sha256Page: 'https://seusite.com/releases/SHA256.txt'
+  // se ainda não tiver esse JSON, deixa assim mesmo.
+  // ele vai falhar no fetch e cair no fallback, sem problema.
+  latestJson: 'https://patogo.com.br/wpp/update.json', 
+
+  // AQUI é o principal:
+  defaultZip: 'https://patogo.com.br/downloads/PatoGo-1.0.0.zip',
+
+  // pode apontar pra própria página de download
+  releasesPage: 'https://patogo.com.br/#download',
+
+  // se ainda não tiver SHA256, pode deixar pra depois ou apontar pra um txt vazio
+  sha256Page: 'https://patogo.com.br/wpp/SHA256.txt'
 };
+
 
 // util
 const el = (id) => document.getElementById(id);
@@ -25,8 +34,8 @@ async function loadRelease(){
     el('cur-ver').textContent = ver;
     el('ver-a').textContent = ver;
     el('ver-b').textContent = ver;
-    el('dl').href = zip;
-    el('dl2').href = zip;
+    //el('dl').href = zip;
+    //el('dl2').href = zip;
     el('notes').textContent = notes;
     el('updated').textContent = updated;
     el('st').innerHTML = '<span class="ok">Pronto para baixar</span>';
