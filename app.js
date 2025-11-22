@@ -88,12 +88,32 @@ async function loadRelease() {
 document.addEventListener('DOMContentLoaded', () => {
   loadRelease();
 
-  // scroll suave para "Como instalar" (se algum dia você criar um botão com id="how")
+  // scroll suave para "Como instalar"
   const howBtn = el('how');
   if (howBtn) {
     howBtn.addEventListener('click', () => {
       const sec = document.getElementById('instalacao');
       if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+  }
+
+  // ===== TRACKING: cliques nos botões de download =====
+  const dlBtn  = el('dl');   // botão principal
+  const dlBtn2 = el('dl2');  // link de download na seção "Como instalar"
+
+  function trackDownload(label) {
+    if (typeof gtag === 'function') {
+      gtag('event', 'download_extensao', {
+        event_category: 'download',
+        event_label: label
+      });
+    }
+  }
+
+  if (dlBtn) {
+    dlBtn.addEventListener('click', () => trackDownload('botao_principal'));
+  }
+  if (dlBtn2) {
+    dlBtn2.addEventListener('click', () => trackDownload('botao_instalacao'));
   }
 });
