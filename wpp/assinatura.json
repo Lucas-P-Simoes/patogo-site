@@ -1,7 +1,8 @@
 {
-  "checkout": "https://www.mercadopago.com.br/checkout/v1/subscription/redirect/8ed72945-2052-4d9b-9e57-f3c1561dca57/card-form/?preference-id=2926488920-f546a01f-c6b0-4f2a-832e-658de7596095&router-request-id=679f4358-6e43-45a9-b524-f9e72c96fc58&p=17387f5482d632310a383f3de03c95a9",
+  "checkout": "https://www.mercadopago.com.br/checkout/v1/subscription/redirect/ea4e2b89-e223-4a67-a527-93e36784f077/card-form/?preference-id=2926488920-4d2e707b-d9ac-462f-a2d9-d3933fef8518&router-request-id=2b23db27-86ef-4507-bdb2-fd617bffb55a&p=17387f5482d632310a383f3de03c95a9",
   "updated_at": "2025-10-26T00:00:00Z"
 }
+
 
 
 
