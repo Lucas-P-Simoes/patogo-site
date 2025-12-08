@@ -8,7 +8,7 @@ const RELEASES = {
   latestJson: 'https://patogo.com.br/wpp/update.json',
 
   // arquivo .zip atual
-  defaultZip: 'https://patogo.com.br/downloads/PatoGo-1.0.0.zip',
+  defaultZip: 'https://chromewebstore.google.com/detail/patogo/dgemcpbnhifkhdmjfoabbjmmjoeaenkb',
 
   // página de releases (pode ser a própria página de download)
   releasesPage: 'https://patogo.com.br/#download',
