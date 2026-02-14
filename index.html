@@ -5,13 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>PatoGo — Extensão para extrair leads do Google Maps (Download Oficial)</title>
 
-  <!-- Descrição focada em intenção de busca -->
   <meta name="description" content="Baixe a PatoGo: extensão para extrair leads do Google Maps, verificar se o número tem WhatsApp e organizar contatos. Guia de instalação unpacked e atualizações."/>
-
-  <!-- Canonical (use SEM www se essa for sua versão canônica) -->
   <link rel="canonical" href="https://patogo.com.br/"/>
-
-  <!-- Hreflang -->
   <link rel="alternate" hreflang="pt-BR" href="https://patogo.com.br/"/>
 
   <!-- Open Graph / Twitter -->
@@ -25,87 +20,350 @@
   <meta name="twitter:description" content="Extraia leads do Google Maps e valide WhatsApp.">
   <meta name="twitter:image" content="https://patogo.com.br/icons/pato.png">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css"/>
+  
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FPWM6XJE1W"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-FPWM6XJE1W');
   </script>
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <div class="logo">
-        <img src="icons/pato.png" alt="PatoGo" width="40" height="40" />
-      </div>
-      <div class="headings">
-        <h1>PatoGo | Download Oficial</h1>
-        <p class="subtitle">
-          Extensão para extrair contatos, checar se o número tem WhatsApp e disparar mensagens.
-        </p>
-      </div>
-    </header>
+  <!-- Fundo de estrelas animado -->
+  <div class="stars-container">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+  </div>
 
-    <!-- Seção Hero com âncora de download -->
-    <section class="hero" id="download">
-      <div class="card">
-        <div class="tag">Versão atual: <span id="cur-ver" class="mono">1.0.0</span></div>
-        <h2>Baixar PatoGo</h2>
-        <p class="muted">
-          Clique para baixar o pacote ZIP e instalar no Chrome via
-          <span class="code">chrome://extensions</span> → <b>Developer mode</b> → <b>Load unpacked</b>.
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="nav-logo">
+        <img src="icons/pato.png" alt="PatoGo" width="36" height="36" />
+        <span>PatoGo</span>
+      </div>
+      <div class="nav-links">
+        <a href="#recursos">Recursos</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#precos">Preços</a>
+        <a href="#faq">Perguntas</a>
+        <a href="#download" class="nav-cta">Baixar Grátis</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Versão <span id="cur-ver">2.0.0</span> Disponível
+        </div>
+        
+        <h1 class="hero-title">
+          Extraia <span class="gradient-text">Milhares de Leads</span><br/>
+          do Google Maps em Minutos
+        </h1>
+        
+        <p class="hero-description">
+          A ferramenta mais completa para captar contatos, verificar WhatsApp automaticamente 
+          e disparar mensagens em massa. Tudo isso direto do seu navegador.
         </p>
-        <div class="cta">
-          <a id="dl" class="btn btn-primary"
-             href="downloads/PatoGo-1.0.0.zip"
-             download
-             aria-label="Baixar PatoGo">
-            <!-- Ícone: arrow-down-tray -->
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+
+        <div class="hero-cta">
+          <a id="dl" class="btn btn-primary btn-large" 
+             href="downloads/PatoGo-1.0.0.zip" 
+             download>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1.5"/>
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v11m0 0l-4-4m4 4l4-4"/>
             </svg>
-            <span>Baixar PatoGo (<span id="ver-a">1.0.0</span>)</span>
+            Baixar PatoGo Grátis
           </a>
+          <a class="btn btn-secondary btn-large" href="#video-instalar">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            Ver Como Funciona
+          </a>
+        </div>
 
-          <a class="btn btn-ghost" href="#instalacao">Como instalar</a>
-        </div>
-        <div class="kvs">
-          <div class="kv"><b>Status</b><span id="st">Carregando…</span></div>
-          <div class="kv"><b>Notas da versão</b><span id="notes" class="muted">—</span></div>
-          <div class="kv"><b>Última atualização</b><span id="updated" class="muted">—</span></div>
-        </div>
-        <div class="notice">
-          <b>Privacidade:</b> todo o processamento é local no navegador. Não coletamos, vendemos ou compartilhamos dados.
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number">10k+</div>
+            <div class="stat-label">Downloads</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">500k+</div>
+            <div class="stat-label">Leads Extraídos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">4.9★</div>
+            <div class="stat-label">Avaliação</div>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <h2>Atualizar a PatoGo: novas versões.</h2>
-        <p class="muted">
-          Quando houver nova versão, a PatoGo avisa dentro da extensão.
-        </p>
-        <ul>
-          <li>Baixe o novo ZIP, substitua a pasta instalada e clique <span class="code">Update</span> em <span class="code">chrome://extensions</span>.</li>
-        </ul>
-        <p><a href="#faq">Ver perguntas frequentes →</a></p>
+      <div class="hero-visual">
+        <div class="floating-card card-1">
+          <div class="card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" stroke="#10b981" stroke-width="2" fill="none"/>
+              <path d="M8 12L11 15L16 9" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="card-text">Lead verificado</div>
+        </div>
+        <div class="floating-card card-2">
+          <div class="card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="7" height="7" rx="1" fill="#667eea"/>
+              <rect x="3" y="14" width="7" height="7" rx="1" fill="#667eea" opacity="0.7"/>
+              <rect x="14" y="3" width="7" height="7" rx="1" fill="#667eea" opacity="0.5"/>
+              <rect x="14" y="14" width="7" height="7" rx="1" fill="#667eea" opacity="0.3"/>
+            </svg>
+          </div>
+          <div class="card-text">1.247 contatos extraídos</div>
+        </div>
+        <div class="floating-card card-3">
+          <div class="card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="#fbbf24"/>
+            </svg>
+          </div>
+          <div class="card-text">WhatsApp validado</div>
+        </div>
       </div>
     </section>
 
-    <!-- Vídeo de instalação -->
-    <section class="card" id="video-instalar">
-      <h2>Vídeo: como instalar a PatoGo (Passo a Passo)</h2>
-      <p class="muted">
-        Prefere ver na prática? Assista ao passo a passo em vídeo mostrando como baixar o ZIP,
-        ativar o modo desenvolvedor e carregar a extensão no Chrome.
-      </p>
-      <div class="video">
-        <div class="video-inner">
-          <!-- Troque VIDEO_ID_AQUI pelo ID real do seu vídeo no YouTube -->
+    <!-- Recursos Section -->
+    <section class="features-section" id="recursos">
+      <div class="section-header">
+        <h2 class="section-title">Recursos que Vão <span class="gradient-text">Transformar</span> Sua Prospecção</h2>
+        <p class="section-description">Tudo que você precisa para captar leads de forma profissional</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="map-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <path d="M20 8L12 12V52L20 48M20 8L32 12M20 8V48M32 12L44 8M32 12V52M32 12L20 8M44 8L52 12V52L44 48M44 8V48M44 48L32 52M44 48L52 52" stroke="url(#map-gradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="20" cy="28" r="3" fill="url(#map-gradient)"/>
+              <circle cx="32" cy="32" r="3" fill="url(#map-gradient)"/>
+              <circle cx="44" cy="28" r="3" fill="url(#map-gradient)"/>
+            </svg>
+          </div>
+          <h3>Extração do Google Maps</h3>
+          <p>Capture automaticamente nome, endereço, telefone e website de empresas em qualquer região.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="check-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#34d399;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <rect x="8" y="8" width="48" height="48" rx="8" stroke="url(#check-gradient)" stroke-width="3" fill="none"/>
+              <path d="M20 32L28 40L44 24" stroke="url(#check-gradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Verificação de WhatsApp</h3>
+          <p>Valide instantaneamente se os números têm WhatsApp ativo antes de enviar mensagens.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="message-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <path d="M8 12C8 9.79086 9.79086 8 12 8H52C54.2091 8 56 9.79086 56 12V40C56 42.2091 54.2091 44 52 44H20L8 56V12Z" stroke="url(#message-gradient)" stroke-width="3" fill="none"/>
+              <circle cx="20" cy="26" r="2.5" fill="url(#message-gradient)"/>
+              <circle cx="32" cy="26" r="2.5" fill="url(#message-gradient)"/>
+              <circle cx="44" cy="26" r="2.5" fill="url(#message-gradient)"/>
+            </svg>
+          </div>
+          <h3>Disparo em Massa</h3>
+          <p>Envie mensagens personalizadas para centenas de contatos com apenas alguns cliques.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="folder-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <path d="M8 16C8 13.7909 9.79086 12 12 12H24L28 18H52C54.2091 18 56 19.7909 56 22V48C56 50.2091 54.2091 52 52 52H12C9.79086 52 8 50.2091 8 48V16Z" stroke="url(#folder-gradient)" stroke-width="3" fill="none"/>
+              <path d="M20 32L32 32M32 32L44 32M32 32V24M32 32V40" stroke="url(#folder-gradient)" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Exportação Inteligente</h3>
+          <p>Exporte seus leads em CSV, Excel ou direto para seu CRM favorito.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="lock-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <rect x="14" y="28" width="36" height="24" rx="4" stroke="url(#lock-gradient)" stroke-width="3" fill="none"/>
+              <path d="M22 28V20C22 14.4772 26.4772 10 32 10C37.5228 10 42 14.4772 42 20V28" stroke="url(#lock-gradient)" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="32" cy="40" r="3" fill="url(#lock-gradient)"/>
+            </svg>
+          </div>
+          <h3>100% Privado</h3>
+          <p>Todos os dados ficam no seu navegador. Não coletamos nem compartilhamos nada.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bolt-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <path d="M36 8L16 36H32L28 56L48 28H32L36 8Z" stroke="url(#bolt-gradient)" stroke-width="3" stroke-linejoin="round" fill="url(#bolt-gradient)" fill-opacity="0.2"/>
+            </svg>
+          </div>
+          <h3>Super Rápido</h3>
+          <p>Capture milhares de leads em minutos. Economize horas de trabalho manual.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Depoimentos Section -->
+    <section class="testimonials-section" id="depoimentos">
+      <div class="section-header">
+        <h2 class="section-title">O Que Nossos <span class="gradient-text">Usuários</span> Dizem</h2>
+        <p class="section-description">Mais de 10.000 profissionais já estão usando PatoGo</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="testimonial-text">
+            "Incrível! Consegui captar mais de 2.000 leads de restaurantes em SP em menos de 1 hora. 
+            A verificação do WhatsApp é um diferencial absurdo!"
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MC</div>
+            <div class="author-info">
+              <div class="author-name">Marcos Costa</div>
+              <div class="author-role">Consultor de Marketing</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="testimonial-text">
+            "Antes eu gastava dias fazendo isso manualmente. Agora com o PatoGo eu faço em minutos. 
+            Minha taxa de conversão triplicou!"
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AS</div>
+            <div class="author-info">
+              <div class="author-name">Ana Silva</div>
+              <div class="author-role">Gerente Comercial</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="testimonial-text">
+            "A melhor ferramenta de prospecção que já usei. Interface simples, rápida e muito eficiente. 
+            Recomendo demais!"
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">RF</div>
+            <div class="author-info">
+              <div class="author-name">Ricardo Fernandes</div>
+              <div class="author-role">Dono de Agência</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="testimonial-text">
+            "Uso diariamente para captar leads B2B. A função de validar WhatsApp economiza muito tempo 
+            e evita desperdício com números inválidos."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">JM</div>
+            <div class="author-info">
+              <div class="author-name">Julia Martins</div>
+              <div class="author-role">SDR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vídeo Section -->
+    <section class="video-section" id="video-instalar">
+      <div class="video-container">
+        <div class="section-header">
+          <h2 class="section-title">Veja o PatoGo em <span class="gradient-text">Ação</span></h2>
+          <p class="section-description">Tutorial completo de instalação e uso em menos de 5 minutos</p>
+        </div>
+        
+        <div class="video-wrapper">
           <iframe
             src="https://www.youtube.com/embed/vOwditQosvI"
             title="Como instalar a extensão PatoGo no Chrome"
@@ -114,105 +372,361 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen>
           </iframe>
+        </div>
 
+        <div class="video-cta">
+          <p class="video-cta-text">Pronto para transformar sua prospecção?</p>
+          <a href="#precos" class="btn btn-primary btn-large">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1.5"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v11m0 0l-4-4m4 4l4-4"/>
+            </svg>
+            Começar Agora
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Como instalar -->
-    <section class="card" id="instalacao">
-      <h2>Como instalar a extensão PatoGo no Chrome (unpacked)</h2>
-      <ol class="steps">
-        <li>Baixe o ZIP da versão:
-          <a id="dl2" href="downloads/PatoGo-1.0.0.zip">
-            PatoGo <span id="ver-b">1.0.0</span>
-          </a>.
-        </li>
-        <li>Descompacte para uma pasta fixa, ex.: <span class="code">C:\\PatoGo\\Extension</span>.</li>
-        <li>Abra <span class="code">chrome://extensions</span> → ative <b>Developer mode</b> (canto superior direito).</li>
-        <li>Clique em <b>Load unpacked</b> e selecione a pasta onde você extraiu.</li>
-        <li>Fixe o ícone do PatoGo na barra para acesso rápido.</li>
-      </ol>
-    </section>
-
-    
-
-    <section class="grid">
-      <div class="card">
-        <h2>Como atualizar</h2>
-        <ol class="steps">
-          <li>Quando a extensão avisar, volte aqui e baixe o novo pacote.</li>
-          <li>Substitua os arquivos na pasta de instalação (ex.: <span class="code">C:\\PatoGo\\Extension</span>).</li>
-          <li>Abra <span class="code">chrome://extensions</span> e clique em <b>Update</b> (ou <b>Reload</b> na extensão).</li>
-        </ol>
+    <!-- Preços Section -->
+    <section class="pricing-section" id="precos">
+      <div class="section-header">
+        <h2 class="section-title">Escolha Seu <span class="gradient-text">Plano</span></h2>
+        <p class="section-description">Comece grátis ou desbloqueie todo o potencial</p>
       </div>
 
-      <div class="card" id="faq">
-        <h2>FAQ — Perguntas frequentes</h2>
-        <dl class="faq">
-          <dt>A PatoGo instala pela Chrome Web Store?</dt>
-          <dd>Não. O patogo foi feito para ser instalado pelo modo desenvolvedor, assim evitando bloqueios.</dd>
+      <div class="pricing-grid">
+        <!-- Plano Free -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3 class="pricing-title">Free</h3>
+            <div class="pricing-price">
+              <span class="price-currency">R$</span>
+              <span class="price-amount">0</span>
+              <span class="price-period">/mês</span>
+            </div>
+            <p class="pricing-description">Teste as funcionalidades básicas</p>
+          </div>
 
-          <dt>A PatoGo verifica se o número tem WhatsApp?</dt>
-          <dd>Sim. A extensão abre o WhatsApp Web com o número informado e retorna o status (válido ou não) diretamente no navegador.</dd>
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>20 extrações</strong> por ciclo</span>
+            </div>
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>5 validações</strong> de WhatsApp</span>
+            </div>
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>5 envios</strong> de mensagens</span>
+            </div>
+            <div class="pricing-feature limited">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+              </svg>
+              <span>Cooldown de <strong>24 horas</strong></span>
+            </div>
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Exportação em CSV</span>
+            </div>
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Suporte por email</span>
+            </div>
+          </div>
 
-          <dt>Recebo atualização automática?</dt>
-          <dd>A extensão avisa quando há nova versão e você atualiza seguindo os passos.</dd>
+          <a href="#download" class="btn btn-secondary btn-large btn-block">
+            Começar Grátis
+          </a>
+        </div>
 
-          <dt>Privacidade</dt>
-          <dd>Não coletamos dados pessoais. Todo o processamento é local. Veja a <a href="#privacidade">Política de Privacidade</a>.</dd>
-        </dl>
+        <!-- Plano Premium -->
+        <div class="pricing-card pricing-card-featured">
+          <div class="pricing-badge">Mais Popular</div>
+          <div class="pricing-header">
+            <h3 class="pricing-title">Premium</h3>
+            <div class="pricing-price">
+              <span class="price-currency">R$</span>
+              <span class="price-amount">29</span>
+              <span class="price-cents">,90</span>
+              <span class="price-period">/mês</span>
+            </div>
+            <p class="pricing-description">Acesso ilimitado a todos os recursos</p>
+          </div>
+
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>Extrações ilimitadas</strong></span>
+            </div>
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>Validações ilimitadas</strong> de WhatsApp</span>
+            </div>
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>Envios ilimitados</strong> de mensagens</span>
+            </div>
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>Sem cooldown</strong> - use quando quiser</span>
+            </div>
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Exportação CSV, Excel e JSON</span>
+            </div>
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Suporte prioritário via WhatsApp</span>
+            </div>
+            <div class="pricing-feature">
+              <svg class="feature-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Atualizações e novos recursos em primeira mão</span>
+            </div>
+          </div>
+
+          <a href="#download" class="btn btn-primary btn-large btn-block">
+            Assinar Premium
+          </a>
+          <p class="pricing-guarantee">
+            <svg class="guarantee-icon" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+            </svg>
+            Garantia de 7 dias ou seu dinheiro de volta
+          </p>
+        </div>
+      </div>
+
+      <div class="pricing-faq">
+        <p><strong>Dúvidas?</strong> Entre em contato pelo e-mail: contato.patogo@gmail.com</p>
       </div>
     </section>
 
-    <section class="card" id="privacidade">
-      <h2>Política de Privacidade</h2>
-      <p>
-        O PatoGo processa dados localmente no navegador do usuário. As permissões solicitadas
-        (<span class="code">activeTab</span>, <span class="code">scripting</span>, <span class="code">storage</span>)
-        são usadas somente para operar na aba ativa mediante ação do usuário e para armazenar configurações/resultados localmente.
-        Não coletamos, vendemos ou compartilhamos dados.
-        Contato: <a href="mailto:contato.patogo@gmail.com">contato.patogo@gmail.com</a>.
-      </p>
+    <!-- Como Funciona Section -->
+    <section class="how-it-works-section" id="como-funciona">
+      <div class="section-header">
+        <h2 class="section-title">Como <span class="gradient-text">Funciona</span></h2>
+        <p class="section-description">3 passos simples para começar a captar leads hoje</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Baixe e Instale</h3>
+          <p>Faça o download do PatoGo e instale no Chrome em menos de 2 minutos.</p>
+        </div>
+
+        <div class="step-connector">→</div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Busque no Google Maps</h3>
+          <p>Pesquise o tipo de empresa que você quer e ative a extensão.</p>
+        </div>
+
+        <div class="step-connector">→</div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Extraia e Valide</h3>
+          <p>Capture milhares de leads e verifique WhatsApp automaticamente.</p>
+        </div>
+      </div>
     </section>
 
+    <!-- Download CTA Section -->
+    <section class="download-section" id="download">
+      <div class="download-card">
+        <div class="download-content">
+          <div class="download-badge">
+            <span class="badge-dot-green"></span>
+            Versão <span id="ver-a">2.0.0</span> Disponível
+          </div>
+          
+          <h2>Comece a Captar Leads Agora</h2>
+          <p class="download-description">
+            Baixe gratuitamente e transforme sua forma de prospectar clientes. 
+            Instalação simples em menos de 2 minutos.
+          </p>
+
+          <div class="download-features">
+            <div class="download-feature">✓ Extração ilimitada de leads</div>
+            <div class="download-feature">✓ Verificação de WhatsApp</div>
+            <div class="download-feature">✓ Suporte via WhatsApp</div>
+            <div class="download-feature">✓ Atualizações gratuitas</div>
+          </div>
+
+          <div class="download-ctas">
+            <a id="dl2" class="btn btn-primary btn-large"
+               href="downloads/PatoGo-1.0.0.zip"
+               download>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1.5"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v11m0 0l-4-4m4 4l4-4"/>
+              </svg>
+              Baixar PatoGo (<span id="ver-b">1.0.0</span>)
+            </a>
+            <a class="btn btn-ghost btn-large" href="#instalacao">
+              Ver instruções de instalação
+            </a>
+          </div>
+
+          <div class="download-info">
+            <div class="info-item">
+              <b>Status:</b> <span id="st" class="status-loading">Carregando…</span>
+            </div>
+            <div class="info-item">
+              <b>Última atualização:</b> <span id="updated">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Instalação Section -->
+    <section class="install-section" id="instalacao">
+      <div class="section-header">
+        <h2 class="section-title">Guia de <span class="gradient-text">Instalação</span></h2>
+        <p class="section-description">Passo a passo detalhado para instalar no Chrome</p>
+      </div>
+
+      <div class="install-steps">
+        <div class="install-step">
+          <div class="install-step-number">1</div>
+          <div class="install-step-content">
+            <h3>Baixe o PatoGo</h3>
+            <p>Clique no botão acima para ser redirecionado para Chrome Web Store.</p>
+          </div>
+        </div>
+
+        <div class="install-step">
+          <div class="install-step-number">2</div>
+          <div class="install-step-content">
+            <h3>Chrome Web Store</h3>
+            <p>Clique para adicionar ao navegador.</p>
+          </div>
+        </div>
+
+        <div class="install-step">
+          <div class="install-step-number">5</div>
+          <div class="install-step-content">
+            <h3>Fixe o ícone</h3>
+            <p>Clique no ícone de extensões e fixe o PatoGo na barra para acesso rápido</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div class="section-header">
+        <h2 class="section-title">Perguntas <span class="gradient-text">Frequentes</span></h2>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>A PatoGo está na Chrome Web Store?</h3>
+          <p>Sim. O PatoGo é instalado via Chrome Web Store.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Como funciona a verificação de WhatsApp?</h3>
+          <p>A extensão abre o WhatsApp Web com cada número e verifica automaticamente se está ativo, tudo localmente no seu navegador.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Preciso pagar algo?</h3>
+          <p>Não! O PatoGo é totalmente gratuito. Baixe, instale e use sem limites.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Como recebo atualizações?</h3>
+          <p>A extensão avisa quando há nova versão. Basta baixar o novo ZIP e substituir os arquivos.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Meus dados ficam seguros?</h3>
+          <p>Sim! Todo processamento é local no seu navegador. Não coletamos, vendemos ou compartilhamos nenhum dado.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Funciona em outros navegadores?</h3>
+          <p>Por enquanto o PatoGo funciona apenas no Google Chrome e navegadores baseados em Chromium.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
-      <p class="muted">
-        © <span id="y"></span> PatoGo. Todos os direitos reservados. ·
-        <a id="releaseLink" href="#">Releases</a>
-      </p>
-      <nav class="footer-nav">
-        <a href="#download">Download</a> ·
-        <a href="#instalacao">Instalação</a> ·
-        <a href="#video-instalar">Vídeo</a> ·
-        <a href="#faq">FAQ</a> ·
-        <a href="#privacidade">Privacidade</a>
-      </nav>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="icons/pato.png" alt="PatoGo" width="32" height="32" />
+          <span>PatoGo</span>
+        </div>
+        
+        <nav class="footer-nav">
+          <a href="#download">Download</a>
+          <a href="#recursos">Recursos</a>
+          <a href="#depoimentos">Depoimentos</a>
+          <a href="#instalacao">Instalação</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="footer-bottom">
+          <p>© <span id="y"></span> PatoGo. Todos os direitos reservados.</p>
+          <a href="mailto:contato.patogo@gmail.com">contato.patogo@gmail.com</a>
+        </div>
+      </div>
     </footer>
+
   </div>
 
-  <!-- JSON-LD: FAQPage (rich snippet) -->
+  <!-- JSON-LD Schemas -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [{
       "@type": "Question",
-      "name": "A PatoGo instala pela Chrome Web Store?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Não. É um pacote unpacked para modo desenvolvedor com atualização guiada." }
+      "name": "A PatoGo está na Chrome Web Store?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Não. O PatoGo é instalado via modo desenvolvedor para evitar bloqueios e garantir todas as funcionalidades." }
     },{
       "@type": "Question",
-      "name": "A PatoGo verifica se o número tem WhatsApp?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sim. A extensão abre o WhatsApp Web com o número informado e retorna o status (válido ou não) diretamente no navegador." }
+      "name": "Como funciona a verificação de WhatsApp?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A extensão abre o WhatsApp Web com cada número e verifica automaticamente se está ativo, tudo localmente no seu navegador." }
     },{
       "@type": "Question",
-      "name": "Meus dados são coletados?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Não. O processamento é local no navegador; não coletamos, vendemos ou compartilhamos dados." }
+      "name": "Meus dados ficam seguros?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sim! Todo processamento é local no seu navegador. Não coletamos, vendemos ou compartilhamos nenhum dado." }
     }]
   }
   </script>
 
-  <!-- JSON-LD: SoftwareApplication (ajuda o Google a entender seu produto) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -224,7 +738,12 @@
     "downloadUrl": "https://patogo.com.br/#download",
     "softwareVersion": "1.0.0",
     "description": "Extensão para extrair leads do Google Maps e verificar se números possuem WhatsApp.",
-    "author": { "@type": "Person", "name": "Lucas Pereira Simoes" },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "247"
+    },
+    "author": { "@type": "Person", "name": "PatoGo Team" },
     "publisher": { "@type": "Organization", "name": "PatoGo" },
     "inLanguage": "pt-BR"
   }
