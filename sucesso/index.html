@@ -3,165 +3,515 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PatoGo — PRO ativado ✅</title>
+  <title>PatoGo - PRO ativado</title>
   <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg1:#0b0b12;
       --bg2:#121225;
-      --card:#17172e;
       --text:#f2f2ff;
       --muted:#b9b9d6;
       --accent:#7c3aed;
       --accent2:#a78bfa;
       --ok:#22c55e;
+      --ok-dim: rgba(34,197,94,.12);
+      --ok-border: rgba(34,197,94,.35);
       --border:rgba(255,255,255,.12);
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body{
-      margin:0;
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial;
-      color:var(--text);
-      background: radial-gradient(1200px 700px at 15% 20%, rgba(124,58,237,.35), transparent 60%),
-                  radial-gradient(900px 600px at 85% 30%, rgba(167,139,250,.25), transparent 55%),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
-      padding: 22px;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 20%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(900px 600px at 85% 30%, rgba(167,139,250,.25), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      padding: 24px;
+      overflow-x: hidden;
+    }
+    #fireworks-canvas{
+      position: fixed;
+      inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
     }
     .card{
-      width:min(720px, 100%);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding: 26px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.45);
-      position:relative;
-      overflow:hidden;
+      position: relative;
+      z-index: 1;
+      width: min(680px, 100%);
+      background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 38px 34px 34px;
+      box-shadow: 0 28px 80px rgba(0,0,0,.6);
+      animation: cardIn .6s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes cardIn{
+      from{ opacity:0; transform: translateY(28px) scale(.98); }
+      to  { opacity:1; transform: translateY(0) scale(1); }
+    }
+    .card::before{
+      content:'';
+      position: absolute;
+      top:0; left:0; right:0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--ok));
+      border-radius: 22px 22px 0 0;
+    }
+    .fireworks-icon{
+      width: 72px; height: 72px;
+      margin-bottom: 22px;
+      animation: popIn .5s .15s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn{
+      from{ opacity:0; transform: scale(.5) rotate(-15deg); }
+      to  { opacity:1; transform: scale(1) rotate(0deg); }
     }
     .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      background: rgba(34,197,94,.12);
-      border: 1px solid rgba(34,197,94,.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--ok-dim);
+      border: 1px solid var(--ok-border);
       color: #d9ffe7;
       border-radius: 999px;
-      font-weight: 700;
-      letter-spacing:.2px;
-      font-size: 14px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: .3px;
+      margin-bottom: 18px;
+      animation: fadeUp .4s .2s ease both;
     }
     .dot{
-      width:10px;height:10px;border-radius:50%;
+      width: 8px; height: 8px; border-radius: 50%;
       background: var(--ok);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.12);
+      box-shadow: 0 0 0 5px rgba(34,197,94,.15);
+      animation: pulse 2s 1s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{ box-shadow: 0 0 0 5px rgba(34,197,94,.15); }
+      50%    { box-shadow: 0 0 0 9px rgba(34,197,94,.04); }
     }
     h1{
-      margin: 14px 0 6px;
-      font-size: clamp(22px, 3.2vw, 30px);
-      line-height:1.2;
-    }
-    p{
-      margin: 0 0 14px;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 15px;
-    }
-    .big{
-      margin-top: 12px;
-      font-size: 16px;
-      color: var(--text);
-    }
-    .highlight{
-      color: var(--accent2);
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(22px, 3.5vw, 30px);
       font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      animation: fadeUp .4s .25s ease both;
     }
-    .row{
-      display:flex;
-      flex-wrap:wrap;
+    .highlight{ color: var(--accent2); }
+    .subtitle{
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+      margin-bottom: 28px;
+      animation: fadeUp .4s .3s ease both;
+    }
+    .steps-box{
+      background: rgba(124,58,237,.10);
+      border: 1px solid rgba(124,58,237,.28);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 22px;
+      animation: fadeUp .4s .35s ease both;
+    }
+    .steps-box .label{
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 16px;
+    }
+    .steps-list{ display: flex; flex-direction: column; gap: 14px; }
+    .step{ display: flex; align-items: flex-start; gap: 12px; }
+    .step-num{
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(167,139,250,.18);
+      border: 1px solid rgba(167,139,250,.3);
+      color: var(--accent2);
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-text{
+      font-size: 14.5px;
+      color: var(--text);
+      line-height: 1.6;
+      padding-top: 4px;
+    }
+    .step-text strong{ color: #fff; font-weight: 600; }
+    .note{
+      display: flex;
+      align-items: flex-start;
       gap: 10px;
-      margin-top: 18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 28px;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.65;
+      animation: fadeUp .4s .4s ease both;
+    }
+    .note svg{ flex-shrink:0; margin-top:2px; opacity:.6; }
+    .row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      animation: fadeUp .4s .45s ease both;
     }
     .btn{
-      appearance:none;
+      appearance: none;
       border: 1px solid var(--border);
       background: rgba(255,255,255,.06);
       color: var(--text);
-      padding: 12px 14px;
-      border-radius: 12px;
+      padding: 13px 20px;
+      border-radius: 13px;
+      font-family: 'Sora', sans-serif;
       font-weight: 700;
+      font-size: 14px;
       cursor: pointer;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
       transition: transform .06s ease, background .18s ease, border-color .18s ease;
     }
-    .btn:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.18); }
+    .btn:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.2); }
     .btn:active{ transform: translateY(1px); }
     .btn.primary{
       background: linear-gradient(90deg, var(--accent), #5b21b6);
       border-color: rgba(255,255,255,.18);
     }
-    .btn.primary:hover{ filter: brightness(1.05); }
-    .small{
-      margin-top: 14px;
-      font-size: 13px;
-      color: rgba(185,185,214,.92);
-    }
-    code{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      background: rgba(0,0,0,.25);
-      border:1px solid rgba(255,255,255,.10);
-      padding: 2px 6px;
-      border-radius: 8px;
-    }
+    .btn.primary:hover{ filter: brightness(1.1); }
     .foot{
-      margin-top: 12px;
-      opacity: .9;
+      margin-top: 16px;
+      font-size: 12px;
+      color: rgba(185,185,214,.4);
+      animation: fadeUp .4s .5s ease both;
+    }
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(12px); }
+      to  { opacity:1; transform:translateY(0); }
     }
   </style>
 </head>
 <body>
+
+  <canvas id="fireworks-canvas"></canvas>
+
   <main class="card">
+
+    <!-- Modern fireworks SVG icon -->
+    <svg class="fireworks-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="36" cy="36" r="7" fill="url(#g1)"/>
+      <g stroke-linecap="round" stroke-width="2.8">
+        <line x1="36" y1="10" x2="36" y2="20" stroke="url(#g2)"/>
+        <line x1="36" y1="52" x2="36" y2="62" stroke="url(#g3)"/>
+        <line x1="10" y1="36" x2="20" y2="36" stroke="url(#g4)"/>
+        <line x1="52" y1="36" x2="62" y2="36" stroke="url(#g5)"/>
+        <line x1="17.6" y1="17.6" x2="24.7" y2="24.7" stroke="url(#g6)"/>
+        <line x1="47.3" y1="47.3" x2="54.4" y2="54.4" stroke="url(#g7)"/>
+        <line x1="54.4" y1="17.6" x2="47.3" y2="24.7" stroke="url(#g8)"/>
+        <line x1="24.7" y1="47.3" x2="17.6" y2="54.4" stroke="url(#g9)"/>
+      </g>
+      <circle cx="36" cy="7"  r="2.2" fill="#fbbf24"/>
+      <circle cx="36" cy="65" r="2.2" fill="#a78bfa"/>
+      <circle cx="7"  cy="36" r="2.2" fill="#34d399"/>
+      <circle cx="65" cy="36" r="2.2" fill="#f472b6"/>
+      <circle cx="14.5" cy="14.5" r="2"  fill="#60a5fa"/>
+      <circle cx="57.5" cy="57.5" r="2"  fill="#fb923c"/>
+      <circle cx="57.5" cy="14.5" r="2"  fill="#facc15"/>
+      <circle cx="14.5" cy="57.5" r="2"  fill="#c084fc"/>
+      <circle cx="24" cy="12" r="1.5" fill="#34d399" opacity=".8"/>
+      <circle cx="48" cy="60" r="1.5" fill="#f472b6" opacity=".8"/>
+      <circle cx="12" cy="48" r="1.5" fill="#fbbf24" opacity=".8"/>
+      <circle cx="60" cy="24" r="1.5" fill="#60a5fa" opacity=".8"/>
+      <defs>
+        <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff"/>
+          <stop offset="60%" stop-color="#c084fc"/>
+          <stop offset="100%" stop-color="#7c3aed"/>
+        </radialGradient>
+        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fbbf24"/><stop offset="1" stop-color="#fbbf24" stop-opacity="0"/></linearGradient>
+        <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a78bfa" stop-opacity="0"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+        <linearGradient id="g4" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#34d399"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></linearGradient>
+        <linearGradient id="g5" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#f472b6" stop-opacity="0"/><stop offset="1" stop-color="#f472b6"/></linearGradient>
+        <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#60a5fa"/><stop offset="1" stop-color="#60a5fa" stop-opacity="0"/></linearGradient>
+        <linearGradient id="g7" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fb923c" stop-opacity="0"/><stop offset="1" stop-color="#fb923c"/></linearGradient>
+        <linearGradient id="g8" x1="1" y1="0" x2="0" y2="1"><stop stop-color="#facc15"/><stop offset="1" stop-color="#facc15" stop-opacity="0"/></linearGradient>
+        <linearGradient id="g9" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#c084fc" stop-opacity="0"/><stop offset="1" stop-color="#c084fc"/></linearGradient>
+      </defs>
+    </svg>
+
     <div class="badge"><span class="dot"></span>Pagamento confirmado</div>
 
-    <h1>Agora você é <span class="highlight">PRO ✅</span></h1>
-    <p class="big"><strong>Pode usar todas as funções do PatoGo.</strong></p>
-
-    <p>
-      Se a extensão ainda não liberou automaticamente, volte para o popup e clique em
-      <code>Atualizar acesso</code> (ou aguarde alguns segundos).
+    <h1>Pagamento aprovado <span class="highlight">com sucesso!</span></h1>
+    <p class="subtitle">
+      Seu plano <strong>Pro</strong> foi ativado. Siga os passos abaixo para que o PatoGo reconheça seu novo acesso corretamente.
     </p>
 
-    <div class="row">
-      <!-- Tenta abrir a extensão (se você tiver um link/landing para isso) -->
-      <a class="btn primary" id="btnOpenExt" href="#" role="button">Abrir o PatoGo</a>
-
-      <!-- Voltar para o site -->
-      <a class="btn" href="https://patogo.com.br" rel="noopener">Voltar ao site</a>
+    <div class="steps-box">
+      <div class="label">Próximos passos</div>
+      <div class="steps-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">Volte para o PatoGo e <strong>faça logout</strong> da sua conta.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Entre novamente</strong> com o mesmo e-mail usado no pagamento.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">Pronto! Seu <strong>selo Pro</strong> e todas as funcionalidades estarão disponíveis.</div>
+        </div>
+      </div>
     </div>
 
-    <p class="small foot" id="debug"></p>
+    <div class="note">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      Após fazer login novamente, o sistema atualizará seu acesso automaticamente. Caso o status Pro não apareça, aguarde alguns segundos e recarregue a página.
+    </div>
+
+    <div class="row">
+      <a class="btn primary" id="btnOpenExt" href="#" role="button">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/></svg>
+        Voltar para o PatoGo
+      </a>
+      <a class="btn" href="https://patogo.com.br" rel="noopener">Ir ao site</a>
+    </div>
+
+    <p class="foot" id="debug"></p>
   </main>
 
   <script>
-    // Mostra session_id na tela (opcional), útil pra debug
+    /* ─── session debug ─── */
     const params = new URLSearchParams(location.search);
     const sid = params.get("session_id") || params.get("sid") || "";
-    const dbg = document.getElementById("debug");
-    if (sid) dbg.textContent = "Session: " + sid;
+    if (sid) document.getElementById("debug").textContent = "Session: " + sid;
 
-    // Se você tiver uma página/rota que instrui como abrir a extensão, coloque aqui
-    // (ex.: https://patogo.com.br/app ou https://patogo.com.br/abrir)
-    // Se não tiver, deixa ir pro site mesmo.
-    const btn = document.getElementById("btnOpenExt");
-    btn.addEventListener("click", (e) => {
+    document.getElementById("btnOpenExt").addEventListener("click", (e) => {
       e.preventDefault();
       window.location.href = "https://patogo.com.br";
     });
+
+    /* ═══════════════════════════════════════
+       FIREWORKS ENGINE
+    ═══════════════════════════════════════ */
+    const canvas = document.getElementById("fireworks-canvas");
+    const ctx    = canvas.getContext("2d");
+
+    function resize(){
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    const COLORS = [
+      "#a78bfa","#7c3aed","#c084fc",
+      "#22c55e","#34d399","#86efac",
+      "#fbbf24","#facc15","#fde68a",
+      "#f472b6","#ec4899","#fbcfe8",
+      "#60a5fa","#3b82f6","#bfdbfe",
+      "#fb923c","#f97316","#fed7aa",
+      "#ffffff","#e0e7ff",
+    ];
+
+    /* Particle */
+    class Particle {
+      constructor(x, y, color){
+        this.x = x; this.y = y;
+        this.color = color;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 6 + 1.5;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.alpha  = 1;
+        this.decay  = Math.random() * 0.018 + 0.01;
+        this.radius = Math.random() * 2.8 + 1;
+        this.gravity = 0.09;
+        this.trail   = [];
+        this.trailLen = Math.floor(Math.random() * 5 + 3);
+        this.spark = Math.random() < 0.3;
+      }
+      update(){
+        this.trail.push({ x: this.x, y: this.y });
+        if(this.trail.length > this.trailLen) this.trail.shift();
+        this.vx *= 0.97;
+        this.vy *= 0.97;
+        this.vy += this.gravity;
+        this.x  += this.vx;
+        this.y  += this.vy;
+        this.alpha -= this.decay;
+      }
+      draw(){
+        for(let i = 0; i < this.trail.length; i++){
+          const t = this.trail[i];
+          const a = (this.alpha * i / this.trail.length) * 0.4;
+          ctx.beginPath();
+          ctx.arc(t.x, t.y, this.radius * 0.5, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.globalAlpha = a;
+          ctx.fill();
+        }
+        ctx.globalAlpha = this.alpha;
+        if(this.spark){
+          const s = this.radius * 1.4;
+          ctx.beginPath();
+          ctx.moveTo(this.x - s, this.y); ctx.lineTo(this.x + s, this.y);
+          ctx.moveTo(this.x, this.y - s); ctx.lineTo(this.x, this.y + s);
+          ctx.strokeStyle = this.color;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        } else {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+      isDead(){ return this.alpha <= 0; }
+    }
+
+    /* Rocket */
+    class Rocket {
+      constructor(){
+        this.x  = Math.random() * canvas.width;
+        this.y  = canvas.height;
+        this.tx = Math.random() * canvas.width * 0.8 + canvas.width * 0.1;
+        this.ty = Math.random() * canvas.height * 0.45 + canvas.height * 0.05;
+        const dx = this.tx - this.x, dy = this.ty - this.y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        const spd = Math.random() * 5 + 9;
+        this.vx = (dx/d) * spd;
+        this.vy = (dy/d) * spd;
+        this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        this.exploded = false;
+        this.trail = [];
+      }
+      update(){
+        this.trail.push({ x: this.x, y: this.y });
+        if(this.trail.length > 12) this.trail.shift();
+        this.vx *= 0.998; this.vy *= 0.998;
+        this.vy += 0.04;
+        this.x  += this.vx; this.y  += this.vy;
+        if(this.vy >= 0 || Math.abs(this.y - this.ty) < 12) this.exploded = true;
+      }
+      draw(){
+        for(let i = 0; i < this.trail.length; i++){
+          const t = this.trail[i];
+          const a = (i / this.trail.length) * 0.6;
+          ctx.beginPath();
+          ctx.arc(t.x, t.y, 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.globalAlpha = a;
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = "#fff";
+        ctx.fill();
+      }
+    }
+
+    let particles = [], rockets = [], flashes = [];
+
+    function burst(x, y, big){
+      const baseColor = COLORS[Math.floor(Math.random() * COLORS.length)];
+      const count = big ? 140 : Math.floor(Math.random() * 60 + 80);
+      flashes.push({ x, y, r: 0, maxR: big ? 90 : Math.random() * 60 + 40, alpha: big ? 0.85 : 0.7, color: big ? "#fff" : baseColor });
+      for(let i = 0; i < count; i++){
+        const c2 = COLORS[Math.floor(Math.random() * COLORS.length)];
+        const p  = new Particle(x, y, Math.random() < 0.5 ? baseColor : c2);
+        if(big){ p.radius += 0.8; p.vx *= 1.2; p.vy *= 1.2; }
+        particles.push(p);
+      }
+    }
+
+    function drawFlashes(){
+      for(let i = flashes.length - 1; i >= 0; i--){
+        const f = flashes[i];
+        f.r    += (f.maxR - f.r) * 0.18;
+        f.alpha *= 0.82;
+        ctx.beginPath();
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+        ctx.strokeStyle = f.color;
+        ctx.lineWidth   = 1.5;
+        ctx.globalAlpha = f.alpha;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+        if(f.alpha < 0.01) flashes.splice(i, 1);
+      }
+    }
+
+    /* Launch schedule */
+    const glitterSet = new Set([5,6,7,11]);
+    const launchTimes = [
+      300,500,700,900,1100,     /* first volley */
+      800,1200,1800,            /* glitter */
+      2400,2700,3000,3300,      /* second wave */
+      3600,                     /* glitter finish */
+    ];
+    launchTimes.forEach((t, i) => {
+      setTimeout(() => {
+        rockets.push(new Rocket());
+        if(glitterSet.has(i)) rockets.push(new Rocket());
+      }, t);
+    });
+    /* tail rockets */
+    for(let i = 0; i < 12; i++){
+      setTimeout(() => rockets.push(new Rocket()), 4500 + i * 450);
+    }
+    /* ambient after 9 s */
+    setTimeout(function loop(){
+      rockets.push(new Rocket());
+      if(Math.random() < 0.25) rockets.push(new Rocket());
+      setTimeout(loop, Math.random() * 1800 + 900);
+    }, 9000);
+
+    /* Render loop */
+    function loop(){
+      requestAnimationFrame(loop);
+      ctx.fillStyle = "rgba(11,11,18,.22)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for(let i = rockets.length - 1; i >= 0; i--){
+        const r = rockets[i];
+        r.update(); r.draw();
+        if(r.exploded){
+          burst(r.x, r.y, Math.random() < 0.2);
+          rockets.splice(i, 1);
+        }
+      }
+      drawFlashes();
+      for(let i = particles.length - 1; i >= 0; i--){
+        particles[i].update(); particles[i].draw();
+        if(particles[i].isDead()) particles.splice(i, 1);
+      }
+    }
+    loop();
   </script>
+</body>
+</html>
 </body>
 </html>
