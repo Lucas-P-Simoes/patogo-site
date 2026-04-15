@@ -692,19 +692,22 @@ section {
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-  max-width: 1000px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
   margin: 0 auto 40px;
+  align-items: stretch;
 }
 
 .pricing-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
-  padding: 40px;
+  padding: 40px 32px;
   transition: all 0.3s;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .pricing-card:hover {
@@ -713,14 +716,15 @@ section {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* Premium — mesmo tamanho que os outros, sem scale */
 .pricing-card-featured {
-  background: rgba(102, 126, 234, 0.08);
-  border: 2px solid rgba(102, 126, 234, 0.5);
-  transform: scale(1.05);
+  background: rgba(102, 126, 234, 0.06);
+  border: 1px solid rgba(102, 126, 234, 0.4);
 }
 
 .pricing-card-featured:hover {
-  transform: scale(1.05) translateY(-5px);
+  transform: translateY(-5px);
+  border-color: rgba(102, 126, 234, 0.6);
 }
 
 .pricing-badge {
@@ -800,6 +804,7 @@ section {
 
 .pricing-features {
   margin-bottom: 32px;
+  flex: 1;
 }
 
 .pricing-feature {
@@ -872,6 +877,118 @@ section {
 
 .pricing-faq a:hover {
   text-decoration: underline;
+}
+
+/* PRO MAX Card — card principal */
+.pricing-card-promax {
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(212, 175, 55, 0.6);
+  position: relative;
+  overflow: visible;
+  transform: scale(1.04);
+  z-index: 2;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.10), 0 10px 50px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-card-promax::before {
+  display: none;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.pricing-card-promax:hover {
+  transform: scale(1.04) translateY(-5px);
+  border-color: rgba(212, 175, 55, 0.9);
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.15), 0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+.pricing-badge-promax {
+  background: linear-gradient(135deg, #b8860b 0%, #ffd700 50%, #daa520 100%);
+  color: #000000;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
+  font-size: 15px;
+  padding: 8px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-crown {
+  flex-shrink: 0;
+}
+
+.pricing-card-promax .pricing-title {
+  font-size: 28px;
+  background: linear-gradient(135deg, #ffd700 0%, #daa520 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pricing-card-promax .price-amount,
+.pricing-card-promax .price-cents {
+  background: linear-gradient(135deg, #ffd700 0%, #daa520 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pricing-feature-ai {
+  background: none;
+  border-radius: 0;
+  padding: 12px 0 !important;
+  margin: 0;
+  border: none;
+}
+
+.feature-check-ai {
+  color: #10b981 !important;
+}
+
+.pricing-ai-divider {
+  text-align: center;
+  margin: 12px 0 8px;
+  position: relative;
+}
+
+.pricing-ai-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+}
+
+.pricing-ai-divider span {
+  position: relative;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffd700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-promax {
+  background: linear-gradient(135deg, #b8860b 0%, #ffd700 50%, #daa520 100%);
+  color: #000000;
+  box-shadow: 0 10px 35px rgba(212, 175, 55, 0.35);
+  font-weight: 700;
+  font-size: 18px;
+  padding: 18px 32px;
+}
+
+.btn-promax:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 50px rgba(212, 175, 55, 0.55);
 }
 
 /* ============================================
@@ -947,9 +1064,64 @@ section {
 
 .download-ctas {
   display: flex;
-  gap: 16px;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 0;
+}
+
+.btn-download-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 56px;
+  border-radius: 14px;
+  font-size: 22px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #ffffff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  animation: btnPulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.btn-download-hero:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 50px rgba(102, 126, 234, 0.55);
+  animation: none;
+}
+
+.btn-download-hero .btn-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Pulse animation for all CTA download buttons */
+.btn-pulse {
+  animation: btnPulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.btn-pulse:hover {
+  animation: none;
+}
+
+@keyframes btnPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4), 0 0 0 0 rgba(102, 126, 234, 0.5);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.5), 0 0 0 12px rgba(102, 126, 234, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4), 0 0 0 0 rgba(102, 126, 234, 0);
+  }
 }
 
 .download-info {
@@ -1155,6 +1327,9 @@ code {
 
   .pricing-grid {
     grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .pricing-card-featured {
@@ -1162,6 +1337,14 @@ code {
   }
 
   .pricing-card-featured:hover {
+    transform: translateY(-5px);
+  }
+
+  .pricing-card-promax {
+    transform: scale(1);
+  }
+
+  .pricing-card-promax:hover {
     transform: translateY(-5px);
   }
 }
