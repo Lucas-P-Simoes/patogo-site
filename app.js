@@ -297,6 +297,65 @@ function animateCounters() {
   counters.forEach(counter => observer.observe(counter));
 }
 
+// ================== ALTERNÂNCIA MENSAL / ANUAL ==================
+
+function setupPricingToggle() {
+  const pricingSection = document.querySelector('#precos');
+  if (!pricingSection) return;
+
+  const billingButtons = pricingSection.querySelectorAll('[data-billing]');
+  const annualElements = pricingSection.querySelectorAll('[data-annual-only]');
+  const priceMajor = pricingSection.querySelector('[data-price-major]');
+  const priceCents = pricingSection.querySelector('[data-price-cents]');
+  const billingDetail = pricingSection.querySelector('[data-billing-detail]');
+  const planCard = pricingSection.querySelector('[data-plan-card]');
+
+  function selectBilling(period) {
+    const isAnnual = period === 'annual';
+
+    billingButtons.forEach((button) => {
+      const isActive = button.dataset.billing === period;
+      button.classList.toggle('active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
+    });
+
+    annualElements.forEach((element) => {
+      element.hidden = !isAnnual;
+    });
+
+    if (priceMajor) priceMajor.textContent = isAnnual ? '41' : '49';
+    if (priceCents) priceCents.textContent = isAnnual ? ',66' : ',90';
+    if (billingDetail) {
+      billingDetail.textContent = isAnnual
+        ? 'cobrado como R$ 499,90/ano'
+        : 'cobrado mensalmente';
+    }
+    if (planCard) planCard.dataset.billingPeriod = period;
+  }
+
+  billingButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      selectBilling(button.dataset.billing);
+      trackEvent('pricing_period_change', 'pricing', button.dataset.billing);
+    });
+  });
+
+  selectBilling('annual');
+}
+
+// ================== ORDEM PRINCIPAL DAS SEÇÕES ==================
+
+function setupSectionOrder() {
+  const heroSection = document.querySelector('#hero');
+  const videoSection = document.querySelector('#video-instalar');
+  const pricingSection = document.querySelector('#precos');
+
+  if (!heroSection || !videoSection || !pricingSection) return;
+
+  heroSection.insertAdjacentElement('afterend', videoSection);
+  videoSection.insertAdjacentElement('afterend', pricingSection);
+}
+
 // ================== MOBILE MENU (se necessário no futuro) ==================
 
 function setupMobileMenu() {
@@ -307,6 +366,9 @@ function setupMobileMenu() {
 // ================== BOOTSTRAP DA PÁGINA ==================
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Colocar demonstração e preços logo após a apresentação inicial
+  setupSectionOrder();
+
   // Carregar informações de release
   loadRelease();
   
@@ -316,6 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupScrollAnimations();
   setupConversionTracking();
   animateCounters();
+  setupPricingToggle();
   setupMobileMenu();
   
   console.log('PatoGo website loaded successfully! 🦆');
