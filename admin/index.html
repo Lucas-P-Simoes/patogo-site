@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; img-src data:; font-src https://fonts.gstatic.com; style-src 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src https://divine-smoke-0c82.lucaspsimoes22.workers.dev; upgrade-insecure-requests">
+<title>PatoGo — Painel de Métricas</title>
+<style id="frameGuard">html{visibility:hidden}</style>
+<script>if(window.top===window.self){document.documentElement.style.visibility='visible'}else{try{window.top.location=window.self.location}catch{}}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='18' fill='%23f5c542'/%3E%3Cellipse cx='27' cy='40' rx='16' ry='10' fill='%2312141a'/%3E%3Ccircle cx='39' cy='25' r='11' fill='%2312141a'/%3E%3Cpath d='M48 25l11 5-11 5z' fill='%23fff4bd'/%3E%3Ccircle cx='42' cy='22' r='2' fill='white'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0b0e;--surface:#12141a;--surface-2:#1a1d26;--surface-3:#22262f;--border:#2a2e38;--text:#e8eaed;--text-dim:#8b8f9a;--text-muted:#808591;--accent:#f5c542;--accent-dim:#d4a830;--green:#34d399;--green-dim:rgba(52,211,153,.12);--red:#f87171;--red-dim:rgba(248,113,113,.12);--blue:#60a5fa;--blue-dim:rgba(96,165,250,.12);--orange:#fb923c;--orange-dim:rgba(251,146,60,.12);--purple:#a78bfa;--purple-dim:rgba(167,139,250,.12);--cyan:#22d3ee;--cyan-dim:rgba(34,211,238,.12);--radius:10px;--radius-lg:14px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;display:flex}
+
+/* Login */
+.login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto;z-index:9999;isolation:isolate;background:radial-gradient(circle at 12% 12%,rgba(245,197,66,.1),transparent 30%),radial-gradient(circle at 88% 84%,rgba(96,165,250,.08),transparent 30%),var(--bg);transition:opacity .4s,visibility .4s}
+.login-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.login-screen::before{content:'';position:absolute;inset:0;z-index:-2;opacity:.23;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 88%)}
+.login-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.login-bg .orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:.13;animation:orbFloat 14s ease-in-out infinite alternate}
+.login-bg .orb-1{width:520px;height:520px;background:var(--accent);top:-24%;left:-8%}
+.login-bg .orb-2{width:460px;height:460px;background:var(--blue);bottom:-25%;right:-8%;animation-delay:-5s}
+.login-bg .orb-3{width:260px;height:260px;background:var(--green);top:42%;left:48%;animation-delay:-9s}
+@keyframes orbFloat{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(36px,-28px,0) scale(1.12)}}
+.login-shell{position:relative;width:min(960px,100%);min-height:580px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(380px,.78fr);overflow:hidden;background:rgba(18,20,26,.9);border:1px solid rgba(255,255,255,.09);border-radius:26px;box-shadow:0 32px 100px rgba(0,0,0,.58),0 0 0 1px rgba(245,197,66,.03) inset;backdrop-filter:blur(24px)}
+.login-showcase{position:relative;display:flex;flex-direction:column;padding:46px 50px 42px;overflow:hidden;background:linear-gradient(145deg,rgba(245,197,66,.13),rgba(245,197,66,.025) 46%,rgba(96,165,250,.035));border-right:1px solid rgba(255,255,255,.07)}
+.login-showcase::after{content:'';position:absolute;width:360px;height:360px;border:1px solid rgba(245,197,66,.12);border-radius:50%;right:-150px;bottom:-170px;box-shadow:0 0 0 42px rgba(245,197,66,.025),0 0 0 84px rgba(245,197,66,.018)}
+.brand-lockup{display:flex;align-items:center;gap:13px;position:relative;z-index:1}.brand-mark{display:block;flex-shrink:0}.brand-mark.login-mark{width:52px;height:52px;filter:drop-shadow(0 10px 22px rgba(245,197,66,.18))}
+.brand-copy{display:flex;flex-direction:column}.brand-copy strong{font-size:22px;line-height:1;font-weight:700;letter-spacing:-.6px;color:#fff}.brand-copy span{margin-top:5px;font:600 9px 'JetBrains Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted)}
+.login-hero-copy{position:relative;z-index:1;margin:auto 0}.login-eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:6px 10px;border:1px solid rgba(245,197,66,.16);border-radius:999px;background:rgba(245,197,66,.06);color:var(--accent);font:600 10px 'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase}.login-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(245,197,66,.8)}
+.login-showcase h1{max-width:470px;font-size:42px;line-height:1.08;letter-spacing:-1.8px;margin-bottom:17px}.login-showcase h1 span{color:var(--accent)}
+.login-showcase .hero-text{max-width:440px;color:var(--text-dim);font-size:15px;line-height:1.7}
+.login-features{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}.login-feature{display:flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid rgba(255,255,255,.07);border-radius:9px;background:rgba(10,11,14,.34);color:var(--text-dim);font-size:11px}.login-feature svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.login-card{position:relative;display:flex;flex-direction:column;justify-content:center;padding:54px 48px;background:linear-gradient(180deg,rgba(18,20,26,.88),rgba(13,15,20,.96))}
+.login-card::before{content:'';position:absolute;top:0;left:48px;right:48px;height:1px;background:linear-gradient(90deg,transparent,rgba(245,197,66,.35),transparent)}
+.login-mobile-brand{display:none}.login-overline{display:flex;align-items:center;gap:8px;margin-bottom:12px;color:var(--accent);font:600 10px 'JetBrains Mono',monospace;letter-spacing:1.3px;text-transform:uppercase}.login-overline span{width:18px;height:1px;background:var(--accent)}
+.login-card h2{font-size:28px;line-height:1.2;letter-spacing:-.8px;margin-bottom:8px}.login-card .subtitle{color:var(--text-muted);font-size:13px;line-height:1.55;margin-bottom:30px}
+.login-field{margin-bottom:17px}
+.login-field label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px}
+.login-field input{width:100%;height:50px;background:rgba(26,29,38,.82);border:1px solid var(--border);color:var(--text);padding:0 15px;border-radius:11px;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s,background .2s;font-family:'DM Sans',sans-serif}
+.login-field input:hover{border-color:#3a3f4b}.login-field input:focus{background:var(--surface-2);border-color:var(--accent);box-shadow:0 0 0 3px rgba(245,197,66,.1)}
+.login-field input::placeholder{color:var(--text-muted)}
+.login-btn{width:100%;height:50px;background:linear-gradient(135deg,#f8d45d,var(--accent));color:#0a0b0e;border:1px solid rgba(255,255,255,.16);padding:0 18px;border-radius:11px;font-weight:700;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform .15s,box-shadow .15s,filter .15s;margin-top:7px;box-shadow:0 10px 26px rgba(245,197,66,.16)}
+.login-btn:hover{filter:brightness(1.04);transform:translateY(-1px);box-shadow:0 14px 32px rgba(245,197,66,.22)}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.login-btn .spinner-sm{display:inline-block;width:16px;height:16px;border:2px solid rgba(10,11,14,.3);border-top-color:#0a0b0e;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px}
+.login-error{background:var(--red-dim);border:1px solid rgba(248,113,113,.18);color:var(--red);padding:11px 14px;border-radius:9px;font-size:12px;margin-top:14px;text-align:center;display:none}
+.login-error.show{display:block;animation:shake .4s ease}
+.login-security{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:20px;color:var(--text-muted);font-size:10px}.login-security svg{width:13px;height:13px;stroke:var(--text-muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+/* App Layout */
+.app-wrap{display:none;width:100%;height:100vh}.app-wrap.visible{display:flex}
+.sidebar{width:220px;min-width:220px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;position:sticky;top:0}
+.sidebar .logo{padding:17px 18px 15px;font-size:20px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.sidebar .logo svg{flex-shrink:0}
+.sidebar .logo .brand-mark{width:31px;height:31px;filter:drop-shadow(0 5px 12px rgba(245,197,66,.16))}.sidebar .logo .name-text{letter-spacing:-.5px}
+.sidebar nav{flex:1;padding:12px 10px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:10px 14px;border-radius:10px;cursor:pointer;font:500 13px 'DM Sans',sans-serif;text-align:left;color:var(--text-dim);background:transparent;transition:all .15s;border:1px solid transparent}
+.nav-item:hover{color:var(--text);background:var(--surface-2)}
+.nav-item.active{background:var(--accent);color:#0a0b0e;font-weight:700;border-color:var(--accent)}
+.nav-item .nav-icon{width:20px;height:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.nav-item .nav-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-sep{height:1px;background:var(--border);margin:8px 14px}
+.nav-label-sm{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);padding:8px 14px 2px}
+.sidebar-footer{padding:14px 16px;border-top:1px solid var(--border)}
+.sidebar-footer .user-email{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--text-muted);margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sidebar-footer .btn-logout{width:100%;background:transparent;color:var(--red);border:1px solid rgba(248,113,113,.2);padding:7px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.sidebar-footer .btn-logout:hover{background:var(--red-dim);border-color:var(--red)}
+
+.content{flex:1;height:100vh;overflow-y:auto;overflow-x:hidden}
+.content::-webkit-scrollbar{width:6px}.content::-webkit-scrollbar-track{background:transparent}.content::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+.page{display:none;padding:28px 32px 60px}.page.active{display:block}
+.page-title{font-size:22px;font-weight:700;margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--text-muted);margin-bottom:24px}
+
+/* Components */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:.5}
+.kpi.green::before{background:var(--green)}.kpi.blue::before{background:var(--blue)}.kpi.orange::before{background:var(--orange)}.kpi.purple::before{background:var(--purple)}.kpi.red::before{background:var(--red)}.kpi.cyan::before{background:var(--cyan)}
+.kpi-label{font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.kpi-value{font-size:26px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:-1px;line-height:1}
+.kpi-sub{font-size:11px;color:var(--text-dim);margin-top:4px}
+
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:14px;margin-bottom:24px}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px}
+.chart-card h3{font-size:13px;font-weight:600;margin-bottom:14px;color:var(--text-dim);display:flex;align-items:center;gap:8px}
+.info-i{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--surface-3);color:var(--text-muted);font-size:10px;font-weight:700;font-style:italic;font-family:Georgia,serif;cursor:help;position:relative;flex-shrink:0;transition:all .15s;line-height:1}
+.info-i:hover{background:var(--accent);color:#0a0b0e}
+.info-i .tip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--surface-2);border:1px solid var(--border);color:var(--text-dim);font-size:11px;font-weight:400;font-style:normal;font-family:'DM Sans',sans-serif;padding:10px 14px;border-radius:8px;width:280px;line-height:1.5;box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:100;pointer-events:none}
+.info-i .tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--border)}
+.info-i:hover .tip,.info-i:focus .tip{display:block}.info-i:focus{outline:2px solid var(--accent);outline-offset:2px}
+.chart-container{width:100%;height:230px;position:relative}
+.chart-container.tall{height:320px}
+
+/* Carousel */
+.carousel{position:relative;margin-bottom:24px}
+.carousel-track{display:flex;overflow:hidden}
+.carousel-slide{min-width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:14px;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;z-index:5}
+.carousel-nav:hover{background:var(--accent);color:#0a0b0e;border-color:var(--accent)}
+.carousel-nav.prev{left:-17px}.carousel-nav.next{right:-17px}
+.carousel-nav:disabled{opacity:.25;cursor:default;background:var(--surface-2);color:var(--text-muted);border-color:var(--border)}
+.carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:10px}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:all .2s;padding:0}
+.carousel-dot.active{background:var(--accent);width:22px;border-radius:4px}
+
+/* Time Range Filter */
+.time-range{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.time-range .tr-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-right:6px}
+.tr-btn{background:var(--surface);border:1px solid var(--border);color:var(--text-muted);padding:5px 12px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .12s}
+.tr-btn:hover{color:var(--text);border-color:var(--text-muted)}
+.tr-btn.active{background:var(--accent);color:#0a0b0e;border-color:var(--accent)}
+
+/* Toolbar */
+.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.search-box{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:280px;transition:border-color .2s}
+.search-box:focus{border-color:var(--accent)}.search-box::placeholder{color:var(--text-muted)}
+.btn{background:var(--accent);color:#0a0b0e;border:none;padding:8px 18px;border-radius:8px;font-weight:700;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.btn:hover{background:var(--accent-dim);transform:translateY(-1px)}
+.btn-secondary{background:var(--surface-3);color:var(--text);border:1px solid var(--border)}.btn-secondary:hover{background:var(--surface-2);border-color:var(--text-muted)}
+.toolbar .count-badge{font-size:12px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-left:auto}
+
+/* Table */
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.full-table{max-height:calc(100vh - 260px);overflow-y:auto}
+.full-table::-webkit-scrollbar{width:6px}.full-table::-webkit-scrollbar-track{background:transparent}.full-table::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:10px 14px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);background:var(--surface-2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:2}
+td{padding:10px 14px;font-size:13px;border-bottom:1px solid var(--border);color:var(--text-dim);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tr:hover td{background:rgba(245,197,66,.03)}
+.tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.tag-free{background:var(--surface-3);color:var(--text-muted)}.tag-pro{background:var(--green-dim);color:var(--green)}
+.tag-success{background:var(--green-dim);color:var(--green)}.tag-error{background:var(--red-dim);color:var(--red)}.tag-empty{background:var(--orange-dim);color:var(--orange)}.tag-active{background:var(--green-dim);color:var(--green)}.tag-deleted{background:var(--red-dim);color:var(--red)}
+
+/* Funnel */
+.funnel{display:flex;flex-direction:column;gap:0;margin:20px auto;max-width:500px}
+.funnel-step{display:flex;align-items:center;gap:14px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);position:relative}
+.funnel-step:first-child{border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.funnel-step:last-child{border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+.funnel-step:not(:last-child){border-bottom:none}
+.funnel-bar{height:8px;border-radius:4px;transition:width .6s ease}
+.funnel-step .f-label{font-size:13px;font-weight:600;width:140px;flex-shrink:0}
+.funnel-step .f-bar-wrap{flex:1;background:var(--surface-3);border-radius:4px;height:8px;overflow:hidden}
+.funnel-step .f-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;width:60px;text-align:right}
+.funnel-step .f-pct{font-size:11px;color:var(--text-muted);width:50px;text-align:right}
+
+/* Churn list */
+.churn-list{display:flex;flex-direction:column;gap:6px;max-height:300px;overflow-y:auto;padding-right:4px}
+.churn-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.churn-item .c-email{flex:1;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.churn-item .c-days{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700}
+.churn-item .c-plan{flex-shrink:0}
+
+/* Uso por usuário */
+.usage-user{display:flex;flex-direction:column;gap:2px;min-width:180px}
+.usage-user strong{color:var(--text);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.usage-user span{color:var(--text-muted);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.usage-features{display:flex;gap:5px;align-items:center;max-width:310px;overflow:hidden}
+.usage-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border:1px solid var(--border);border-radius:999px;background:var(--surface-2);color:var(--text-dim);font-size:10px;white-space:nowrap}
+.usage-chip b{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:9px}
+.usage-detail-btn{border:1px solid rgba(245,197,66,.28);background:rgba(245,197,66,.08);color:var(--accent);padding:6px 10px;border-radius:7px;font:600 11px 'DM Sans',sans-serif;cursor:pointer;transition:all .15s;white-space:nowrap}
+.usage-detail-btn:hover{background:var(--accent);color:#0a0b0e;border-color:var(--accent)}
+.usage-zero{opacity:.48}
+.usage-zero:hover{opacity:.8}
+.usage-status{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600}
+.usage-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--text-muted)}
+.usage-status.active{color:var(--green)}.usage-status.active::before{background:var(--green);box-shadow:0 0 8px rgba(52,211,153,.5)}
+.usage-status.idle{color:var(--orange)}.usage-status.idle::before{background:var(--orange)}
+.usage-modal{position:fixed;inset:0;z-index:10000;background:rgba(3,5,9,.76);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px}
+.usage-modal.open{display:flex}
+.usage-dialog{width:min(1060px,96vw);max-height:92vh;background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.65);display:flex;flex-direction:column;overflow:hidden}
+.usage-dialog-head{display:flex;align-items:flex-start;gap:14px;padding:20px 22px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(245,197,66,.07),transparent 55%)}
+.usage-avatar{width:46px;height:46px;border-radius:14px;background:var(--accent);color:#0a0b0e;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;flex-shrink:0}
+.usage-dialog-title{flex:1;min-width:0}.usage-dialog-title h2{font-size:17px;margin:1px 0 3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.usage-dialog-title p{font-size:12px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.usage-close{width:34px;height:34px;border-radius:9px;border:1px solid var(--border);background:var(--surface-2);color:var(--text-dim);font-size:20px;cursor:pointer;flex-shrink:0}.usage-close:hover{color:var(--text);border-color:var(--text-muted)}
+.usage-dialog-body{padding:20px 22px 24px;overflow-y:auto}
+.usage-dialog-body::-webkit-scrollbar{width:6px}.usage-dialog-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:6px}
+.usage-section{margin-top:20px}.usage-section h3{font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.usage-chip-cloud{display:flex;flex-wrap:wrap;gap:7px}
+.usage-chip-cloud .usage-chip{padding:6px 10px;font-size:11px}
+.usage-timeline{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.usage-timeline-item{display:grid;grid-template-columns:150px 12px minmax(180px,1fr) minmax(160px,.65fr);gap:10px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--border);font-size:11px}
+.usage-timeline-item:last-child{border-bottom:none}.usage-timeline-item:hover{background:rgba(245,197,66,.025)}
+.usage-timeline-time{font-family:'JetBrains Mono',monospace;color:var(--text-muted);font-size:10px}.usage-timeline-dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}.usage-timeline-dot.extraction{background:var(--green)}.usage-timeline-dot.library{background:var(--purple)}.usage-timeline-dot.error{background:var(--red)}
+.usage-timeline-main{color:var(--text);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.usage-timeline-detail{color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.usage-empty{padding:30px;text-align:center;color:var(--text-muted);font-size:12px;border:1px dashed var(--border);border-radius:12px}
+#page-usage .full-table{overflow:auto}
+#page-usage table{min-width:1500px}
+#page-usage th:last-child{right:0;z-index:4}
+#page-usage td:last-child{position:sticky;right:0;background:var(--surface);box-shadow:-8px 0 14px rgba(10,11,14,.72)}
+#page-usage tr:hover td:last-child{background:var(--surface-2)}
+
+/* Settings */
+.settings-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px}
+.settings-heading{font-size:15px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.settings-desc{font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.5}
+.settings-row{display:flex;gap:16px;flex-wrap:wrap}
+.settings-field{display:flex;flex-direction:column;gap:6px;min-width:200px}
+.settings-field label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted)}
+.settings-field input{background:var(--surface-2);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;transition:border-color .2s}
+.settings-field input:focus{border-color:var(--accent)}
+.settings-field input::placeholder{color:var(--text-muted)}
+.excluded-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;min-height:20px}
+.excluded-tag{display:flex;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:6px 10px 6px 12px;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--text-dim)}
+.excluded-tag .x-btn{width:18px;height:18px;border-radius:50%;border:none;background:var(--surface-3);color:var(--text-muted);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1}
+.excluded-tag .x-btn:hover{background:var(--red);color:#fff}
+
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-overlay{position:fixed;inset:0;background:rgba(10,11,14,.7);display:flex;align-items:center;justify-content:center;z-index:999;gap:12px;font-size:14px;color:var(--text-dim);backdrop-filter:blur(4px)}
+.loading-overlay.hidden{display:none}
+.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
+
+@media(max-width:760px){
+  .login-screen{padding:16px;align-items:center}
+  .login-shell{display:block;width:min(430px,100%);min-height:0;border-radius:22px}
+  .login-showcase{display:none}
+  .login-card{padding:38px 28px 30px}
+  .login-card::before{left:28px;right:28px}
+  .login-mobile-brand{display:flex;align-items:center;gap:10px;margin-bottom:34px}
+  .login-mobile-brand .brand-mark{width:42px;height:42px}
+  .login-mobile-brand strong{font-size:20px;letter-spacing:-.5px}
+  .login-card h2{font-size:26px}
+}
+@media(max-height:680px){.login-screen{align-items:flex-start}.login-shell{margin:auto 0}}
+@media(max-width:900px){
+  .sidebar{width:56px;min-width:56px}
+  .sidebar .logo .name-text,.nav-item .nav-label,.sidebar-footer .user-email,.nav-label-sm{display:none}
+  .sidebar .logo{padding:14px 8px;justify-content:center}
+  .sidebar .logo .brand-mark{width:32px;height:32px}
+  .sidebar .logo svg{margin:0}
+  .nav-item{justify-content:center;padding:10px}
+  .page{padding:20px 16px}
+  .chart-grid,.carousel-slide{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .search-box{width:100%}
+  .usage-timeline-item{grid-template-columns:110px 10px 1fr}.usage-timeline-detail{display:none}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<div class="login-screen" id="loginScreen">
+  <div class="login-bg"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+  <div class="login-shell">
+    <section class="login-showcase" aria-label="Portal de Inteligência PatoGo">
+      <div class="brand-lockup">
+        <svg class="brand-mark login-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="loginMarkGradient" x1="8" y1="5" x2="56" y2="60" gradientUnits="userSpaceOnUse"><stop stop-color="#ffe178"/><stop offset="1" stop-color="#e7ad18"/></linearGradient></defs><rect x="2" y="2" width="60" height="60" rx="18" fill="url(#loginMarkGradient)"/><rect x="2.5" y="2.5" width="59" height="59" rx="17.5" fill="none" stroke="rgba(255,255,255,.3)"/><ellipse cx="27" cy="40" rx="16" ry="10" fill="#111318"/><circle cx="39" cy="25" r="11" fill="#111318"/><path d="M48 25l11 5-11 5z" fill="#fff4bd"/><circle cx="42" cy="22" r="2" fill="#fff"/><path d="M16 40c7 4 17 4 25-1" fill="none" stroke="#f5c542" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <div class="brand-copy"><strong>PatoGo</strong><span>Portal de Inteligência</span></div>
+      </div>
+      <div class="login-hero-copy">
+        <div class="login-eyebrow">Visão central do produto</div>
+        <h1>Decisões melhores começam com <span>dados claros.</span></h1>
+        <p class="hero-text">Acompanhe a aquisição, o uso, a conversão e a saúde operacional do PatoGo em um só lugar.</p>
+        <div class="login-features">
+          <span class="login-feature"><svg viewBox="0 0 24 24"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/></svg>Métricas de uso</span>
+          <span class="login-feature"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 8-8"/><path d="M12 2v10h10"/></svg>Conversão</span>
+          <span class="login-feature"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Saúde operacional</span>
+        </div>
+      </div>
+    </section>
+    <section class="login-card" aria-labelledby="loginTitle">
+      <div class="login-mobile-brand">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="18" fill="#f5c542"/><ellipse cx="27" cy="40" rx="16" ry="10" fill="#111318"/><circle cx="39" cy="25" r="11" fill="#111318"/><path d="M48 25l11 5-11 5z" fill="#fff4bd"/><circle cx="42" cy="22" r="2" fill="#fff"/></svg><strong>PatoGo</strong>
+      </div>
+      <div class="login-overline"><span></span>Acesso administrativo</div>
+      <h2 id="loginTitle">Bem-vindo de volta</h2>
+      <p class="subtitle">Entre com suas credenciais para acessar o painel.</p>
+      <input type="hidden" id="loginWorkerUrl" value="https://divine-smoke-0c82.lucaspsimoes22.workers.dev"/>
+      <div class="login-field"><label for="loginEmail">E-mail</label><input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="username"/></div>
+      <div class="login-field"><label for="loginPassword">Senha</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"/></div>
+      <button class="login-btn" id="loginBtn" onclick="doLogin()">Acessar painel</button>
+      <div class="login-error" id="loginError" role="alert" aria-live="polite"></div>
+      <div class="login-security"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Sua sessão fica restrita a esta aba</div>
+    </section>
+  </div>
+</div>
+
+<div class="app-wrap" id="appWrap">
+<aside class="sidebar">
+  <div class="logo"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="sidebarMarkGradient" x1="8" y1="5" x2="56" y2="60" gradientUnits="userSpaceOnUse"><stop stop-color="#ffe178"/><stop offset="1" stop-color="#e7ad18"/></linearGradient></defs><rect x="2" y="2" width="60" height="60" rx="18" fill="url(#sidebarMarkGradient)"/><ellipse cx="27" cy="40" rx="16" ry="10" fill="#111318"/><circle cx="39" cy="25" r="11" fill="#111318"/><path d="M48 25l11 5-11 5z" fill="#fff4bd"/><circle cx="42" cy="22" r="2" fill="#fff"/></svg><span class="name-text">PatoGo</span></div>
+  <nav>
+    <div class="nav-label-sm">Dados</div>
+    <button type="button" class="nav-item active" data-page="overview" onclick="navigate(this)"><span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="nav-label">Visão Geral</span></button>
+    <button type="button" class="nav-item" data-page="users" onclick="navigate(this)"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="nav-label">Usuários</span></button>
+    <button type="button" class="nav-item" data-page="usage" onclick="navigate(this)"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 16 4-5 3 3 5-7"/><circle cx="7" cy="16" r="1"/><circle cx="11" cy="11" r="1"/><circle cx="14" cy="14" r="1"/><circle cx="19" cy="7" r="1"/></svg></span><span class="nav-label">Uso por usuário</span></button>
+    <button type="button" class="nav-item" data-page="extractions" onclick="navigate(this)"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span><span class="nav-label">Extrações</span></button>
+    <button type="button" class="nav-item" data-page="events" onclick="navigate(this)"><span class="nav-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><span class="nav-label">Eventos</span></button>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="user-email" id="sidebarEmail"></div>
+    <button class="btn-logout" onclick="doLogout()">Sair</button>
+  </div>
+</aside>
+
+<main class="content">
+<div id="loadingOverlay" class="loading-overlay hidden" role="status" aria-live="polite"><div class="spinner"></div> Carregando dados…</div>
+
+<!-- OVERVIEW -->
+<div class="page active" id="page-overview">
+  <div class="page-title">Visão Geral</div><div class="page-sub">Resumo de todas as métricas</div>
+  <div class="time-range" data-page="overview"><span class="tr-label">Período</span><button class="tr-btn" data-range="0" onclick="setRange(this)">Hoje</button><button class="tr-btn" data-range="7" onclick="setRange(this)">7d</button><button class="tr-btn" data-range="15" onclick="setRange(this)">15d</button><button class="tr-btn active" data-range="30" onclick="setRange(this)">30d</button><button class="tr-btn" data-range="90" onclick="setRange(this)">3m</button><button class="tr-btn" data-range="180" onclick="setRange(this)">6m</button><button class="tr-btn" data-range="365" onclick="setRange(this)">1 ano</button><button class="tr-btn" data-range="9999" onclick="setRange(this)">Tudo</button></div>
+  <div class="kpi-grid" id="ovKpis"></div>
+  <div class="chart-grid" id="ovCharts"></div>
+</div>
+
+<!-- USERS -->
+<div class="page" id="page-users">
+  <div class="page-title">Usuários</div><div class="page-sub">Todos os usuários registrados</div>
+  <div class="time-range" data-page="users"><span class="tr-label">Período</span><button class="tr-btn" data-range="0" onclick="setRange(this)">Hoje</button><button class="tr-btn" data-range="7" onclick="setRange(this)">7d</button><button class="tr-btn" data-range="15" onclick="setRange(this)">15d</button><button class="tr-btn active" data-range="30" onclick="setRange(this)">30d</button><button class="tr-btn" data-range="90" onclick="setRange(this)">3m</button><button class="tr-btn" data-range="180" onclick="setRange(this)">6m</button><button class="tr-btn" data-range="365" onclick="setRange(this)">1 ano</button><button class="tr-btn" data-range="9999" onclick="setRange(this)">Tudo</button></div>
+  <div class="kpi-grid" id="usersKpis"></div>
+  <div class="chart-grid"><div class="chart-card"><h3>Novos por Dia (<span class="range-lbl" data-page="users">30d</span>)</h3><div class="chart-container"><canvas id="cUsersDaily"></canvas></div></div><div class="chart-card"><h3>Planos</h3><div class="chart-container"><canvas id="cUsersPlans"></canvas></div></div></div>
+  <div class="toolbar"><input class="search-box" id="searchUsers" aria-label="Buscar usuários" placeholder="Buscar email, nome, telefone…" oninput="filterTable('users')"/><button class="btn" onclick="refreshData()">Atualizar</button><button class="btn btn-secondary" onclick="exportCSV('users')">CSV</button><span class="count-badge" id="usersCountBadge">0</span></div>
+  <div class="table-wrap"><div class="full-table"><table><thead><tr><th>Email</th><th>Nome</th><th>Plano</th><th>Telefone</th><th>Origem</th><th>Stripe</th><th>Criado</th><th>Atualizado</th></tr></thead><tbody id="usersBody"></tbody></table></div></div>
+</div>
+
+<!-- USO POR USUÁRIO -->
+<div class="page" id="page-usage">
+  <div class="page-title">Uso por usuário</div><div class="page-sub">Veja quais recursos cada pessoa utiliza e quando foi sua última atividade</div>
+  <div class="time-range" data-page="usage"><span class="tr-label">Período</span><button class="tr-btn" data-range="0" onclick="setRange(this)">Hoje</button><button class="tr-btn" data-range="7" onclick="setRange(this)">7d</button><button class="tr-btn" data-range="15" onclick="setRange(this)">15d</button><button class="tr-btn active" data-range="30" onclick="setRange(this)">30d</button><button class="tr-btn" data-range="90" onclick="setRange(this)">3m</button><button class="tr-btn" data-range="180" onclick="setRange(this)">6m</button><button class="tr-btn" data-range="365" onclick="setRange(this)">1 ano</button><button class="tr-btn" data-range="9999" onclick="setRange(this)">Tudo</button></div>
+  <div class="kpi-grid" id="usageKpis"></div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Recursos mais utilizados</h3><div class="chart-container"><canvas id="cUsageFeatures"></canvas></div></div>
+    <div class="chart-card"><h3>Usuários mais ativos</h3><div class="chart-container"><canvas id="cUsageUsers"></canvas></div></div>
+  </div>
+  <div class="toolbar">
+    <input class="search-box" id="searchUsage" aria-label="Buscar uso por usuário" placeholder="Buscar e-mail, nome, recurso ou aba…" oninput="filterTable('usage')"/>
+    <select class="search-box" id="usageSort" aria-label="Ordenar usuários" onchange="filterTable('usage')" style="width:190px;cursor:pointer"><option value="actions">Mais ações</option><option value="recent">Mais recentes</option><option value="messages">Mais mensagens</option><option value="ai">Mais uso de IA</option><option value="extractions">Mais extrações</option><option value="contacts">Mais contatos</option></select>
+    <button class="btn" onclick="refreshData()">Atualizar</button><button class="btn btn-secondary" onclick="exportUsageCSV()">CSV</button><span class="count-badge" id="usageCountBadge">0</span>
+  </div>
+  <div class="table-wrap"><div class="full-table"><table><thead><tr><th>Usuário</th><th>Plano</th><th>Última atividade</th><th>Dias ativos</th><th>Recursos usados</th><th>Mensagens</th><th>IA</th><th>Extrações</th><th>Contatos</th><th>Downloads</th><th>Biblioteca</th><th>Ações</th><th></th></tr></thead><tbody id="usageBody"></tbody></table></div></div>
+</div>
+
+<!-- EXTRACTIONS -->
+<div class="page" id="page-extractions">
+  <div class="page-title">Extrações</div><div class="page-sub">Monitoramento de extrações de contatos</div>
+  <div class="time-range" data-page="extractions"><span class="tr-label">Período</span><button class="tr-btn" data-range="0" onclick="setRange(this)">Hoje</button><button class="tr-btn" data-range="7" onclick="setRange(this)">7d</button><button class="tr-btn" data-range="15" onclick="setRange(this)">15d</button><button class="tr-btn active" data-range="30" onclick="setRange(this)">30d</button><button class="tr-btn" data-range="90" onclick="setRange(this)">3m</button><button class="tr-btn" data-range="180" onclick="setRange(this)">6m</button><button class="tr-btn" data-range="365" onclick="setRange(this)">1 ano</button><button class="tr-btn" data-range="9999" onclick="setRange(this)">Tudo</button></div>
+  <div class="kpi-grid" id="extKpis"></div>
+  <div class="carousel" id="extC"><button class="carousel-nav prev" aria-label="Gráficos anteriores" onclick="cNav('ext',-1)" id="extPrev" disabled>‹</button><button class="carousel-nav next" aria-label="Próximos gráficos" onclick="cNav('ext',1)" id="extNext">›</button>
+    <div class="carousel-track" id="extTrack">
+      <div class="carousel-slide"><div class="chart-card"><h3>Extrações por Dia (<span class="range-lbl" data-page="extractions">30d</span>)</h3><div class="chart-container"><canvas id="cExtDaily"></canvas></div></div><div class="chart-card"><h3>Top Cidades</h3><div class="chart-container"><canvas id="cExtCities"></canvas></div></div></div>
+      <div class="carousel-slide"><div class="chart-card"><h3>Contatos Extraídos por Dia (<span class="range-lbl" data-page="extractions">30d</span>)</h3><div class="chart-container"><canvas id="cExtContacts"></canvas></div></div><div class="chart-card"><h3>Ranking — Quem Mais Extrai</h3><div class="chart-container"><canvas id="cExtRank"></canvas></div></div></div>
+      <div class="carousel-slide"><div class="chart-card"><h3>Top Segmentos Buscados</h3><div class="chart-container"><canvas id="cExtSegments"></canvas></div></div><div class="chart-card"><h3>Duração Média por Dia (<span class="range-lbl" data-page="extractions">30d</span>)</h3><div class="chart-container"><canvas id="cExtDuration"></canvas></div></div></div>
+    </div>
+    <div class="carousel-dots" id="extDots"></div>
+  </div>
+  <div class="toolbar"><input class="search-box" id="searchExtractions" aria-label="Buscar extrações" placeholder="Buscar cidade, segmento, email…" oninput="filterTable('extractions')"/><button class="btn" onclick="refreshData()">Atualizar</button><button class="btn btn-secondary" onclick="exportCSV('extractions')">CSV</button><span class="count-badge" id="extCountBadge">0</span></div>
+  <div class="table-wrap"><div class="full-table"><table><thead><tr><th>Data</th><th>Email</th><th>Nome</th><th>Plano</th><th>Cidade</th><th>Segmento</th><th>Contatos</th><th>DL</th><th>Status</th><th>Duração</th><th>Erro</th></tr></thead><tbody id="extractionsBody"></tbody></table></div></div>
+</div>
+
+<!-- EVENTS -->
+<div class="page" id="page-events">
+  <div class="page-title">Eventos de Uso</div><div class="page-sub">Telemetria de uso das features</div>
+  <div class="time-range" data-page="events"><span class="tr-label">Período</span><button class="tr-btn" data-range="0" onclick="setRange(this)">Hoje</button><button class="tr-btn" data-range="7" onclick="setRange(this)">7d</button><button class="tr-btn" data-range="15" onclick="setRange(this)">15d</button><button class="tr-btn active" data-range="30" onclick="setRange(this)">30d</button><button class="tr-btn" data-range="90" onclick="setRange(this)">3m</button><button class="tr-btn" data-range="180" onclick="setRange(this)">6m</button><button class="tr-btn" data-range="365" onclick="setRange(this)">1 ano</button><button class="tr-btn" data-range="9999" onclick="setRange(this)">Tudo</button></div>
+  <div class="kpi-grid" id="evtKpis"></div>
+  <div class="carousel" id="evtC"><button class="carousel-nav prev" aria-label="Gráficos anteriores" onclick="cNav('evt',-1)" id="evtPrev" disabled>‹</button><button class="carousel-nav next" aria-label="Próximos gráficos" onclick="cNav('evt',1)" id="evtNext">›</button>
+    <div class="carousel-track" id="evtTrack">
+      <div class="carousel-slide"><div class="chart-card"><h3>Eventos por Dia (<span class="range-lbl" data-page="events">30d</span>)</h3><div class="chart-container"><canvas id="cEvtDaily"></canvas></div></div><div class="chart-card"><h3>Top Features</h3><div class="chart-container"><canvas id="cEvtFeatures"></canvas></div></div></div>
+      <div class="carousel-slide"><div class="chart-card"><h3>Features por Plano</h3><div class="chart-container"><canvas id="cEvtByPlan"></canvas></div></div><div class="chart-card"><h3>Horários de Pico</h3><div class="chart-container"><canvas id="cEvtHours"></canvas></div></div></div>
+    </div>
+    <div class="carousel-dots" id="evtDots"></div>
+  </div>
+  <div class="toolbar"><input class="search-box" id="searchEvents" aria-label="Buscar eventos" placeholder="Buscar evento, feature, email…" oninput="filterTable('events')"/><button class="btn" onclick="refreshData()">Atualizar</button><button class="btn btn-secondary" onclick="exportCSV('events')">CSV</button><span class="count-badge" id="evtCountBadge">0</span></div>
+  <div class="table-wrap"><div class="full-table"><table><thead><tr><th>Data</th><th>Email</th><th>O que fez</th><th>Onde</th><th>Plano</th><th>Status</th><th>Duração</th><th>Detalhe</th><th>Versão</th></tr></thead><tbody id="eventsBody"></tbody></table></div></div>
+</div>
+
+<!-- LIBRARY -->
+<div class="page" id="page-library">
+  <div class="page-title">Biblioteca</div><div class="page-sub">Mensagens e áudios salvos</div>
+  <div class="time-range" data-page="library"><span class="tr-label">Período</span><button class="tr-btn" data-range="0" onclick="setRange(this)">Hoje</button><button class="tr-btn" data-range="7" onclick="setRange(this)">7d</button><button class="tr-btn" data-range="15" onclick="setRange(this)">15d</button><button class="tr-btn active" data-range="30" onclick="setRange(this)">30d</button><button class="tr-btn" data-range="90" onclick="setRange(this)">3m</button><button class="tr-btn" data-range="180" onclick="setRange(this)">6m</button><button class="tr-btn" data-range="365" onclick="setRange(this)">1 ano</button><button class="tr-btn" data-range="9999" onclick="setRange(this)">Tudo</button></div>
+  <div class="kpi-grid" id="libKpis"></div>
+  <div class="chart-grid"><div class="chart-card"><h3>Itens por Tipo</h3><div class="chart-container"><canvas id="cLibTypes"></canvas></div></div><div class="chart-card"><h3>Top Usuários por Usos</h3><div class="chart-container"><canvas id="cLibTopUsers"></canvas></div></div></div>
+  <div class="toolbar"><input class="search-box" id="searchLibrary" aria-label="Buscar itens da biblioteca" placeholder="Buscar título, email, tipo…" oninput="filterTable('library')"/><button class="btn" onclick="refreshData()">Atualizar</button><button class="btn btn-secondary" onclick="exportCSV('library')">CSV</button><span class="count-badge" id="libCountBadge">0</span></div>
+  <div class="table-wrap"><div class="full-table"><table><thead><tr><th>Título</th><th>Email</th><th>Tipo</th><th>Plano</th><th>Usos</th><th>Último Uso</th><th>Status</th><th>Criado</th></tr></thead><tbody id="libraryBody"></tbody></table></div></div>
+</div>
+
+<!-- RETENTION -->
+<div class="page" id="page-retention">
+  <div class="page-title">Retenção & Funil</div><div class="page-sub">Conversão, churn e engajamento</div>
+  <div class="time-range" data-page="retention"><span class="tr-label">Período</span><button class="tr-btn" data-range="0" onclick="setRange(this)">Hoje</button><button class="tr-btn" data-range="7" onclick="setRange(this)">7d</button><button class="tr-btn" data-range="15" onclick="setRange(this)">15d</button><button class="tr-btn active" data-range="30" onclick="setRange(this)">30d</button><button class="tr-btn" data-range="90" onclick="setRange(this)">3m</button><button class="tr-btn" data-range="180" onclick="setRange(this)">6m</button><button class="tr-btn" data-range="365" onclick="setRange(this)">1 ano</button><button class="tr-btn" data-range="9999" onclick="setRange(this)">Tudo</button></div>
+  <div class="kpi-grid" id="retKpis"></div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Funil de Conversão</h3><div id="funnelContainer"></div></div>
+    <div class="chart-card"><h3>Usuários Ativos por Dia (<span class="range-lbl" data-page="retention">30d</span>)</h3><div class="chart-container"><canvas id="cRetDAU"></canvas></div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Tempo entre Registro e Assinatura</h3><div class="chart-container"><canvas id="cRetTimeToSub"></canvas></div></div>
+    <div class="chart-card"><h3>Risco de Churn — PRO inativos</h3><div id="churnContainer" class="churn-list" style="padding:8px"></div></div>
+  </div>
+</div>
+
+<!-- CONVERSION -->
+<div class="page" id="page-conversion">
+  <div class="page-title">Conversão</div><div class="page-sub">Por que usuários free não fecham PRO — e onde estão travando</div>
+  <div class="time-range" data-page="conversion"><span class="tr-label">Período</span><button class="tr-btn" data-range="0" onclick="setRange(this)">Hoje</button><button class="tr-btn" data-range="7" onclick="setRange(this)">7d</button><button class="tr-btn" data-range="15" onclick="setRange(this)">15d</button><button class="tr-btn active" data-range="30" onclick="setRange(this)">30d</button><button class="tr-btn" data-range="90" onclick="setRange(this)">3m</button><button class="tr-btn" data-range="180" onclick="setRange(this)">6m</button><button class="tr-btn" data-range="365" onclick="setRange(this)">1 ano</button><button class="tr-btn" data-range="9999" onclick="setRange(this)">Tudo</button></div>
+  <div class="kpi-grid" id="convKpis"></div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Última Ação Registrada de Usuários Free</h3><div class="chart-container"><canvas id="cConvLastStep"></canvas></div></div>
+    <div class="chart-card"><h3>Bateram no Limite Free e Não Converteram</h3><div class="chart-container"><canvas id="cConvBlocked"></canvas></div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Uso Médio: Quem Converteu vs Quem Não</h3><div class="chart-container"><canvas id="cConvCompare"></canvas></div></div>
+    <div class="chart-card"><h3>Features Mais Usadas por Usuários PRO</h3><div class="chart-container"><canvas id="cConvJourney"></canvas></div></div>
+  </div>
+  <div class="chart-card" style="margin-bottom:24px"><h3>Usuários Free que Bateram no Paywall</h3>
+    <div id="paywallList" class="churn-list" style="padding:8px;max-height:350px"></div>
+  </div>
+</div>
+
+<!-- ENGAGEMENT -->
+<div class="page" id="page-engagement">
+  <div class="page-title">Engajamento</div><div class="page-sub">Score de engajamento, cohort semanal e receita estimada</div>
+  <div class="time-range" data-page="engagement"><span class="tr-label">Período</span><button class="tr-btn" data-range="0" onclick="setRange(this)">Hoje</button><button class="tr-btn" data-range="7" onclick="setRange(this)">7d</button><button class="tr-btn" data-range="15" onclick="setRange(this)">15d</button><button class="tr-btn active" data-range="30" onclick="setRange(this)">30d</button><button class="tr-btn" data-range="90" onclick="setRange(this)">3m</button><button class="tr-btn" data-range="180" onclick="setRange(this)">6m</button><button class="tr-btn" data-range="365" onclick="setRange(this)">1 ano</button><button class="tr-btn" data-range="9999" onclick="setRange(this)">Tudo</button></div>
+  <div class="kpi-grid" id="engKpis"></div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Cohort de Retenção Semanal</h3><div id="cohortContainer" style="overflow-x:auto"></div></div>
+    <div class="chart-card"><h3>Distribuição do Score de Engajamento</h3><div class="chart-container"><canvas id="cEngScore"></canvas></div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>MRR Estimado (<span class="range-lbl" data-page="engagement">30d</span>)</h3><div class="chart-container"><canvas id="cEngMRR"></canvas></div></div>
+    <div class="chart-card"><h3>Lifetime Médio do PRO</h3><div class="chart-container"><canvas id="cEngLifetime"></canvas></div></div>
+  </div>
+  <div class="chart-card" style="margin-bottom:24px"><h3>Top 20 — Score de Engajamento</h3>
+    <div id="engRankList" class="churn-list" style="padding:8px;max-height:400px"></div>
+  </div>
+</div>
+
+<!-- INSIGHTS -->
+<div class="page" id="page-insights">
+  <div class="page-title">Insights Operacionais</div><div class="page-sub">Saúde do produto e padrões de uso</div>
+  <div class="time-range" data-page="insights"><span class="tr-label">Período</span><button class="tr-btn" data-range="0" onclick="setRange(this)">Hoje</button><button class="tr-btn" data-range="7" onclick="setRange(this)">7d</button><button class="tr-btn" data-range="15" onclick="setRange(this)">15d</button><button class="tr-btn active" data-range="30" onclick="setRange(this)">30d</button><button class="tr-btn" data-range="90" onclick="setRange(this)">3m</button><button class="tr-btn" data-range="180" onclick="setRange(this)">6m</button><button class="tr-btn" data-range="365" onclick="setRange(this)">1 ano</button><button class="tr-btn" data-range="9999" onclick="setRange(this)">Tudo</button></div>
+  <div class="kpi-grid" id="insKpis"></div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Taxa de Erro por Dia (<span class="range-lbl" data-page="insights">30d</span>)</h3><div class="chart-container"><canvas id="cInsErrors"></canvas></div></div>
+    <div class="chart-card"><h3>Duração Média das Extrações (<span class="range-lbl" data-page="insights">30d</span>)</h3><div class="chart-container"><canvas id="cInsDuration"></canvas></div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Horários de Pico — Todas as Ações</h3><div class="chart-container"><canvas id="cInsHours"></canvas></div></div>
+    <div class="chart-card"><h3>Adoção de Features — Free vs PRO</h3><div class="chart-container"><canvas id="cInsPlanFeatures"></canvas></div></div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="page" id="page-settings">
+  <div class="page-title">Configurações</div><div class="page-sub">Valor do plano PRO e e-mails excluídos das análises</div>
+
+  <div class="settings-section">
+    <h3 class="settings-heading">Valor do Plano PRO (para cálculo de MRR)</h3>
+    <div class="settings-row">
+      <div class="settings-field">
+        <label for="cfgPricePro">Preço PRO (R$/mês)</label>
+        <input type="number" id="cfgPricePro" step="0.01" min="0" placeholder="49.90" />
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <h3 class="settings-heading">E-mails Excluídos</h3>
+    <p class="settings-desc">Esses e-mails serão removidos de todas as tabelas, gráficos e KPIs. Útil para excluir contas de teste, admin, ou desenvolvedores.</p>
+    <div class="settings-row" style="align-items:flex-start">
+      <div class="settings-field" style="flex:1">
+        <label for="cfgExcludeInput">Adicionar e-mail</label>
+        <div style="display:flex;gap:8px">
+          <input type="email" id="cfgExcludeInput" placeholder="email@exemplo.com" style="flex:1" />
+          <button class="btn" onclick="addExcludedEmail()" style="white-space:nowrap">Adicionar</button>
+        </div>
+      </div>
+    </div>
+    <div id="excludedEmailsList" class="excluded-list"></div>
+  </div>
+
+  <div style="margin-top:24px;display:flex;gap:10px">
+    <button class="btn" onclick="saveSettings()" style="padding:12px 32px;font-size:14px">Salvar e Recarregar Dados</button>
+    <span id="settingsSaved" style="color:var(--green);font-size:13px;align-self:center;opacity:0;transition:opacity .3s"></span>
+  </div>
+</div>
+
+</main>
+</div>
+
+<div class="usage-modal" id="usageModal" role="dialog" aria-modal="true" aria-labelledby="usageModalTitle" onclick="usageModalBackdrop(event)">
+  <div class="usage-dialog">
+    <div class="usage-dialog-head">
+      <div class="usage-avatar" id="usageModalAvatar">U</div>
+      <div class="usage-dialog-title"><h2 id="usageModalTitle">Uso do usuário</h2><p id="usageModalSubtitle"></p></div>
+      <button class="usage-close" type="button" aria-label="Fechar" onclick="closeUsageDetail()">×</button>
+    </div>
+    <div class="usage-dialog-body" id="usageModalBody"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha384-bs/nf9FbdNouRbMiFcrcZfLXYPKiPaGVGplVbv7dLGECccEXDW+S3zjqSKR5ZEaD" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+const SK='patogo_admin_session';let DATA={users:[],extractions:[],events:[],library:[]};let RAW_DATA={users:[],extractions:[],events:[],library:[]};let C={};let curPage='overview';
+const PAL=['#f5c542','#34d399','#60a5fa','#a78bfa','#fb923c','#f87171','#818cf8','#fbbf24','#38bdf8','#e879f9','#22d3ee','#f472b6'];
+
+// ═══ Settings (localStorage) ═══
+const CFG_KEY='patogo_dashboard_config';
+function loadCfg(){try{return JSON.parse(sessionStorage.getItem(CFG_KEY))||{}}catch{return{}}}
+function saveCfg(c){sessionStorage.setItem(CFG_KEY,JSON.stringify(c))}
+function getCfg(){
+  const c=loadCfg();
+  return{
+    pricePro:parseFloat(c.pricePro)||49.90,
+    excludedEmails:(c.excludedEmails||[]).map(e=>e.trim().toLowerCase()).filter(Boolean)
+  };
+}
+function applyExclusions(){
+  const cfg=getCfg();const ex=new Set(cfg.excludedEmails);
+  if(!ex.size){DATA={...RAW_DATA};return}
+  DATA={
+    users:RAW_DATA.users.filter(u=>!ex.has((u.email||'').toLowerCase())),
+    extractions:RAW_DATA.extractions.filter(e=>!ex.has((e.email||'').toLowerCase())),
+    events:RAW_DATA.events.filter(e=>!ex.has((e._email||e.user_email||'').toLowerCase())),
+    library:RAW_DATA.library.filter(l=>!ex.has((l.email||'').toLowerCase())),
+  };
+}
+function renderSettingsPage(){
+  const c=loadCfg();
+  document.getElementById('cfgPricePro').value=c.pricePro||'';
+  renderExcludedList();
+}
+function renderExcludedList(){
+  const c=loadCfg();const emails=c.excludedEmails||[];
+  document.getElementById('excludedEmailsList').innerHTML=emails.length?emails.map((em,i)=>`<span class="excluded-tag">${eh(em)}<button class="x-btn" type="button" aria-label="Remover ${eh(em)}" onclick="removeExcludedEmail(${i})">×</button></span>`).join(''):'<span style="color:var(--text-muted);font-size:12px">Nenhum e-mail excluído</span>';
+}
+function addExcludedEmail(){
+  const input=document.getElementById('cfgExcludeInput');
+  const em=input.value.trim().toLowerCase();
+  if(!em||!em.includes('@'))return;
+  const c=loadCfg();if(!c.excludedEmails)c.excludedEmails=[];
+  if(c.excludedEmails.includes(em))return;
+  c.excludedEmails.push(em);saveCfg(c);input.value='';
+  renderExcludedList();
+}
+function removeExcludedEmail(idx){
+  const c=loadCfg();if(!c.excludedEmails)return;
+  c.excludedEmails.splice(idx,1);saveCfg(c);
+  renderExcludedList();
+}
+function saveSettings(){
+  const c=loadCfg();
+  const pp=document.getElementById('cfgPricePro').value;
+  if(pp)c.pricePro=parseFloat(pp);
+  saveCfg(c);
+  // Re-apply and re-render
+  applyExclusions();renderAll();
+  const el=document.getElementById('settingsSaved');el.textContent='✓ Salvo! Dados recarregados.';el.style.opacity='1';
+  setTimeout(()=>{el.style.opacity='0'},3000);
+}
+
+// Session: token restrito à aba atual e com duração máxima de 30 minutos.
+const ADMIN_SESSION_MS=30*60*1000;let sessionExpiryTimer=null;
+function getSession(){try{const raw=sessionStorage.getItem(SK);if(!raw)return null;const s=JSON.parse(raw);if(!s?.adminToken||!s?.expiresAt||Date.now()>s.expiresAt){clearSession();return null}return s}catch{clearSession();return null}}
+function saveSession(d,serverTtlSec){const serverMs=Number(serverTtlSec)*1000;const ttl=Number.isFinite(serverMs)&&serverMs>0?Math.min(serverMs,ADMIN_SESSION_MS):ADMIN_SESSION_MS;d.expiresAt=Date.now()+ttl;sessionStorage.setItem(SK,JSON.stringify(d));localStorage.removeItem(SK)}
+function clearSession(){sessionStorage.removeItem(SK);localStorage.removeItem(SK)}
+function armSessionExpiry(s){if(sessionExpiryTimer)clearTimeout(sessionExpiryTimer);sessionExpiryTimer=setTimeout(()=>{clearSession();location.reload()},Math.max(0,s.expiresAt-Date.now()))}
+
+// Login
+async function doLogin(){const b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),pw=document.getElementById('loginPassword'),u=document.getElementById('loginWorkerUrl').value.trim().replace(/\/+$/,''),em=document.getElementById('loginEmail').value.trim().toLowerCase(),p=pw.value;e.classList.remove('show');if(!em)return sErr('Informe o e-mail');if(!p)return sErr('Informe a senha');b.disabled=true;b.innerHTML='<span class="spinner-sm"></span> Verificando…';try{const r=await fetch(`${u}/admin/login`,{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({email:em,password:p})});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.detail||d.error||'Credenciais inválidas');if(typeof d.admin_token!=='string'||d.admin_token.length<20||d.admin_token.length>512)throw new Error('Resposta de autenticação inválida');saveSession({workerUrl:u,email:em,adminToken:d.admin_token},d.expires_in);enterDash()}catch(x){sErr(x.message||'Erro')}finally{pw.value='';b.disabled=false;b.innerHTML='Acessar painel'}}
+function sErr(m){const e=document.getElementById('loginError');e.textContent=m;e.classList.add('show')}
+function doLogout(){clearSession();location.reload()}
+function enterDash(){const s=getSession();if(!s)return;armSessionExpiry(s);document.getElementById('loginScreen').classList.add('hidden');document.getElementById('appWrap').classList.add('visible');document.getElementById('sidebarEmail').textContent=s.email;loadAll()}
+
+// Nav
+function navigate(el){document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));el.classList.add('active');const p=el.dataset.page;curPage=p;document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');renderPage(p)}
+
+// Carousel
+const cIdx={ext:0,evt:0};
+function cNav(id,dir){cGo(id,cIdx[id]+dir)}
+function cGo(id,idx){const track=document.getElementById(id+'Track');const slides=track.querySelectorAll('.carousel-slide');const total=slides.length;idx=Math.max(0,Math.min(total-1,idx));cIdx[id]=idx;slides.forEach(s=>{s.style.transform=`translateX(-${idx*100}%)`});document.getElementById(id+'Prev').disabled=idx===0;document.getElementById(id+'Next').disabled=idx===total-1;document.querySelectorAll(`#${id}Dots .carousel-dot`).forEach((d,i)=>{d.classList.toggle('active',i===idx)})}
+function initDots(id){const track=document.getElementById(id+'Track');const n=track.querySelectorAll('.carousel-slide').length;const dots=document.getElementById(id+'Dots');dots.innerHTML='';for(let i=0;i<n;i++){const d=document.createElement('button');d.type='button';d.className='carousel-dot'+(i===0?' active':'');d.setAttribute('aria-label',`Ir para o grupo de gráficos ${i+1}`);d.onclick=()=>cGo(id,i);dots.appendChild(d)}}
+
+// ═══ Time Range Filter ═══
+const pageRange={overview:30,users:30,usage:30,extractions:30,events:30,library:30,retention:30,conversion:30,engagement:30,insights:30};
+
+function setRange(btn){
+  const pg=btn.closest('.time-range').dataset.page;
+  const days=parseInt(btn.dataset.range);
+  pageRange[pg]=days;
+  // Update active button
+  btn.closest('.time-range').querySelectorAll('.tr-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  // Re-render page
+  renderPage(pg);
+}
+
+// Get the cutoff epoch for a page's current range
+function getRangeCutoff(pg){
+  const days=pageRange[pg||curPage]??30;
+  if(days>=9999)return 0; // no cutoff = show everything
+  if(days===0){// today: start of today in local time
+    const t=new Date();t.setHours(0,0,0,0);return t.getTime()/1000;
+  }
+  return Date.now()/1000-days*86400;
+}
+
+// Get number of days for chart day-keys (reflects exactly the selected filter)
+function getRangeDays(pg){
+  const d=pageRange[pg||curPage]??30;
+  if(d>=9999){
+    // "Tudo": use span from oldest record to today (fallback to 90 if no data yet)
+    const all=[...(DATA?.users||[]),...(DATA?.extractions||[]),...(DATA?.events||[]),...(DATA?.library||[])];
+    let oldest=Infinity;
+    all.forEach(r=>{const t=pd(r.created_at||r.occurred_at);if(t&&t<oldest)oldest=t});
+    if(!isFinite(oldest))return 90;
+    const days=Math.ceil((Date.now()/1000-oldest)/86400)+1;
+    return Math.max(1,days);
+  }
+  if(d===0)return 1;
+  return d;
+}
+
+// Build a human label for the current filter (used in chart titles / tooltips)
+function rangeLabel(pg){
+  const d=pageRange[pg||curPage]??30;
+  if(d>=9999)return 'todo o período';
+  if(d===0)return 'hoje';
+  if(d===1)return 'ontem/hoje';
+  if(d%365===0)return (d/365)+' ano'+(d>365?'s':'');
+  if(d%30===0)return (d/30)+' meses';
+  return d+'d';
+}
+
+// Filter any array by a date field within the current page range
+function trFilter(arr,dateField,pg){
+  const days=pageRange[pg||curPage]??30;
+  if(days===0){const today=dayKey(Date.now()/1000);return arr.filter(r=>dayKey(r[dateField])===today)}
+  const cutoff=getRangeCutoff(pg);
+  if(!cutoff)return arr;
+  return arr.filter(r=>{const t=pd(r[dateField]);return t>=cutoff});
+}
+
+// API
+function hdr(){const s=getSession();const h={'Content-Type':'application/json'};if(s?.adminToken)h['X-Admin-Token']=s.adminToken;return h}
+function base(){return getSession()?.workerUrl||''}
+async function q(sql){const r=await fetch(`${base()}/admin/query`,{method:'POST',headers:hdr(),body:JSON.stringify({sql})});if(r.status===401||r.status===403){clearSession();location.reload()}const d=await r.json();if(!d.ok)throw new Error(d.error);return d.results||[]}
+async function tCols(t){try{return new Set((await q(`SELECT name FROM pragma_table_info('${t}')`)).map(r=>r.name))}catch{return new Set()}}
+async function safeSel(t,w,ob,lim=10000){const c=await tCols(t);if(!c.size)return[];const s=w.filter(x=>c.has(x));if(!s.length)return[];const o=c.has(ob)?ob:s[0];return q(`SELECT ${s.join(',')} FROM ${t} ORDER BY ${o} DESC LIMIT ${lim}`)}
+
+async function loadAll(){
+  document.getElementById('loadingOverlay').classList.remove('hidden');
+  try{
+    const[users,extractions,events,library]=await Promise.all([
+      safeSel('users',['id','name','email','plan','telefone','source','stripe_status','stripe_customer_id','stripe_subscription_id','stripe_current_period_end','created_at','created_at_brt','updated_at'],'created_at'),
+      safeSel('extraction_monitoring',['id','created_at','user_name','email','plan','city','segment','items_returned','clicked_download','downloaded_at','status','duration_ms','error_message'],'created_at'),
+      q(`SELECT um.event_id,um.event_name,um.feature,um.occurred_at,um.plan,um.extension_version,um.status,um.duration_ms,um.screen,um.metadata_json,u.email as user_email FROM usage_monitoring um LEFT JOIN users u ON um.user_id=u.id ORDER BY um.occurred_at DESC LIMIT 10000`).catch(()=>safeSel('usage_monitoring',['event_id','event_name','feature','occurred_at','plan','extension_version','status','duration_ms','screen','metadata_json','user_id'],'occurred_at')),
+      safeSel('library_monitoring',['library_item_id','email','plan','item_type','title','created_at','updated_at','times_used','last_used_at','status'],'created_at')
+    ]);
+    [users,extractions,events,library].forEach(rows=>rows.forEach(row=>{row.plan=String(row.plan||'free').toLowerCase()==='pro'?'pro':'free'}));
+    users.forEach(user=>{user.stripe_status=String(user.stripe_status||'').toLowerCase()});
+    RAW_DATA={users,extractions,events,library};
+    const uMap=new Map(users.map(u=>[String(u.id),u.email]));
+    events.forEach(e=>{e._email=e.user_email||(e.user_id?uMap.get(String(e.user_id)):'')||''});
+    applyExclusions();
+    initDots('ext');initDots('evt');
+    renderAll();
+  }catch(e){console.error(e);alert('Erro: '+e.message)}finally{document.getElementById('loadingOverlay').classList.add('hidden')}
+}
+function refreshData(){loadAll()}
+
+// Helpers
+function pt(p){p=(p||'free').toLowerCase();const normalized=p==='pro'?'pro':'free';return `<span class="tag ${normalized==='pro'?'tag-pro':'tag-free'}">${normalized.toUpperCase()}</span>`}
+function st(s){s=(s||'').toLowerCase();const c=s==='success'||s==='active'?'tag-success':s==='empty'?'tag-empty':s==='error'||s==='deleted'?'tag-error':'tag-free';return `<span class="tag ${c}">${eh(s||'—')}</span>`}
+function fd(v){if(!v)return'—';const t=pd(v);return t?new Date(t*1000).toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'}):'—'}
+function pd(v){if(!v)return 0;const numeric=typeof v==='number'||/^\d+(\.\d+)?$/.test(String(v));if(numeric){const n=Number(v);if(n>1e11)return n/1000;if(n>1e9)return n}const t=new Date(v).getTime();return Number.isFinite(t)?t/1000:0}
+const DATE_FMT=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'});
+const HOUR_FMT=new Intl.DateTimeFormat('en-US',{timeZone:'America/Sao_Paulo',hour:'2-digit',hourCycle:'h23'});
+function dayKey(v){const t=pd(v);if(!t)return'';const parts=Object.fromEntries(DATE_FMT.formatToParts(new Date(t*1000)).map(p=>[p.type,p.value]));return`${parts.year}-${parts.month}-${parts.day}`}
+function hourKey(v){const t=pd(v);if(!t)return null;const h=Number(HOUR_FMT.format(new Date(t*1000)));return Number.isInteger(h)?h:null}
+const CD={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8f9a',font:{family:'DM Sans',size:11}}}},scales:{x:{ticks:{color:'#808591',font:{size:10}},grid:{color:'#1a1d26'}},y:{ticks:{color:'#808591',font:{size:10}},grid:{color:'#1a1d26'},beginAtZero:true}}};
+function dc(...k){k.forEach(x=>{if(C[x]){C[x].destroy();delete C[x]}})}
+function dk(n){const o={};for(let i=n-1;i>=0;i--){const d=new Date(Date.now()-i*86400000);o[dayKey(d.getTime()/1000)]=0}return o}
+function udk(u){const key=dayKey(u.created_at);if(key)return key;if(u.created_at_brt){const p=u.created_at_brt.split(' ')[0].split('-');if(p.length===3&&p[2].length===4)return`${p[2]}-${p[1]}-${p[0]}`}return null}
+function mkChart(id,cfg){return new Chart(document.getElementById(id),cfg)}
+function barH(id,labels,data,color){return mkChart(id,{type:'bar',data:{labels,datasets:[{data,backgroundColor:color||'rgba(96,165,250,.6)',borderRadius:4}]},options:{...CD,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{...CD.scales.x,beginAtZero:true},y:{ticks:{font:{size:11,family:'JetBrains Mono'},color:'#8b8f9a'},grid:{color:'#1a1d26'}}}}})}
+
+// ═══ Uso individual: cruza usuários, eventos, extrações e biblioteca por e-mail ═══
+function eh(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function usageEmail(v){return String(v||'').trim().toLowerCase()}
+function usageMeta(v){if(!v)return{};if(typeof v==='object')return v;try{const o=JSON.parse(v);return o&&typeof o==='object'?o:{}}catch{return{}}}
+function usageDay(ts){return dayKey(ts)}
+function usageInRange(ts,pg='usage'){const days=pageRange[pg]??30;if(days===0)return dayKey(ts)===dayKey(Date.now()/1000);const cutoff=getRangeCutoff(pg);const t=pd(ts);return!!t&&(!cutoff||t>=cutoff)}
+function usageTabName(tab){return META_NAMES['tab:'+tab]||META_NAMES['page:'+tab]||String(tab||'').replace(/_/g,' ')}
+function usageContentType(type){return({mensagem:'Mensagem',message:'Mensagem',audio:'Áudio',foto:'Foto',photo:'Foto',video:'Vídeo',arquivo:'Arquivo',file:'Arquivo',funil:'Funil',funnel:'Funil'}[String(type||'').toLowerCase()]||String(type||'Outro'))}
+function usageAiAction(action){return META_NAMES['action:'+action]||String(action||'IA').replace(/_/g,' ')}
+function usageFeatureName(feature){return friendlyFeat(feature||'unknown')}
+function usageEventName(name){return friendlyEvt(name||'unknown')}
+function usageCountMeta(meta,key,fallback=0){const n=Number(meta?.[key]);return Number.isFinite(n)&&n>=0?n:fallback}
+function usageInitial(name,email){const s=String(name||email||'U').trim();return(s[0]||'U').toUpperCase()}
+function csvCell(v){let s=String(v??'');if(/^[=+\-@\t\r]/.test(s))s="'"+s;return`"${s.replace(/"/g,'""')}"`}
+
+function buildUsageRows(){
+  const rows=new Map();
+  const ensure=(email,user={})=>{
+    const em=usageEmail(email);if(!em||em==='desconhecido')return null;
+    if(!rows.has(em))rows.set(em,{
+      email:em,name:user.name||'',plan:String(user.plan||'free').toLowerCase(),
+      events:0,actions:0,errors:0,messages:0,aiSuccess:0,aiFailed:0,
+      extractions:0,contacts:0,eventDownloads:0,extractionDownloads:0,downloads:0,
+      paywalls:0,upgradeClicks:0,activeDays:new Set(),features:{},eventNames:{},tabs:new Set(),sendTypes:{},aiActions:{},
+      libraryItems:0,libraryUses:0,libraryTypes:{},lastAt:0,lastAtAll:0,version:'',
+    });
+    const r=rows.get(em);
+    if(user.name&&!r.name)r.name=user.name;
+    if(user.plan)r.plan=String(user.plan).toLowerCase();
+    return r;
+  };
+  (DATA.users||[]).forEach(u=>ensure(u.email,u));
+
+  (DATA.events||[]).forEach(e=>{
+    const r=ensure(e._email||e.user_email);if(!r)return;
+    const ts=pd(e.occurred_at);if(ts>r.lastAtAll)r.lastAtAll=ts;
+    if(!usageInRange(e.occurred_at))return;
+    r.events++;r.actions++;
+    if(ts>r.lastAt)r.lastAt=ts;
+    const day=usageDay(e.occurred_at);if(day)r.activeDays.add(day);
+    const feature=usageFeatureName(e.feature||e.event_name);
+    const event=usageEventName(e.event_name);
+    r.features[feature]=(r.features[feature]||0)+1;
+    r.eventNames[event]=(r.eventNames[event]||0)+1;
+    if(e.status==='error'||e.status==='blocked'||e.status==='failed')r.errors++;
+    const meta=usageMeta(e.metadata_json);
+    if(e.event_name==='messages_sent'){
+      const count=usageCountMeta(meta,'count',1),type=usageContentType(meta.item_type||'Outro');
+      r.messages+=count;r.sendTypes[type]=(r.sendTypes[type]||0)+count;
+    }
+    if(e.event_name==='ai_request_success'){
+      r.aiSuccess++;const action=usageAiAction(meta.action);r.aiActions[action]=(r.aiActions[action]||0)+1;
+    }
+    if(e.event_name==='ai_request_failed')r.aiFailed++;
+    if(e.event_name==='list_downloaded')r.eventDownloads++;
+    if(e.event_name==='free_limit_hit')r.paywalls++;
+    if(e.event_name==='upgrade_cta_clicked')r.upgradeClicks++;
+    if(e.event_name==='tab_switched'&&meta.tab)r.tabs.add(usageTabName(meta.tab));
+    if(e.event_name==='library_opened'&&meta.page)r.tabs.add(usageTabName(meta.page));
+    if(e.extension_version)r.version=e.extension_version;
+    if(e.plan)r.plan=String(e.plan).toLowerCase();
+  });
+
+  (DATA.extractions||[]).forEach(e=>{
+    const r=ensure(e.email,{name:e.user_name,plan:e.plan});if(!r)return;
+    const ts=pd(e.created_at);if(ts>r.lastAtAll)r.lastAtAll=ts;
+    if(!usageInRange(e.created_at))return;
+    r.extractions++;r.actions++;r.contacts+=Number(e.items_returned)||0;
+    if(e.clicked_download)r.extractionDownloads++;
+    if(e.status==='error')r.errors++;
+    if(ts>r.lastAt)r.lastAt=ts;
+    const day=usageDay(e.created_at);if(day)r.activeDays.add(day);
+    r.features['Extração de contatos']=(r.features['Extração de contatos']||0)+1;
+    const label=e.segment?`Extraiu: ${e.segment}`:'Realizou extração';
+    r.eventNames[label]=(r.eventNames[label]||0)+1;
+  });
+
+  (DATA.library||[]).forEach(l=>{
+    const r=ensure(l.email,{plan:l.plan});if(!r)return;
+    r.libraryItems++;
+    r.libraryUses+=Number(l.times_used)||0;
+    const type=String(l.item_type||'outro');
+    r.libraryTypes[type]=(r.libraryTypes[type]||0)+(Number(l.times_used)||0);
+    const ts=Math.max(pd(l.last_used_at),pd(l.updated_at),pd(l.created_at));
+    if(ts>r.lastAtAll)r.lastAtAll=ts;
+    if(l.last_used_at&&usageInRange(l.last_used_at)){
+      if(ts>r.lastAt)r.lastAt=ts;
+      const day=usageDay(l.last_used_at);if(day)r.activeDays.add(day);
+    }
+  });
+
+  return[...rows.values()].map(r=>{
+    r.downloads=Math.max(r.eventDownloads,r.extractionDownloads);
+    r.topFeatures=Object.entries(r.features).sort((a,b)=>b[1]-a[1]);
+    r.topEvents=Object.entries(r.eventNames).sort((a,b)=>b[1]-a[1]);
+    r.tabs=[...r.tabs];
+    r.activeDaysCount=r.activeDays.size;
+    r.isActive=r.actions>0||r.lastAt>0;
+    return r;
+  });
+}
+
+function usageTimeline(email){
+  const em=usageEmail(email),items=[];
+  trFilter(DATA.events,'occurred_at','usage').forEach(e=>{
+    if(usageEmail(e._email||e.user_email)!==em)return;
+    const meta=friendlyMeta(e.metadata_json);
+    items.push({ts:pd(e.occurred_at),time:e.occurred_at,type:(e.status==='error'||e.status==='blocked')?'error':'event',main:usageEventName(e.event_name),detail:meta!=='—'?meta:usageFeatureName(e.feature),status:e.status||'success'});
+  });
+  trFilter(DATA.extractions,'created_at','usage').forEach(e=>{
+    if(usageEmail(e.email)!==em)return;
+    const place=[e.segment,e.city].filter(Boolean).join(' · ');
+    items.push({ts:pd(e.created_at),time:e.created_at,type:e.status==='error'?'error':'extraction',main:`Extração ${e.status==='success'?'concluída':e.status||''}`.trim(),detail:`${place||'Sem local informado'} · ${Number(e.items_returned)||0} contatos`,status:e.status||'—'});
+  });
+  (DATA.library||[]).forEach(l=>{
+    if(usageEmail(l.email)!==em||!l.last_used_at||!usageInRange(l.last_used_at))return;
+    items.push({ts:pd(l.last_used_at),time:l.last_used_at,type:'library',main:`Usou ${String(l.item_type||'item')} da biblioteca`,detail:l.title||'Sem título',status:l.status||'active'});
+  });
+  return items.sort((a,b)=>b.ts-a.ts).slice(0,40);
+}
+
+function getF(section){
+  const el=document.getElementById('search'+section.charAt(0).toUpperCase()+section.slice(1));
+  const q=(el?.value||'').trim().toLowerCase();
+  if(section==='usage'){
+    let rows=buildUsageRows();
+    if(q)rows=rows.filter(r=>[
+      r.email,r.name,r.plan,r.topFeatures.map(x=>x[0]).join(' '),r.tabs.join(' '),
+      Object.keys(r.libraryTypes).join(' '),Object.keys(r.sendTypes).join(' '),Object.keys(r.aiActions).join(' ')
+    ].some(v=>String(v||'').toLowerCase().includes(q)));
+    const sort=document.getElementById('usageSort')?.value||'actions';
+    const sorters={
+      recent:(a,b)=>(b.lastAt||b.lastAtAll||0)-(a.lastAt||a.lastAtAll||0),
+      messages:(a,b)=>b.messages-a.messages,
+      ai:(a,b)=>b.aiSuccess-a.aiSuccess,
+      extractions:(a,b)=>b.extractions-a.extractions,
+      contacts:(a,b)=>b.contacts-a.contacts,
+      actions:(a,b)=>b.actions-a.actions,
+    };
+    return rows.sort(sorters[sort]||sorters.actions);
+  }
+  // Apply time range first
+  const dateField={users:'created_at',extractions:'created_at',events:'occurred_at',library:'created_at'}[section]||'created_at';
+  const ranged=trFilter(DATA[section],dateField,section);
+  if(!q)return ranged;
+  // Build a search haystack that also includes the friendly/derived values shown in each table
+  return ranged.filter(r=>{
+    const raw=Object.values(r).map(v=>v==null?'':String(v));
+    let extra=[];
+    if(section==='events'){
+      extra=[friendlyEvt(r.event_name),friendlyFeat(r.feature),friendlyScreen(r.screen),friendlyMeta(r.metadata_json),eventDetailText(r),r._email||''];
+    }
+    return [...raw,...extra].some(v=>v&&v.toLowerCase().includes(q));
+  });
+}
+
+function renderAll(){renderPage(curPage)}
+function renderPage(p){
+  if(p==='overview')rOverview();
+  else if(p==='users')rUsers(getF('users'));
+  else if(p==='usage')rUsage(getF('usage'));
+  else if(p==='extractions')rExt(getF('extractions'));
+  else if(p==='events')rEvt(getF('events'));
+  else if(p==='library')rLib(getF('library'));
+  else if(p==='retention')rRetention();
+  else if(p==='conversion')rConversion();
+  else if(p==='engagement')rEngagement();
+  else if(p==='insights')rInsights();
+  else if(p==='settings')renderSettingsPage();
+  updateRangeLabels();
+  injectTooltips();
+}
+let filterTimer;
+function filterTable(s){clearTimeout(filterTimer);filterTimer=setTimeout(()=>renderPage(s),200)}
+
+// ══════ TOOLTIP MAP ══════
+// TIPS keys are the "base title" (without the dynamic range suffix).
+// {R} in the text is replaced at inject time with the current filter label.
+const TIPS={
+  // Overview
+  'Registros':'Conta quantos usuários novos foram criados em cada dia do período selecionado ({R}), baseado no campo created_at da tabela users.',
+  'Planos':'Distribui os usuários entre Free e PRO com base no campo plan da tabela users.',
+  'Extrações':'Conta quantas extrações foram feitas por dia no período selecionado ({R}), agrupadas por status (sucesso, vazio, erro) da tabela extraction_monitoring.',
+  'Top Features':'Agrupa todos os eventos da tabela usage_monitoring pelo campo feature (ou event_name) e ordena pela quantidade, mostrando os 8 mais usados.',
+  // Users
+  'Novos por Dia':'Conta registros por dia a partir do created_at dos usuários filtrados no período selecionado ({R}).',
+  // Uso por usuário
+  'Recursos mais utilizados':'Cruza a telemetria do período selecionado ({R}) e soma as features utilizadas por todos os usuários exibidos.',
+  'Usuários mais ativos':'Soma eventos de telemetria e extrações por usuário no período selecionado ({R}), mostrando os dez com mais ações registradas.',
+  // Extractions
+  'Extrações por Dia':'Agrupa registros de extraction_monitoring por data (created_at) no período selecionado ({R}), separando por status: success, empty, error.',
+  'Top Cidades':'Conta quantas extrações foram feitas em cada cidade (campo city) e mostra as 8 com mais volume.',
+  'Contatos Extraídos por Dia':'Soma o campo items_returned de cada extração agrupado por dia no período selecionado ({R}). Mostra o volume real de contatos capturados.',
+  'Ranking — Quem Mais Extrai':'Agrupa todas as extrações por email do usuário, soma o total de items_returned de cada um, e ordena do maior para o menor. O tooltip mostra email completo e número de extrações.',
+  'Top Segmentos Buscados':'Conta quantas vezes cada valor do campo segment aparece nas extrações. Mostra os 10 nichos/segmentos mais buscados pelos seus usuários.',
+  'Duração Média por Dia':'Para cada dia do período selecionado ({R}), calcula a média de duration_ms das extrações com duração registrada, convertendo para segundos. Picos podem indicar throttling do Google.',
+  // Events
+  'Eventos por Dia':'Conta o total de eventos na tabela usage_monitoring agrupados por dia (occurred_at) no período selecionado ({R}).',
+  'Features por Plano':'Para cada feature, empilha quantos eventos vieram de usuários Free e PRO. Mostra quais features cada plano mais usa.',
+  'Horários de Pico':'Extrai a hora (0-23h) do campo occurred_at de cada evento e conta o total por hora. Barras douradas destacam o horário comercial (8h-20h).',
+  // Library
+  'Itens por Tipo':'Agrupa os itens da biblioteca pelo campo item_type (mensagem, áudio, etc.) e mostra a proporção de cada tipo.',
+  'Top Usuários por Usos':'Soma o campo times_used de cada item de biblioteca agrupado por email do usuário. Mostra quem mais usa mensagens/áudios salvos.',
+  // Retention
+  'Funil de Conversão':'Considera a coorte de usuários registrados no período selecionado e mostra quantos fizeram extração, download e quantos atualmente estão no plano PRO.',
+  'Usuários Ativos por Dia':'Para cada dia do período selecionado ({R}), coleta emails únicos que aparecem em extraction_monitoring OU usage_monitoring. Um usuário que fez qualquer ação naquele dia conta como ativo.',
+  'Tempo entre Registro e Assinatura':'Para cada usuário PRO, estima a diferença em dias entre created_at e updated_at. Para precisão financeira, o ideal é registrar subscribed_at no backend.',
+  'Risco de Churn — PRO inativos':'Lista assinantes PRO cujo email não aparece em nenhum evento ou extração dos últimos 7 dias. Vermelho = 30+ dias, laranja = 14+ dias.',
+  // Insights
+  'Taxa de Erro por Dia':'Para cada dia do período selecionado ({R}), divide o número de extrações com status=error pelo total de extrações daquele dia, mostrando a % de falha. Subidas indicam possível quebra de seletor CSS.',
+  'Duração Média das Extrações':'Média diária de duration_ms/1000 no período selecionado ({R}). Se a linha subir de repente, pode significar que o Google está mais lento ou fazendo throttling.',
+  'Horários de Pico — Todas as Ações':'Combina eventos de usage_monitoring + extraction_monitoring, extrai a hora de cada registro e conta por faixa horária. Mostra quando seus usuários estão mais ativos.',
+  'Adoção de Features — Free vs PRO':'Mostra o percentual de usuários ativos de cada plano que utilizou cada feature no período. Percentuais evitam distorções quando os planos têm populações diferentes.',
+  // Conversion
+  'Última Ação Registrada de Usuários Free':'Identifica o evento ou extração mais recente de cada usuário atualmente Free e agrupa por tipo de ação. Não presume abandono sem uma janela de inatividade.',
+  'Bateram no Limite Free e Não Converteram':'Identifica eventos explícitos de limite ou paywall entre usuários que continuam Free. Extrações vazias, sozinhas, não são tratadas como paywall.',
+  'Uso Médio: Quem Converteu vs Quem Não':'Compara a média de extrações e eventos entre usuários atualmente PRO e usuários atualmente Free.',
+  'Features Mais Usadas por Usuários PRO':'Conta as features usadas no período por usuários atualmente PRO. Não presume que a ação aconteceu antes da assinatura.',
+  'Usuários Free que Bateram no Paywall':'Lista nominal dos usuários free que tiveram extração bloqueada/vazia e não converteram. Mostra quantas extrações fizeram, última ação, e há quantos dias estão inativos.',
+  // Engagement
+  'Cohort de Retenção Semanal':'Agrupa usuários pela janela semanal em que registraram e verifica quantos voltaram nas janelas seguintes. Verde (70%+) = boa retenção. Vermelho (<40%) = problema de engajamento.',
+  'Distribuição do Score de Engajamento':'Score de 0-100 calculado com: Recência (40%) = dias desde última ação, Frequência (30%) = total de ações em 30d, Diversidade (30%) = quantas features diferentes usou.',
+  'MRR Estimado':'Estima o MRR usando apenas assinaturas PRO com Stripe ativo e o preço definido em Configurações. O histórico usa updated_at como aproximação enquanto subscribed_at não estiver disponível.',
+  'Lifetime Médio do PRO':'Calcula a média de dias desde o cadastro para assinantes PRO com Stripe ativo.',
+  'Top 20 — Score de Engajamento':'Ranking dos 20 usuários com maior score de engajamento. Barra visual mostra a proporção do score. Verde = alto, dourado = médio, vermelho = baixo.',
+};
+
+function injectTooltips(){
+  document.querySelectorAll('.chart-card h3').forEach(h3=>{
+    // raw title includes the dynamic range span if present — strip it to find the base title
+    const raw=(h3.childNodes[0]?.textContent||h3.textContent||'').trim();
+    // Try exact match first, then strip trailing " (...)" suffix (which holds the range label)
+    const base=raw.replace(/\s*\(.*\)\s*$/,'').trim();
+    const tip=TIPS[raw]||TIPS[base];
+    if(!tip)return;
+    // Resolve current page's range label for {R}
+    const rlSpan=h3.querySelector('.range-lbl');
+    const pg=rlSpan?.dataset?.page||curPage;
+    const text=tip.replace(/\{R\}/g,rangeLabel(pg));
+    // Remove existing tooltip marker (to refresh text when range changes)
+    const old=h3.querySelector('.info-i');if(old)old.remove();
+    const i=document.createElement('span');
+    i.className='info-i';
+    i.tabIndex=0;
+    i.setAttribute('role','note');
+    i.setAttribute('aria-label',text);
+    i.innerHTML=`i<span class="tip">${text}</span>`;
+    h3.appendChild(i);
+  });
+  document.querySelectorAll('canvas').forEach(canvas=>{
+    const title=canvas.closest('.chart-card')?.querySelector('h3')?.childNodes[0]?.textContent?.trim()||'Gráfico de métricas';
+    canvas.setAttribute('role','img');canvas.setAttribute('aria-label',title);
+  });
+}
+
+// Update all dynamic range labels in <h3> titles to reflect current pageRange
+function updateRangeLabels(){
+  document.querySelectorAll('.range-lbl').forEach(el=>{
+    const pg=el.dataset.page;
+    if(pg)el.textContent=rangeLabel(pg);
+  });
+}
+
+// ══════ OVERVIEW ══════
+function rOverview(){
+  const pg='overview';const rd=getRangeDays(pg);
+  const U=trFilter(DATA.users,'created_at',pg),E=trFilter(DATA.extractions,'created_at',pg),V=trFilter(DATA.events,'occurred_at',pg),L=trFilter(DATA.library,'created_at',pg);
+  const Uall=DATA.users;const pro=Uall.filter(u=>u.plan==='pro').length;
+  const con=E.reduce((s,e)=>s+(e.items_returned||0),0);
+  document.getElementById('ovKpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Usuários (período)</div><div class="kpi-value">${U.length}</div><div class="kpi-sub">${pro} usuários PRO no total</div></div>
+    <div class="kpi green"><div class="kpi-label">Extrações</div><div class="kpi-value">${E.length}</div><div class="kpi-sub">${con} contatos</div></div>
+    <div class="kpi blue"><div class="kpi-label">Eventos</div><div class="kpi-value">${V.length}</div></div>
+    <div class="kpi purple"><div class="kpi-label">Biblioteca</div><div class="kpi-value">${L.filter(l=>l.status==='active').length}</div><div class="kpi-sub">${L.reduce((s,l)=>s+(l.times_used||0),0)} usos</div></div>`;
+  dc('ovReg','ovPlans','ovExt','ovFeat');
+  const rD=dk(rd);U.forEach(u=>{const d=udk(u);if(d&&d in rD)rD[d]++});
+  document.getElementById('ovCharts').innerHTML=`<div class="chart-card"><h3>Registros (<span class="range-lbl" data-page="overview">${rangeLabel(pg)}</span>)</h3><div class="chart-container"><canvas id="ovReg"></canvas></div></div><div class="chart-card"><h3>Planos</h3><div class="chart-container"><canvas id="ovPlans"></canvas></div></div><div class="chart-card"><h3>Extrações (<span class="range-lbl" data-page="overview">${rangeLabel(pg)}</span>)</h3><div class="chart-container"><canvas id="ovExt"></canvas></div></div><div class="chart-card"><h3>Top Features</h3><div class="chart-container"><canvas id="ovFeat"></canvas></div></div>`;
+  C.ovReg=mkChart('ovReg',{type:'bar',data:{labels:Object.keys(rD).map(d=>d.slice(5)),datasets:[{data:Object.values(rD),backgroundColor:'rgba(245,197,66,.6)',borderRadius:4}]},options:{...CD,plugins:{legend:{display:false}}}});
+  const pc={free:Uall.length-pro,pro};
+  C.ovPlans=mkChart('ovPlans',{type:'doughnut',data:{labels:['Free','PRO'],datasets:[{data:[pc.free,pc.pro],backgroundColor:['#2a2e38','#34d399'],borderWidth:0,spacing:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'#8b8f9a',padding:14}}}}});
+  const eD=dk(rd);E.forEach(e=>{const d=dayKey(e.created_at);if(d in eD)eD[d]++});
+  C.ovExt=mkChart('ovExt',{type:'bar',data:{labels:Object.keys(eD).map(d=>d.slice(5)),datasets:[{data:Object.values(eD),backgroundColor:'rgba(52,211,153,.6)',borderRadius:3}]},options:{...CD,plugins:{legend:{display:false}}}});
+  const fc={};V.forEach(e=>{const f=e.feature||e.event_name||'?';fc[f]=(fc[f]||0)+1});const tf=Object.entries(fc).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  C.ovFeat=barH('ovFeat',tf.map(f=>f[0]),tf.map(f=>f[1]),tf.map((_,i)=>PAL[i%PAL.length]+'AA'));
+}
+
+// ══════ USERS ══════
+function rUsers(data){
+  const pg='users';const rd=getRangeDays(pg);
+  const U=data||trFilter(DATA.users,'created_at',pg);const now=Date.now()/1000,d7=now-7*86400,d30=now-30*86400;
+  const pro=U.filter(u=>u.plan==='pro').length;
+  document.getElementById('usersKpis').innerHTML=`<div class="kpi"><div class="kpi-label">Total</div><div class="kpi-value">${U.length}</div></div><div class="kpi green"><div class="kpi-label">PRO</div><div class="kpi-value">${pro}</div></div><div class="kpi"><div class="kpi-label">Free</div><div class="kpi-value">${U.length-pro}</div></div><div class="kpi blue"><div class="kpi-label">Novos 7d</div><div class="kpi-value">${U.filter(u=>pd(u.created_at)>d7).length}</div></div><div class="kpi orange"><div class="kpi-label">Novos 30d</div><div class="kpi-value">${U.filter(u=>pd(u.created_at)>d30).length}</div></div><div class="kpi"><div class="kpi-label">Stripe ativo</div><div class="kpi-value">${U.filter(u=>u.stripe_status==='active').length}</div></div>`;
+  dc('cUsersDaily','cUsersPlans');
+  const rD=dk(rd);U.forEach(u=>{const d=udk(u);if(d&&d in rD)rD[d]++});
+  C.cUsersDaily=mkChart('cUsersDaily',{type:'bar',data:{labels:Object.keys(rD).map(d=>d.slice(5)),datasets:[{data:Object.values(rD),backgroundColor:'rgba(245,197,66,.6)',borderRadius:4}]},options:{...CD,plugins:{legend:{display:false}}}});
+  const pc={free:U.length-pro,pro};
+  C.cUsersPlans=mkChart('cUsersPlans',{type:'doughnut',data:{labels:['Free','PRO'],datasets:[{data:[pc.free,pc.pro],backgroundColor:['#2a2e38','#34d399'],borderWidth:0,spacing:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'#8b8f9a',padding:14}}}}});
+  document.getElementById('usersBody').innerHTML=U.map(u=>`<tr><td title="${eh(u.email||'')}">${eh(u.email||'—')}</td><td>${eh(u.name||'—')}</td><td>${pt(u.plan)}</td><td>${eh(u.telefone||'—')}</td><td>${eh(u.source||'—')}</td><td>${u.stripe_status?st(u.stripe_status):'—'}</td><td>${fd(u.created_at)}</td><td>${fd(u.updated_at)}</td></tr>`).join('');
+  document.getElementById('usersCountBadge').textContent=U.length+' registros';
+}
+
+// ══════ USO POR USUÁRIO ══════
+function rUsage(data){
+  const U=data||getF('usage');
+  const active=U.filter(u=>u.isActive);
+  const messages=U.reduce((s,u)=>s+u.messages,0);
+  const ai=U.reduce((s,u)=>s+u.aiSuccess,0);
+  const ext=U.reduce((s,u)=>s+u.extractions,0);
+  const contacts=U.reduce((s,u)=>s+u.contacts,0);
+  const downloads=U.reduce((s,u)=>s+u.downloads,0);
+  const actions=U.reduce((s,u)=>s+u.actions,0);
+  document.getElementById('usageKpis').innerHTML=`
+    <div class="kpi green"><div class="kpi-label">Usuários ativos</div><div class="kpi-value">${active.length}</div><div class="kpi-sub">${U.length} exibidos</div></div>
+    <div class="kpi"><div class="kpi-label">Ações registradas</div><div class="kpi-value">${actions.toLocaleString('pt-BR')}</div></div>
+    <div class="kpi blue"><div class="kpi-label">Mensagens enviadas</div><div class="kpi-value">${messages.toLocaleString('pt-BR')}</div></div>
+    <div class="kpi purple"><div class="kpi-label">Usos de IA</div><div class="kpi-value">${ai.toLocaleString('pt-BR')}</div></div>
+    <div class="kpi orange"><div class="kpi-label">Extrações</div><div class="kpi-value">${ext.toLocaleString('pt-BR')}</div><div class="kpi-sub">${contacts.toLocaleString('pt-BR')} contatos</div></div>
+    <div class="kpi cyan"><div class="kpi-label">Listas baixadas</div><div class="kpi-value">${downloads.toLocaleString('pt-BR')}</div></div>`;
+
+  dc('cUsageFeatures','cUsageUsers');
+  const featureTotals={};U.forEach(u=>Object.entries(u.features).forEach(([k,v])=>featureTotals[k]=(featureTotals[k]||0)+v));
+  const topFeatures=Object.entries(featureTotals).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  C.cUsageFeatures=barH('cUsageFeatures',topFeatures.map(x=>x[0]),topFeatures.map(x=>x[1]),topFeatures.map((_,i)=>PAL[i%PAL.length]+'AA'));
+  const topUsers=[...active].sort((a,b)=>b.actions-a.actions).slice(0,10);
+  C.cUsageUsers=mkChart('cUsageUsers',{type:'bar',data:{labels:topUsers.map(u=>(u.name||u.email.split('@')[0]).slice(0,24)),datasets:[{data:topUsers.map(u=>u.actions),backgroundColor:topUsers.map((_,i)=>PAL[i%PAL.length]+'AA'),borderRadius:4}]},options:{...CD,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{afterLabel:ctx=>topUsers[ctx.dataIndex]?.email||''}}},scales:{x:{...CD.scales.x,beginAtZero:true},y:{ticks:{font:{size:11,family:'JetBrains Mono'},color:'#8b8f9a'},grid:{color:'#1a1d26'}}}}});
+
+  const body=document.getElementById('usageBody');
+  body.innerHTML=U.length?U.map(u=>{
+    const feat=u.topFeatures.slice(0,2).map(([name,count])=>`<span class="usage-chip" title="${eh(name)}">${eh(name)} <b>${count}</b></span>`).join('');
+    const more=u.topFeatures.length>2?`<span class="usage-chip">+${u.topFeatures.length-2}</span>`:'';
+    const last=u.lastAt||u.lastAtAll;
+    return`<tr class="${u.isActive?'':'usage-zero'}">
+      <td><div class="usage-user"><strong title="${eh(u.email)}">${eh(u.name||u.email.split('@')[0])}</strong><span>${eh(u.email)}</span></div></td>
+      <td>${pt(u.plan)}</td>
+      <td><span class="usage-status ${u.isActive?'active':'idle'}">${u.isActive?fd(last):'Sem atividade no período'}</span></td>
+      <td class="mono">${u.activeDaysCount}</td>
+      <td><div class="usage-features">${feat||'<span style="color:var(--text-muted);font-size:11px">—</span>'}${more}</div></td>
+      <td class="mono" style="color:${u.messages?'var(--blue)':'var(--text-muted)'}">${u.messages}</td>
+      <td class="mono" style="color:${u.aiSuccess?'var(--purple)':'var(--text-muted)'}">${u.aiSuccess}</td>
+      <td class="mono">${u.extractions}</td><td class="mono">${u.contacts.toLocaleString('pt-BR')}</td><td class="mono">${u.downloads}</td>
+      <td class="mono" title="${u.libraryItems} itens salvos">${u.libraryUses} usos</td>
+      <td class="mono" style="font-weight:700;color:${u.actions?'var(--accent)':'var(--text-muted)'}">${u.actions}</td>
+      <td><button class="usage-detail-btn" type="button" data-usage-email="${eh(u.email)}">Detalhes</button></td>
+    </tr>`;
+  }).join(''):'<tr><td colspan="13"><div class="usage-empty">Nenhum usuário encontrado neste filtro.</div></td></tr>';
+  body.querySelectorAll('[data-usage-email]').forEach(btn=>btn.addEventListener('click',()=>showUsageDetail(btn.dataset.usageEmail)));
+  document.getElementById('usageCountBadge').textContent=`${active.length} ativos · ${U.length} usuários`;
+}
+
+let usageModalLastFocus=null;
+function showUsageDetail(email){
+  const row=buildUsageRows().find(u=>u.email===usageEmail(email));if(!row)return;
+  const modal=document.getElementById('usageModal');
+  document.getElementById('usageModalAvatar').textContent=usageInitial(row.name,row.email);
+  document.getElementById('usageModalTitle').textContent=row.name||row.email.split('@')[0];
+  document.getElementById('usageModalSubtitle').textContent=`${row.email} · ${String(row.plan||'free').toUpperCase()} · ${rangeLabel('usage')}`;
+  const timeline=usageTimeline(row.email);
+  const featureCloud=row.topFeatures.length?row.topFeatures.map(([name,count])=>`<span class="usage-chip">${eh(name)} <b>${count}</b></span>`).join(''):'<span style="color:var(--text-muted);font-size:12px">Nenhum recurso registrado no período.</span>';
+  const eventCloud=row.topEvents.length?row.topEvents.slice(0,12).map(([name,count])=>`<span class="usage-chip">${eh(name)} <b>${count}</b></span>`).join(''):'<span style="color:var(--text-muted);font-size:12px">Nenhuma ação registrada.</span>';
+  const tabs=row.tabs.length?row.tabs.map(name=>`<span class="usage-chip">${eh(name)}</span>`).join(''):'<span style="color:var(--text-muted);font-size:12px">Nenhuma troca de aba registrada.</span>';
+  const sendTypes=Object.entries(row.sendTypes).sort((a,b)=>b[1]-a[1]);
+  const sendCloud=sendTypes.length?sendTypes.map(([name,count])=>`<span class="usage-chip">${eh(name)} <b>${count}</b></span>`).join(''):'<span style="color:var(--text-muted);font-size:12px">Nenhum envio registrado.</span>';
+  const aiActions=Object.entries(row.aiActions).sort((a,b)=>b[1]-a[1]);
+  const aiCloud=aiActions.length?aiActions.map(([name,count])=>`<span class="usage-chip">${eh(name)} <b>${count}</b></span>`).join(''):'<span style="color:var(--text-muted);font-size:12px">Nenhum uso de IA registrado.</span>';
+  const libTypes=Object.entries(row.libraryTypes).sort((a,b)=>b[1]-a[1]);
+  const libCloud=libTypes.length?libTypes.map(([name,count])=>`<span class="usage-chip">${eh(name)} <b>${count} usos</b></span>`).join(''):'<span style="color:var(--text-muted);font-size:12px">Nenhum item de biblioteca.</span>';
+  const timelineHtml=timeline.length?timeline.map(item=>`<div class="usage-timeline-item">
+    <span class="usage-timeline-time">${eh(fd(item.time))}</span><span class="usage-timeline-dot ${eh(item.type)}"></span>
+    <span class="usage-timeline-main" title="${eh(item.main)}">${eh(item.main)}</span><span class="usage-timeline-detail" title="${eh(item.detail)}">${eh(item.detail)}</span>
+  </div>`).join(''):'<div class="usage-empty" style="border:0">Nenhuma atividade encontrada neste período.</div>';
+  document.getElementById('usageModalBody').innerHTML=`
+    <div class="kpi-grid" style="margin-bottom:0">
+      <div class="kpi"><div class="kpi-label">Ações</div><div class="kpi-value">${row.actions}</div><div class="kpi-sub">${row.activeDaysCount} dias ativos</div></div>
+      <div class="kpi blue"><div class="kpi-label">Mensagens</div><div class="kpi-value">${row.messages}</div></div>
+      <div class="kpi purple"><div class="kpi-label">IA concluída</div><div class="kpi-value">${row.aiSuccess}</div><div class="kpi-sub">${row.aiFailed} falhas/bloqueios</div></div>
+      <div class="kpi orange"><div class="kpi-label">Extrações</div><div class="kpi-value">${row.extractions}</div><div class="kpi-sub">${row.contacts.toLocaleString('pt-BR')} contatos</div></div>
+      <div class="kpi cyan"><div class="kpi-label">Downloads</div><div class="kpi-value">${row.downloads}</div></div>
+      <div class="kpi green"><div class="kpi-label">Biblioteca (total)</div><div class="kpi-value">${row.libraryUses}</div><div class="kpi-sub">${row.libraryItems} itens · uso acumulado</div></div>
+      <div class="kpi red"><div class="kpi-label">Erros/Bloqueios</div><div class="kpi-value">${row.errors}</div><div class="kpi-sub">${row.paywalls} limites free</div></div>
+      <div class="kpi"><div class="kpi-label">Última atividade</div><div class="kpi-value" style="font-size:14px;line-height:1.35">${eh(fd(row.lastAt||row.lastAtAll))}</div><div class="kpi-sub">Extensão ${eh(row.version||'—')}</div></div>
+    </div>
+    <div class="usage-section"><h3>Recursos utilizados</h3><div class="usage-chip-cloud">${featureCloud}</div></div>
+    <div class="usage-section"><h3>Ações realizadas</h3><div class="usage-chip-cloud">${eventCloud}</div></div>
+    <div class="usage-section"><h3>Abas visitadas</h3><div class="usage-chip-cloud">${tabs}</div></div>
+    <div class="usage-section"><h3>Tipos de conteúdo enviados</h3><div class="usage-chip-cloud">${sendCloud}</div></div>
+    <div class="usage-section"><h3>Recursos de IA utilizados</h3><div class="usage-chip-cloud">${aiCloud}</div></div>
+    <div class="usage-section"><h3>Biblioteca por tipo — uso acumulado</h3><div class="usage-chip-cloud">${libCloud}</div></div>
+    <div class="usage-section"><h3>Atividade recente</h3><div class="usage-timeline">${timelineHtml}</div></div>`;
+  usageModalLastFocus=document.activeElement;
+  modal.classList.add('open');document.body.style.overflow='hidden';
+  modal.querySelector('.usage-close')?.focus();
+}
+function closeUsageDetail(){const modal=document.getElementById('usageModal');if(!modal?.classList.contains('open'))return;modal.classList.remove('open');document.body.style.overflow='';usageModalLastFocus?.focus?.();usageModalLastFocus=null}
+function usageModalBackdrop(e){if(e.target?.id==='usageModal')closeUsageDetail()}
+document.addEventListener('keydown',e=>{const modal=document.getElementById('usageModal');if(!modal?.classList.contains('open'))return;if(e.key==='Escape'){closeUsageDetail();return}if(e.key==='Tab'){const focusable=[...modal.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled);if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
+
+function exportUsageCSV(){
+  const rows=getF('usage').map(u=>({
+    email:u.email,nome:u.name,plano:u.plan,ultima_atividade:u.lastAt?fd(u.lastAt):'',dias_ativos:u.activeDaysCount,
+    acoes:u.actions,mensagens_enviadas:u.messages,usos_ia:u.aiSuccess,falhas_ia:u.aiFailed,extracoes:u.extractions,
+    contatos_extraidos:u.contacts,downloads:u.downloads,itens_biblioteca:u.libraryItems,usos_biblioteca_total:u.libraryUses,
+    recursos:u.topFeatures.map(([n,c])=>`${n} (${c})`).join(' | '),abas:u.tabs.join(' | '),
+    tipos_enviados:Object.entries(u.sendTypes).map(([n,c])=>`${n} (${c})`).join(' | '),recursos_ia:Object.entries(u.aiActions).map(([n,c])=>`${n} (${c})`).join(' | '),erros_bloqueios:u.errors
+  }));
+  if(!rows.length)return alert('Sem dados');
+  const keys=Object.keys(rows[0]),csv=[keys.join(',')];
+  rows.forEach(row=>csv.push(keys.map(k=>csvCell(row[k])).join(',')));
+  const blob=new Blob(['\uFEFF'+csv.join('\n')],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=`patogo_uso_usuarios_${dayKey(Date.now()/1000)}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+// ══════ EXTRACTIONS ══════
+function rExt(data){
+  const pg='extractions';const rd=getRangeDays(pg);
+  const E=data||trFilter(DATA.extractions,'created_at',pg);
+  const ok=E.filter(e=>e.status==='success').length,emp=E.filter(e=>e.status==='empty').length,err=E.filter(e=>e.status==='error').length;
+  const con=E.reduce((s,e)=>s+(e.items_returned||0),0),dl=E.filter(e=>e.clicked_download).length,avg=ok?Math.round(con/ok):0;
+  document.getElementById('extKpis').innerHTML=`<div class="kpi"><div class="kpi-label">Total</div><div class="kpi-value">${E.length}</div></div><div class="kpi green"><div class="kpi-label">Sucesso</div><div class="kpi-value">${ok}</div><div class="kpi-sub">${E.length?((ok/E.length)*100).toFixed(0):0}%</div></div><div class="kpi orange"><div class="kpi-label">Vazias</div><div class="kpi-value">${emp}</div></div><div class="kpi red"><div class="kpi-label">Erros</div><div class="kpi-value">${err}</div></div><div class="kpi blue"><div class="kpi-label">Contatos</div><div class="kpi-value">${con.toLocaleString('pt-BR')}</div></div><div class="kpi purple"><div class="kpi-label">Média</div><div class="kpi-value">${avg}</div><div class="kpi-sub">${dl} downloads</div></div>`;
+  dc('cExtDaily','cExtCities','cExtContacts','cExtRank','cExtSegments','cExtDuration');
+  // S1: extractions/day
+  const eD={};Object.keys(dk(rd)).forEach(d=>eD[d]={s:0,e:0,x:0});
+  E.forEach(e=>{const d=dayKey(e.created_at);if(d in eD){if(e.status==='success')eD[d].s++;else if(e.status==='empty')eD[d].e++;else eD[d].x++}});
+  C.cExtDaily=mkChart('cExtDaily',{type:'bar',data:{labels:Object.keys(eD).map(d=>d.slice(5)),datasets:[{label:'OK',data:Object.values(eD).map(v=>v.s),backgroundColor:'rgba(52,211,153,.7)',borderRadius:3},{label:'Vazio',data:Object.values(eD).map(v=>v.e),backgroundColor:'rgba(251,146,60,.7)',borderRadius:3},{label:'Erro',data:Object.values(eD).map(v=>v.x),backgroundColor:'rgba(248,113,113,.7)',borderRadius:3}]},options:{...CD,scales:{x:{...CD.scales.x,stacked:true},y:{...CD.scales.y,stacked:true}}}});
+  // cities
+  const cc={};E.forEach(e=>{if(e.city)cc[e.city]=(cc[e.city]||0)+1});const tc=Object.entries(cc).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  C.cExtCities=barH('cExtCities',tc.map(c=>c[0]),tc.map(c=>c[1]));
+  // S2: contacts/day
+  const cD=dk(rd);E.forEach(e=>{const d=dayKey(e.created_at);if(d in cD)cD[d]+=(e.items_returned||0)});
+  C.cExtContacts=mkChart('cExtContacts',{type:'bar',data:{labels:Object.keys(cD).map(d=>d.slice(5)),datasets:[{label:'Contatos',data:Object.values(cD),backgroundColor:'rgba(245,197,66,.55)',borderColor:'#f5c542',borderWidth:1,borderRadius:4}]},options:{...CD,plugins:{legend:{display:false}}}});
+  // ranking
+  const ur={};E.forEach(e=>{const em=e.email||'?';if(!ur[em])ur[em]={c:0,n:0};ur[em].c+=(e.items_returned||0);ur[em].n++});
+  const rk=Object.entries(ur).sort((a,b)=>b[1].c-a[1].c).slice(0,10);
+  C.cExtRank=mkChart('cExtRank',{type:'bar',data:{labels:rk.map((r,i)=>`${i+1}º ${r[0].split('@')[0]}`),datasets:[{data:rk.map(r=>r[1].c),backgroundColor:rk.map((_,i)=>PAL[i%PAL.length]+'CC'),borderRadius:4}]},options:{...CD,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{afterLabel:ctx=>{const r=rk[ctx.dataIndex];return`${r[1].n} extrações · ${r[0]}`}}}},scales:{x:{...CD.scales.x,beginAtZero:true},y:{ticks:{font:{size:11,family:'JetBrains Mono'},color:'#8b8f9a'},grid:{color:'#1a1d26'}}}}});
+  // S3: segments
+  const sg={};E.forEach(e=>{if(e.segment)sg[e.segment]=(sg[e.segment]||0)+1});const ts=Object.entries(sg).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  C.cExtSegments=barH('cExtSegments',ts.map(s=>s[0]),ts.map(s=>s[1]),ts.map((_,i)=>PAL[i%PAL.length]+'AA'));
+  // duration/day
+  const durD=dk(rd);const durC={};Object.keys(durD).forEach(k=>durC[k]=0);
+  E.forEach(e=>{if(e.duration_ms){const d=dayKey(e.created_at);if(d in durD){durD[d]+=e.duration_ms;durC[d]++}}});
+  const durAvg=Object.keys(durD).map(k=>durC[k]?Math.round(durD[k]/durC[k]/1000):0);
+  C.cExtDuration=mkChart('cExtDuration',{type:'line',data:{labels:Object.keys(durD).map(d=>d.slice(5)),datasets:[{label:'seg',data:durAvg,borderColor:'#a78bfa',backgroundColor:'rgba(167,139,250,.1)',fill:true,tension:.3,pointRadius:3}]},options:{...CD,plugins:{legend:{display:false}}}});
+  cGo('ext',cIdx.ext);
+  // Table
+  document.getElementById('extractionsBody').innerHTML=E.map(e=>`<tr><td>${fd(e.created_at)}</td><td title="${eh(e.email||'')}">${eh(e.email||'—')}</td><td>${eh(e.user_name||'—')}</td><td>${pt(e.plan)}</td><td>${eh(e.city||'—')}</td><td>${eh(e.segment||'—')}</td><td style="font-family:'JetBrains Mono';font-weight:600;color:${(e.items_returned||0)>0?'var(--green)':'var(--text-muted)'}">${Number(e.items_returned)||0}</td><td>${e.clicked_download?'✅':'—'}</td><td>${st(e.status)}</td><td class="mono">${e.duration_ms?(Number(e.duration_ms)/1000).toFixed(1)+'s':'—'}</td><td title="${eh(e.error_message||'')}" style="max-width:320px;white-space:normal;overflow-wrap:anywhere;font-size:12px;line-height:1.4">${eh(e.error_message||'—')}</td></tr>`).join('');
+  document.getElementById('extCountBadge').textContent=E.length+' registros';
+}
+
+// ══════ EVENTS ══════
+function rEvt(data){
+  const pg='events';const rd=getRangeDays(pg);
+  const E=data||trFilter(DATA.events,'occurred_at',pg);const ok=E.filter(e=>e.status==='success').length,err=E.filter(e=>e.status==='error'||e.status==='blocked').length;
+  const feats=new Set(E.map(e=>e.feature||e.event_name)).size;const latestVersion=E.find(e=>e.extension_version)?.extension_version||'—';
+  document.getElementById('evtKpis').innerHTML=`<div class="kpi"><div class="kpi-label">Total</div><div class="kpi-value">${E.length}</div></div><div class="kpi green"><div class="kpi-label">Sucesso</div><div class="kpi-value">${ok}</div></div><div class="kpi red"><div class="kpi-label">Erros</div><div class="kpi-value">${err}</div></div><div class="kpi blue"><div class="kpi-label">Features</div><div class="kpi-value">${feats}</div></div><div class="kpi purple"><div class="kpi-label">Versão mais recente</div><div class="kpi-value" style="font-size:18px">${eh(latestVersion)}</div></div>`;
+  dc('cEvtDaily','cEvtFeatures','cEvtByPlan','cEvtHours');
+  // S1
+  const eD=dk(rd);E.forEach(e=>{const d=dayKey(e.occurred_at);if(d in eD)eD[d]++});
+  C.cEvtDaily=mkChart('cEvtDaily',{type:'line',data:{labels:Object.keys(eD).map(d=>d.slice(5)),datasets:[{data:Object.values(eD),borderColor:'#f5c542',backgroundColor:'rgba(245,197,66,.1)',fill:true,tension:.3,pointRadius:3,pointBackgroundColor:'#f5c542'}]},options:{...CD,plugins:{legend:{display:false}}}});
+  const fc={};E.forEach(e=>{const f=e.feature||e.event_name||'?';fc[f]=(fc[f]||0)+1});const tf=Object.entries(fc).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  C.cEvtFeatures=barH('cEvtFeatures',tf.map(f=>f[0]),tf.map(f=>f[1]),tf.map((_,i)=>PAL[i%PAL.length]+'AA'));
+  // S2: features by plan
+  const fp={free:{},pro:{}};E.forEach(e=>{const p=(e.plan||'free').toLowerCase()==='pro'?'pro':'free';const f=e.feature||e.event_name||'?';fp[p][f]=(fp[p][f]||0)+1});
+  const allF=[...new Set(E.map(e=>e.feature||e.event_name||'?'))].sort((a,b)=>((fp.free[b]||0)+(fp.pro[b]||0))-((fp.free[a]||0)+(fp.pro[a]||0))).slice(0,8);
+  C.cEvtByPlan=mkChart('cEvtByPlan',{type:'bar',data:{labels:allF,datasets:[{label:'Free',data:allF.map(f=>fp.free[f]||0),backgroundColor:'rgba(42,46,56,.8)',borderRadius:3},{label:'PRO',data:allF.map(f=>fp.pro[f]||0),backgroundColor:'rgba(52,211,153,.7)',borderRadius:3}]},options:{...CD,scales:{x:{...CD.scales.x,stacked:true},y:{...CD.scales.y,stacked:true}}}});
+  // Hours
+  const hrs=Array(24).fill(0);E.forEach(e=>{const h=hourKey(e.occurred_at);if(h!=null)hrs[h]++});
+  C.cEvtHours=mkChart('cEvtHours',{type:'bar',data:{labels:hrs.map((_,i)=>`${i}h`),datasets:[{data:hrs,backgroundColor:hrs.map((_,i)=>(i>=8&&i<=20)?'rgba(245,197,66,.6)':'rgba(96,165,250,.3)'),borderRadius:3}]},options:{...CD,plugins:{legend:{display:false}}}});
+  cGo('evt',cIdx.evt);
+
+  // Table
+  document.getElementById('eventsBody').innerHTML=E.map(e=>{
+    const what=friendlyEvt(e.event_name);
+    const where=friendlyScreen(e.screen);
+    let detail='—';
+    // Build detail from metadata + feature context
+    const metaParsed=friendlyMeta(e.metadata_json);
+    const feat=friendlyFeat(e.feature);
+    if(metaParsed!=='—')detail=metaParsed;
+    else if(e.feature&&e.feature!==e.event_name)detail=feat;
+    // Combine: if tab_switched, the detail is the tab they went to
+    if(e.event_name==='tab_switched'&&e.metadata_json){
+      try{const o=JSON.parse(e.metadata_json);if(o.tab)detail=META_NAMES['tab:'+o.tab]||'Aba "'+o.tab+'"'}catch{}
+    }
+    return`<tr><td>${fd(e.occurred_at)}</td><td title="${eh(e._email)}">${eh(e._email||'—')}</td><td title="${eh(e.event_name||'')}" style="max-width:260px">${eh(what)}</td><td title="${eh(e.screen||'')}">${eh(where)}</td><td>${pt(e.plan)}</td><td>${st(e.status)}</td><td class="mono">${e.duration_ms!=null?eh(e.duration_ms)+'ms':'—'}</td><td title="${eh(metaParsed)}" style="max-width:180px">${eh(detail)}</td><td class="mono">${eh(e.extension_version||'—')}</td></tr>`;
+  }).join('');
+  document.getElementById('evtCountBadge').textContent=E.length+' registros';
+}
+
+// ── Friendly name mapping (module-scope so search/filter can use them) ──
+const EVT_NAMES={
+  'sidebar_opened':'Abriu o painel lateral do PatoGo no WhatsApp',
+  'tab_switched':'Navegou entre abas dentro do PatoGo',
+  'library_opened':'Abriu a Biblioteca (página completa)',
+  'tutorial_opened':'Abriu o tutorial de como usar',
+  'ai_tab_opened':'Abriu a aba de IA no painel lateral',
+  'ai_request_success':'Usou recurso de IA com sucesso',
+  'ai_request_failed':'Tentou usar IA mas falhou',
+  'upgrade_cta_clicked':'Clicou no botão de fazer upgrade para PRO',
+  'upgrade_failed':'Tentou fazer upgrade mas deu erro',
+  'stripe_start_failed':'Erro ao iniciar pagamento no Stripe',
+  'selector_fallback_used':'Seletor CSS do Google mudou, usou fallback',
+  'extraction_success':'Extração de contatos concluída com sucesso',
+  'extraction_empty':'Extração retornou 0 contatos (bloqueio ou página vazia)',
+  'extraction_error':'Erro durante extração de contatos',
+  'messages_sent':'Enviou mensagens pelo PatoGo',
+  'list_downloaded':'Baixou uma lista de contatos',
+  'free_limit_hit':'Atingiu um limite do plano Free',
+};
+const FEAT_NAMES={
+  'sidebar':'Painel lateral (WhatsApp)',
+  'library':'Biblioteca de mensagens/áudios',
+  'ai':'Assistente IA (transcrição/resposta)',
+  'ai_tab':'Aba de IA no painel',
+  'extraction':'Extrator de contatos',
+  'send':'Disparador de mensagens',
+  'send_tab':'Aba de envio',
+  'search':'Busca/pesquisa',
+  'tutorial':'Tutorial/ajuda',
+  'settings':'Configurações',
+  'chat':'Chat do WhatsApp',
+  'funnel':'Funil de vendas',
+  'conta':'Minha conta',
+  'extract':'Extração de contatos',
+  'shortcut':'Atalho rápido de envio',
+  'billing':'Planos e pagamentos',
+  'whatsapp_runtime':'Integração com WhatsApp',
+};
+const SCREEN_NAMES={
+  'whatsapp_chat':'Tela do WhatsApp Web',
+  'sidebar':'Painel lateral PatoGo',
+  'library':'Página da Biblioteca',
+};
+const META_NAMES={
+  'tab:send':'Aba "Enviar"',
+  'tab:search':'Aba "Buscar"',
+  'tab:access':'Aba "Acessar"',
+  'tab:funnel':'Aba "Funil de vendas"',
+  'tab:conta':'Aba "Minha conta"',
+  'tab:audios':'Aba "Áudios"',
+  'tab:mensagens':'Aba "Mensagens"',
+  'page:conta':'Página "Minha conta"',
+  'page:send':'Página "Enviar"',
+  'page:mensagens':'Página "Mensagens"',
+  'page:audios':'Página "Áudios"',
+  'page:funnel':'Página "Funil"',
+  'page:tutorial':'Página "Tutorial"',
+  'action:chat':'Ação de chat IA',
+  'action:transcribe':'Transcrição de áudio',
+  'action:reply_suggestion':'Sugestão de resposta',
+  'action:transcript_reply':'Resposta baseada em áudio',
+  'action:transcript_summarize':'Resumo de áudio',
+  'action:lead_analysis':'Análise de lead',
+  'action:chat_summary':'Resumo da conversa',
+  'action:chat_key_points':'Pontos principais da conversa',
+  'action:improve_text':'Melhoria de texto',
+};
+function friendlyEvt(name){return EVT_NAMES[name]||name||'—'}
+function friendlyFeat(name){return FEAT_NAMES[name]||name||'—'}
+function friendlyScreen(name){return SCREEN_NAMES[name]||name||'—'}
+function friendlyMeta(jsonStr){
+  if(!jsonStr)return'—';
+  try{
+    const o=JSON.parse(jsonStr);
+    const parts=[];
+    for(const[k,v]of Object.entries(o)){
+      const key=META_NAMES[`${k}:${v}`]||META_NAMES[`${v}`]||null;
+      if(key)parts.push(key);
+      else parts.push(`${k}: ${v}`);
+    }
+    return parts.join(' · ').slice(0,80)||'—';
+  }catch{return'—'}
+}
+// Build the same "detail" string shown in the events table — used for search
+function eventDetailText(e){
+  let detail='—';
+  const metaParsed=friendlyMeta(e.metadata_json);
+  const feat=friendlyFeat(e.feature);
+  if(metaParsed!=='—')detail=metaParsed;
+  else if(e.feature&&e.feature!==e.event_name)detail=feat;
+  if(e.event_name==='tab_switched'&&e.metadata_json){
+    try{const o=JSON.parse(e.metadata_json);if(o.tab)detail=META_NAMES['tab:'+o.tab]||'Aba "'+o.tab+'"'}catch{}
+  }
+  return detail;
+}
+
+// ══════ LIBRARY ══════
+function rLib(data){
+  const pg='library';const rd=getRangeDays(pg);
+  const L=data||trFilter(DATA.library,'created_at',pg);const act=L.filter(l=>l.status==='active').length,del=L.filter(l=>l.status==='deleted').length;
+  const uses=L.reduce((s,l)=>s+(l.times_used||0),0),uu=new Set(L.map(l=>l.email)).size;
+  document.getElementById('libKpis').innerHTML=`<div class="kpi"><div class="kpi-label">Total</div><div class="kpi-value">${L.length}</div></div><div class="kpi green"><div class="kpi-label">Ativos</div><div class="kpi-value">${act}</div></div><div class="kpi red"><div class="kpi-label">Deletados</div><div class="kpi-value">${del}</div></div><div class="kpi blue"><div class="kpi-label">Usos</div><div class="kpi-value">${uses}</div></div><div class="kpi purple"><div class="kpi-label">Usuários</div><div class="kpi-value">${uu}</div></div>`;
+  dc('cLibTypes','cLibTopUsers');
+  const tp={};L.forEach(l=>{const t=l.item_type||'outro';tp[t]=(tp[t]||0)+1});const te=Object.entries(tp);
+  if(te.length)C.cLibTypes=mkChart('cLibTypes',{type:'doughnut',data:{labels:te.map(t=>t[0]),datasets:[{data:te.map(t=>t[1]),backgroundColor:te.map((_,i)=>PAL[i%PAL.length]),borderWidth:0,spacing:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{color:'#8b8f9a',padding:12}}}}});
+  const uu2={};L.forEach(l=>{if(l.email)uu2[l.email]=(uu2[l.email]||0)+(l.times_used||0)});const tu=Object.entries(uu2).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  if(tu.length)C.cLibTopUsers=barH('cLibTopUsers',tu.map(u=>u[0].split('@')[0]),tu.map(u=>u[1]),'rgba(167,139,250,.6)');
+  document.getElementById('libraryBody').innerHTML=L.map(l=>`<tr><td title="${eh(l.title||'')}">${eh((l.title||'—').slice(0,45))}</td><td title="${eh(l.email||'')}">${eh(l.email||'—')}</td><td>${eh(l.item_type||'—')}</td><td>${pt(l.plan)}</td><td class="mono" style="font-weight:600">${Number(l.times_used)||0}</td><td>${fd(l.last_used_at)}</td><td>${st(l.status)}</td><td>${fd(l.created_at)}</td></tr>`).join('');
+  document.getElementById('libCountBadge').textContent=L.length+' registros';
+}
+
+// ══════ RETENTION & FUNNEL ══════
+function rRetention(){
+  const pg='retention';const rd=getRangeDays(pg);
+  const U=trFilter(DATA.users,'created_at',pg),allU=DATA.users,E=trFilter(DATA.extractions,'created_at',pg),V=trFilter(DATA.events,'occurred_at',pg);const now=Date.now()/1000,d7=now-7*86400;
+  const totalReg=U.length;
+  const usersWithExt=new Set(E.map(e=>e.email).filter(Boolean));
+  const didExtract=U.filter(u=>usersWithExt.has(u.email)).length;
+  const usersWithDownload=new Set(E.filter(e=>e.clicked_download).map(e=>e.email).filter(Boolean));
+  const didDownload=U.filter(u=>usersWithDownload.has(u.email)).length;
+  const converted=U.filter(u=>u.plan==='pro').length;
+  const convertedAfterDownload=U.filter(u=>u.plan==='pro'&&usersWithDownload.has(u.email)).length;
+  const activeEmails=new Set([...DATA.extractions.filter(e=>pd(e.created_at)>d7).map(e=>e.email),...DATA.events.filter(e=>pd(e.occurred_at)>d7).map(e=>e._email)].filter(Boolean));
+  const active7=activeEmails.size;
+  const proUsers=allU.filter(u=>u.plan==='pro'&&u.stripe_status==='active');
+  const proInactive=proUsers.filter(u=>!activeEmails.has(u.email));
+  const lastActivityByEmail=new Map();
+  DATA.extractions.forEach(e=>{const t=pd(e.created_at);if(e.email&&t>(lastActivityByEmail.get(e.email)||0))lastActivityByEmail.set(e.email,t)});
+  DATA.events.forEach(e=>{const t=pd(e.occurred_at);if(e._email&&t>(lastActivityByEmail.get(e._email)||0))lastActivityByEmail.set(e._email,t)});
+  const lastActivity=u=>lastActivityByEmail.get(u.email)||pd(u.created_at);
+
+  document.getElementById('retKpis').innerHTML=`<div class="kpi"><div class="kpi-label">Registrados no período</div><div class="kpi-value">${totalReg}</div></div><div class="kpi green"><div class="kpi-label">Fizeram Extração</div><div class="kpi-value">${didExtract}</div><div class="kpi-sub">${totalReg?((didExtract/totalReg)*100).toFixed(0):0}%</div></div><div class="kpi blue"><div class="kpi-label">Fizeram Download</div><div class="kpi-value">${didDownload}</div></div><div class="kpi purple"><div class="kpi-label">Atualmente PRO</div><div class="kpi-value">${converted}</div><div class="kpi-sub">${totalReg?((converted/totalReg)*100).toFixed(1):0}%</div></div><div class="kpi cyan"><div class="kpi-label">Ativos 7d</div><div class="kpi-value">${active7}</div></div><div class="kpi red"><div class="kpi-label">PRO Inativos 7d</div><div class="kpi-value">${proInactive.length}</div></div>`;
+
+  // Funnel
+  const steps=[{label:'Registrados no período',val:totalReg,color:'var(--accent)'},{label:'1ª Extração',val:didExtract,color:'var(--blue)'},{label:'Download',val:didDownload,color:'var(--green)'},{label:'PRO entre downloads',val:convertedAfterDownload,color:'var(--purple)'}];
+  const max=steps[0].val||1;
+  document.getElementById('funnelContainer').innerHTML=`<div class="funnel">${steps.map(s=>`<div class="funnel-step"><span class="f-label">${s.label}</span><div class="f-bar-wrap"><div class="funnel-bar" style="width:${(s.val/max*100).toFixed(1)}%;background:${s.color}"></div></div><span class="f-val">${s.val}</span><span class="f-pct">${(s.val/max*100).toFixed(0)}%</span></div>`).join('')}</div>`;
+
+  // DAU
+  dc('cRetDAU','cRetTimeToSub');
+  const dau=dk(rd);const allAct=[...E.map(e=>({d:dayKey(e.created_at),em:e.email})),...V.map(e=>({d:dayKey(e.occurred_at),em:e._email}))];
+  const dauSets={};Object.keys(dau).forEach(k=>dauSets[k]=new Set());allAct.forEach(a=>{if(a.d in dauSets&&a.em)dauSets[a.d].add(a.em)});Object.keys(dau).forEach(k=>dau[k]=dauSets[k].size);
+  C.cRetDAU=mkChart('cRetDAU',{type:'line',data:{labels:Object.keys(dau).map(d=>d.slice(5)),datasets:[{label:'Usuários Ativos',data:Object.values(dau),borderColor:'#22d3ee',backgroundColor:'rgba(34,211,238,.1)',fill:true,tension:.3,pointRadius:3,pointBackgroundColor:'#22d3ee'}]},options:{...CD,plugins:{legend:{display:false}}}});
+
+  // Time to subscribe (updated_at is an approximation until subscribed_at exists)
+  const subTimes=[];
+  U.forEach(u=>{
+    if(u.plan==='pro'&&u.created_at){
+      const created=pd(u.created_at);
+      const subAt=u.updated_at?pd(u.updated_at):created;
+      const days=Math.max(0,Math.round((subAt-created)/86400));
+      if(days<365)subTimes.push(days);
+    }
+  });
+  const buckets={'Mesmo dia':0,'1-3 dias':0,'4-7 dias':0,'8-14 dias':0,'15-30 dias':0,'30+ dias':0};
+  subTimes.forEach(d=>{if(d===0)buckets['Mesmo dia']++;else if(d<=3)buckets['1-3 dias']++;else if(d<=7)buckets['4-7 dias']++;else if(d<=14)buckets['8-14 dias']++;else if(d<=30)buckets['15-30 dias']++;else buckets['30+ dias']++});
+  C.cRetTimeToSub=mkChart('cRetTimeToSub',{type:'bar',data:{labels:Object.keys(buckets),datasets:[{data:Object.values(buckets),backgroundColor:Object.keys(buckets).map((_,i)=>PAL[i%PAL.length]+'AA'),borderRadius:4}]},options:{...CD,plugins:{legend:{display:false}}}});
+
+  // Churn risk
+  const churnHtml=proInactive.sort((a,b)=>lastActivity(a)-lastActivity(b)).slice(0,20).map(u=>{
+    const lastAct=lastActivity(u);const days=Math.round((now-lastAct)/86400);
+    const color=days>30?'var(--red)':days>14?'var(--orange)':'var(--text-dim)';
+    return`<div class="churn-item"><span class="c-email" title="${eh(u.email)}">${eh(u.email||'—')}</span><span class="c-plan">${pt(u.plan)}</span><span class="c-days" style="color:${color}">${days}d</span></div>`;
+  }).join('');
+  document.getElementById('churnContainer').innerHTML=churnHtml||'<p style="color:var(--text-muted);padding:20px;text-align:center">Nenhum assinante inativo encontrado</p>';
+}
+
+// ══════ CONVERSION ══════
+function rConversion(){
+  const pg='conversion';const rd=getRangeDays(pg);
+  const U=DATA.users,E=trFilter(DATA.extractions,'created_at',pg),V=trFilter(DATA.events,'occurred_at',pg);const now=Date.now()/1000;
+  const freeUsers=U.filter(u=>u.plan!=='pro');
+  const proUsers=U.filter(u=>u.plan==='pro');
+  const freeEmails=new Set(freeUsers.map(u=>u.email));
+  const proEmails=new Set(proUsers.map(u=>u.email));
+
+  // Explicit quota/paywall signals. An empty extraction alone is not a paywall.
+  const isBlockedExtraction=e=>['blocked','rate_limited','limit_reached'].includes(String(e.status||'').toLowerCase());
+  const isPaywallEvent=e=>e.event_name==='free_limit_hit'||e.status==='blocked'||/(paywall|limit_reached|quota_blocked)/i.test(e.event_name||'');
+  const blockedExtractions=E.filter(isBlockedExtraction),blockedEvents=V.filter(isPaywallEvent);
+  const knownEmails=new Set([...freeEmails,...proEmails]);
+  const blockedEmails=new Set([...blockedExtractions.map(e=>e.email),...blockedEvents.map(e=>e._email)].filter(email=>email&&knownEmails.has(email)));
+  const hitPaywall=blockedEmails.size;
+  const hitAndConverted=[...blockedEmails].filter(em=>proEmails.has(em)).length;
+
+  // Last action of free users who stopped
+  const freeLastAction={};
+  V.forEach(e=>{if(freeEmails.has(e._email)){const t=pd(e.occurred_at);if(!freeLastAction[e._email]||t>freeLastAction[e._email].t)freeLastAction[e._email]={t,action:e.event_name||e.feature||'?'}}});
+  E.forEach(e=>{if(freeEmails.has(e.email)){const t=pd(e.created_at);if(!freeLastAction[e.email]||t>freeLastAction[e.email].t)freeLastAction[e.email]={t,action:'extraction_'+e.status}}});
+  const lastActions={};Object.values(freeLastAction).forEach(v=>{lastActions[v.action]=(lastActions[v.action]||0)+1});
+  const sortedLast=Object.entries(lastActions).sort((a,b)=>b[1]-a[1]).slice(0,10);
+
+  // Compare: converted vs not — avg extractions and events
+  const proExtCount={};const freeExtCount={};
+  E.forEach(e=>{if(proEmails.has(e.email)){proExtCount[e.email]=(proExtCount[e.email]||0)+1}else if(freeEmails.has(e.email)){freeExtCount[e.email]=(freeExtCount[e.email]||0)+1}});
+  const avgProExt=proEmails.size?Math.round(Object.values(proExtCount).reduce((s,v)=>s+v,0)/proEmails.size):0;
+  const avgFreeExt=freeEmails.size?Math.round(Object.values(freeExtCount).reduce((s,v)=>s+v,0)/freeEmails.size):0;
+  const proEvtCount={};const freeEvtCount={};
+  V.forEach(e=>{if(proEmails.has(e._email)){proEvtCount[e._email]=(proEvtCount[e._email]||0)+1}else if(freeEmails.has(e._email)){freeEvtCount[e._email]=(freeEvtCount[e._email]||0)+1}});
+  const avgProEvt=proEmails.size?Math.round(Object.values(proEvtCount).reduce((s,v)=>s+v,0)/proEmails.size):0;
+  const avgFreeEvt=freeEmails.size?Math.round(Object.values(freeEvtCount).reduce((s,v)=>s+v,0)/freeEmails.size):0;
+
+  // Feature usage among current PRO users (subscription timestamp is not available here)
+  const proFeatures={};V.forEach(e=>{if(proEmails.has(e._email)){const f=e.feature||e.event_name||'?';proFeatures[f]=(proFeatures[f]||0)+1}});
+  const journeyTop=Object.entries(proFeatures).sort((a,b)=>b[1]-a[1]).slice(0,8);
+
+  document.getElementById('convKpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Free Total</div><div class="kpi-value">${freeUsers.length}</div></div>
+    <div class="kpi green"><div class="kpi-label">Convertidos</div><div class="kpi-value">${proUsers.length}</div><div class="kpi-sub">${U.length?((proUsers.length/U.length)*100).toFixed(1):0}%</div></div>
+    <div class="kpi orange"><div class="kpi-label">Bateram Paywall</div><div class="kpi-value">${hitPaywall}</div><div class="kpi-sub">${hitAndConverted} converteram</div></div>
+    <div class="kpi red"><div class="kpi-label">Paywall → Não Converteu</div><div class="kpi-value">${hitPaywall-hitAndConverted}</div></div>
+    <div class="kpi blue"><div class="kpi-label">Média Ext (PRO)</div><div class="kpi-value">${avgProExt}</div></div>
+    <div class="kpi"><div class="kpi-label">Média Ext (Free)</div><div class="kpi-value">${avgFreeExt}</div></div>`;
+
+  dc('cConvLastStep','cConvBlocked','cConvCompare','cConvJourney');
+
+  C.cConvLastStep=barH('cConvLastStep',sortedLast.map(a=>a[0]),sortedLast.map(a=>a[1]),sortedLast.map((_,i)=>PAL[i%PAL.length]+'AA'));
+
+  // Paywall blocked breakdown: how many times each user hit it
+  const blockedCounts={};
+  blockedExtractions.forEach(e=>{if(blockedEmails.has(e.email)&&freeEmails.has(e.email))blockedCounts[e.email]=(blockedCounts[e.email]||0)+1});
+  blockedEvents.forEach(e=>{if(blockedEmails.has(e._email)&&freeEmails.has(e._email))blockedCounts[e._email]=(blockedCounts[e._email]||0)+1});
+  const blockedSorted=Object.entries(blockedCounts).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  C.cConvBlocked=barH('cConvBlocked',blockedSorted.map(b=>b[0].split('@')[0]),blockedSorted.map(b=>b[1]),'rgba(248,113,113,.6)');
+
+  // Compare chart
+  C.cConvCompare=mkChart('cConvCompare',{type:'bar',data:{labels:['Extrações (média)','Eventos (média)'],datasets:[{label:'Convertidos PRO',data:[avgProExt,avgProEvt],backgroundColor:'rgba(52,211,153,.7)',borderRadius:4},{label:'Free (não converteu)',data:[avgFreeExt,avgFreeEvt],backgroundColor:'rgba(90,94,106,.5)',borderRadius:4}]},options:{...CD,plugins:{legend:{labels:{color:'#8b8f9a'}}}}});
+
+  // Journey
+  C.cConvJourney=barH('cConvJourney',journeyTop.map(j=>j[0]),journeyTop.map(j=>j[1]),journeyTop.map((_,i)=>PAL[i%PAL.length]+'AA'));
+
+  // Paywall users list
+  const paywallUsers=[...blockedEmails].filter(em=>freeEmails.has(em)).map(em=>{
+    const u=U.find(u=>u.email===em);const extN=freeExtCount[em]||0;
+    const lastAct=freeLastAction[em];const daysAgo=lastAct?Math.round((now-lastAct.t)/86400):'?';
+    return{email:em,name:u?.name||'',exts:extN,lastAction:lastAct?.action||'?',daysAgo};
+  }).sort((a,b)=>a.daysAgo-b.daysAgo);
+  document.getElementById('paywallList').innerHTML=paywallUsers.slice(0,30).map(u=>`<div class="churn-item"><span class="c-email" title="${eh(u.email)}">${eh(u.email)}</span><span class="mono" style="color:var(--text-muted)">${u.exts} ext</span><span class="mono" style="color:var(--orange)">${eh(u.lastAction)}</span><span class="c-days" style="color:${u.daysAgo>14?'var(--red)':'var(--text-dim)'}">${eh(u.daysAgo)}d</span></div>`).join('')||'<p style="color:var(--text-muted);padding:20px;text-align:center">Nenhum usuário nesta condição</p>';
+}
+
+// ══════ ENGAGEMENT ══════
+function rEngagement(){
+  const pg='engagement';const rd=getRangeDays(pg);
+  const U=DATA.users,E=trFilter(DATA.extractions,'created_at',pg),V=trFilter(DATA.events,'occurred_at',pg);const now=Date.now()/1000;
+
+  // Score = recência (40%) + frequência (30%) + diversidade (30%)
+  const activityByEmail=new Map();
+  const activityFor=email=>{if(!activityByEmail.has(email))activityByEmail.set(email,{last:0,actions30:0,features:new Set()});return activityByEmail.get(email)};
+  const d30=now-30*86400;
+  E.forEach(e=>{if(!e.email)return;const a=activityFor(e.email),t=pd(e.created_at);a.last=Math.max(a.last,t);if(t>d30)a.actions30++;a.features.add('extraction')});
+  V.forEach(e=>{if(!e._email)return;const a=activityFor(e._email),t=pd(e.occurred_at);a.last=Math.max(a.last,t);if(t>d30)a.actions30++;a.features.add(e.feature||e.event_name||'unknown')});
+  const userScores=U.map(u=>{
+    const em=u.email;
+    // Recência: dias desde última ação (0-100, 0=nunca, 100=hoje)
+    const activity=activityByEmail.get(em);
+    const daysSince=activity?.last?Math.max(0,(now-activity.last)/86400):Infinity;
+    const recency=Number.isFinite(daysSince)?Math.max(0,100-daysSince*3.3):0; // 0 after ~30 days
+
+    // Frequência: total de ações nos últimos 30d
+    const actions=activity?.actions30||0;
+    const frequency=Math.min(100,actions*2); // cap at 100 (50+ actions)
+
+    // Diversidade: unique features used
+    const feats=activity?.features||new Set();
+    const diversity=Math.min(100,feats.size*12); // cap at ~8 features
+
+    const score=Math.round(recency*0.4+frequency*0.3+diversity*0.3);
+    return{email:em,name:u.name,plan:u.plan,score,recency:Math.round(recency),frequency:Math.round(frequency),diversity:Math.round(diversity),actions,daysSince:Number.isFinite(daysSince)?Math.round(daysSince):null,feats:feats.size};
+  }).sort((a,b)=>b.score-a.score);
+
+  const avgScore=userScores.length?Math.round(userScores.reduce((s,u)=>s+u.score,0)/userScores.length):0;
+  const highEng=userScores.filter(u=>u.score>=70).length;
+  const medEng=userScores.filter(u=>u.score>=30&&u.score<70).length;
+  const lowEng=userScores.filter(u=>u.score<30).length;
+
+  // MRR estimate (from settings)
+  const cfg=getCfg();const PRO_PRICE=cfg.pricePro;
+  const activeProUsers=U.filter(u=>u.plan==='pro'&&u.stripe_status==='active');
+  const proCount=activeProUsers.length;
+  const mrr=proCount*PRO_PRICE;
+
+  // Lifetime (days since created_at for PRO users who are still active)
+  const proLifetimes=activeProUsers.map(u=>Math.round((now-pd(u.created_at))/86400)).filter(d=>d>0);
+  const avgLifetimePro=proLifetimes.length?Math.round(proLifetimes.reduce((s,d)=>s+d,0)/proLifetimes.length):0;
+
+  document.getElementById('engKpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Score Médio</div><div class="kpi-value">${avgScore}</div><div class="kpi-sub">de 100</div></div>
+    <div class="kpi green"><div class="kpi-label">Alto (70+)</div><div class="kpi-value">${highEng}</div></div>
+    <div class="kpi orange"><div class="kpi-label">Médio (30-69)</div><div class="kpi-value">${medEng}</div></div>
+    <div class="kpi red"><div class="kpi-label">Baixo (&lt;30)</div><div class="kpi-value">${lowEng}</div></div>
+    <div class="kpi cyan"><div class="kpi-label">MRR Estimado</div><div class="kpi-value" style="font-size:20px">R$ ${mrr.toFixed(0)}</div><div class="kpi-sub">${proCount} assinaturas PRO ativas</div></div>
+    <div class="kpi purple"><div class="kpi-label">Lifetime Médio</div><div class="kpi-value">${avgLifetimePro}d</div></div>`;
+
+  dc('cEngScore','cEngMRR','cEngLifetime');
+
+  // Cohort semanal (4 semanas)
+  const weeks=[];const weekMs=7*86400*1000;const nowMs=Date.now();
+  for(let i=3;i>=0;i--){const start=new Date(nowMs-((i+1)*weekMs));const end=new Date(nowMs-(i*weekMs));weeks.push({start,end,label:`Sem ${4-i}`})}
+  const cohortE=DATA.extractions,cohortV=DATA.events;
+  const cohortData=weeks.map((w,wi)=>{
+    const cohortUsers=U.filter(u=>{const t=new Date(pd(u.created_at)*1000);return t>=w.start&&t<w.end});
+    const cohortEmails=new Set(cohortUsers.map(u=>u.email));
+    const retention=weeks.slice(wi).map((rw,ri)=>{
+      if(ri===0)return cohortEmails.size;
+      const activeInWeek=new Set();
+      cohortE.forEach(e=>{const t=new Date(pd(e.created_at)*1000);if(t>=rw.start&&t<rw.end&&cohortEmails.has(e.email))activeInWeek.add(e.email)});
+      cohortV.forEach(e=>{const t=new Date(pd(e.occurred_at)*1000);if(t>=rw.start&&t<rw.end&&cohortEmails.has(e._email))activeInWeek.add(e._email)});
+      return activeInWeek.size;
+    });
+    return{label:w.label,size:cohortEmails.size,retention};
+  });
+  // Render cohort as HTML table
+  let cohortHtml='<table style="width:100%;font-size:12px"><thead><tr><th style="background:var(--surface)">Cohort</th><th style="background:var(--surface)">Tamanho</th>';
+  weeks.forEach((w,i)=>cohortHtml+=`<th style="background:var(--surface)">${w.label}</th>`);
+  cohortHtml+='</tr></thead><tbody>';
+  cohortData.forEach((cd,ci)=>{
+    cohortHtml+=`<tr><td style="font-weight:600">${cd.label}</td><td class="mono">${cd.size}</td>`;
+    weeks.forEach((w,wi)=>{
+      if(wi<ci){cohortHtml+='<td></td>';return}
+      const idx=wi-ci;
+      const val=cd.retention[idx]!=null?cd.retention[idx]:'';
+      const pct=cd.size&&val!==''?Math.round(val/cd.size*100):0;
+      const bg=pct>=70?'var(--green-dim)':pct>=40?'var(--orange-dim)':pct>0?'var(--red-dim)':'transparent';
+      const color=pct>=70?'var(--green)':pct>=40?'var(--orange)':pct>0?'var(--red)':'var(--text-muted)';
+      cohortHtml+=`<td style="background:${bg};color:${color};font-weight:600;font-family:'JetBrains Mono',monospace;text-align:center">${val!==''?pct+'%':''}</td>`;
+    });
+    cohortHtml+='</tr>';
+  });
+  cohortHtml+='</tbody></table>';
+  document.getElementById('cohortContainer').innerHTML=cohortHtml;
+
+  // Score distribution
+  const scoreBuckets={'0-10':0,'11-20':0,'21-30':0,'31-40':0,'41-50':0,'51-60':0,'61-70':0,'71-80':0,'81-90':0,'91-100':0};
+  userScores.forEach(u=>{const b=u.score===0?0:Math.min(9,Math.floor((u.score-1)/10));const key=Object.keys(scoreBuckets)[b];scoreBuckets[key]++});
+  C.cEngScore=mkChart('cEngScore',{type:'bar',data:{labels:Object.keys(scoreBuckets),datasets:[{data:Object.values(scoreBuckets),backgroundColor:Object.keys(scoreBuckets).map((_,i)=>{const g=i/9;return `rgba(${Math.round(248-196*g)},${Math.round(113+98*g)},${Math.round(113+40*g)},.7)`}),borderRadius:3}]},options:{...CD,plugins:{legend:{display:false}}}});
+
+  // MRR over last 30d — reconstructed day-by-day
+  // For each day, count how many assinaturas PRO ativas já existiam naquela data
+  // A data de início usa updated_at como aproximação até subscribed_at estar disponível
+  const mrrD=dk(rd);
+  const mrrDays=Object.keys(mrrD);
+  const proUsers=activeProUsers;
+  // Build timeline: when each paying user started
+  const subTimeline=proUsers.map(u=>{
+    // Best guess: updated_at is when plan changed; fallback to created_at
+    const becamePro=pd(u.updated_at)||pd(u.created_at);
+    return{email:u.email,startEpoch:becamePro};
+  });
+  mrrDays.forEach(dayStr=>{
+    const dayEnd=pd(dayStr+'T23:59:59-03:00');
+    let proOnDay=0;
+    subTimeline.forEach(s=>{
+      if(s.startEpoch<=dayEnd)proOnDay++;
+    });
+    mrrD[dayStr]=proOnDay*PRO_PRICE;
+  });
+  C.cEngMRR=mkChart('cEngMRR',{type:'line',data:{labels:mrrDays.map(d=>d.slice(5)),datasets:[{label:'MRR (R$)',data:Object.values(mrrD),borderColor:'#22d3ee',backgroundColor:'rgba(34,211,238,.1)',fill:true,tension:.3,pointRadius:3,pointBackgroundColor:'#22d3ee'}]},options:{...CD,plugins:{legend:{display:false}},scales:{...CD.scales,y:{...CD.scales.y,ticks:{...CD.scales.y.ticks,callback:v=>'R$'+v}}}}});
+
+  // Lifetime by plan
+  const lifePro=activeProUsers.map(u=>Math.round((now-pd(u.created_at))/86400)).filter(d=>d>0);
+  const avgLP=lifePro.length?Math.round(lifePro.reduce((s,d)=>s+d,0)/lifePro.length):0;
+  C.cEngLifetime=mkChart('cEngLifetime',{type:'bar',data:{labels:['PRO ativo'],datasets:[{data:[avgLP],backgroundColor:['rgba(52,211,153,.7)'],borderRadius:6}]},options:{...CD,plugins:{legend:{display:false}},scales:{...CD.scales,y:{...CD.scales.y,ticks:{...CD.scales.y.ticks,callback:v=>v+'d'}}}}});
+
+  // Top 20 engagement ranking
+  document.getElementById('engRankList').innerHTML=userScores.slice(0,20).map((u,i)=>{
+    const barW=u.score;const color=u.score>=70?'var(--green)':u.score>=30?'var(--accent)':'var(--red)';
+    return`<div class="churn-item"><span style="font-weight:700;color:var(--text-muted);width:24px;font-size:12px">${i+1}</span><span class="c-email" title="${eh(u.email)}">${eh(u.email)}</span><span class="c-plan">${pt(u.plan)}</span><div style="width:80px;background:var(--surface-3);border-radius:4px;height:8px;overflow:hidden"><div style="width:${barW}%;height:100%;background:${color};border-radius:4px"></div></div><span class="c-days" style="color:${color}">${u.score}</span></div>`;
+  }).join('');
+}
+
+// ══════ INSIGHTS ══════
+function rInsights(){
+  const pg='insights';const rd=getRangeDays(pg);
+  const E=trFilter(DATA.extractions,'created_at',pg),V=trFilter(DATA.events,'occurred_at',pg);const d7=Date.now()/1000-7*86400;
+  const e7=DATA.extractions.filter(e=>pd(e.created_at)>d7);
+  const errRate7=e7.length?(e7.filter(e=>e.status==='error').length/e7.length*100).toFixed(1):0;
+  const avgDur=E.filter(e=>e.duration_ms).length?Math.round(E.filter(e=>e.duration_ms).reduce((s,e)=>s+e.duration_ms,0)/E.filter(e=>e.duration_ms).length/1000):0;
+  const proEvents=V.filter(e=>(e.plan||'').toLowerCase()==='pro').length;
+  const freeEvents=V.length-proEvents;
+
+  document.getElementById('insKpis').innerHTML=`<div class="kpi red"><div class="kpi-label">Taxa Erro 7d</div><div class="kpi-value">${errRate7}%</div></div><div class="kpi blue"><div class="kpi-label">Duração Média</div><div class="kpi-value">${avgDur}s</div></div><div class="kpi green"><div class="kpi-label">Eventos PRO</div><div class="kpi-value">${proEvents}</div></div><div class="kpi"><div class="kpi-label">Eventos Free</div><div class="kpi-value">${freeEvents}</div></div>`;
+
+  dc('cInsErrors','cInsDuration','cInsHours','cInsPlanFeatures');
+  // Error rate/day
+  const errD=dk(rd);const totD={};Object.keys(errD).forEach(k=>totD[k]=0);
+  E.forEach(e=>{const d=dayKey(e.created_at);if(d in totD){totD[d]++;if(e.status==='error')errD[d]++}});
+  const errPct=Object.keys(errD).map(k=>totD[k]?(errD[k]/totD[k]*100):0);
+  C.cInsErrors=mkChart('cInsErrors',{type:'line',data:{labels:Object.keys(errD).map(d=>d.slice(5)),datasets:[{label:'% erro',data:errPct.map(v=>+v.toFixed(1)),borderColor:'#f87171',backgroundColor:'rgba(248,113,113,.1)',fill:true,tension:.3,pointRadius:3,pointBackgroundColor:'#f87171'}]},options:{...CD,plugins:{legend:{display:false}},scales:{...CD.scales,y:{...CD.scales.y,ticks:{...CD.scales.y.ticks,callback:v=>v+'%'}}}}});
+  // Avg duration/day
+  const durD=dk(rd);const durC={};Object.keys(durD).forEach(k=>durC[k]=0);
+  E.forEach(e=>{if(e.duration_ms){const d=dayKey(e.created_at);if(d in durD){durD[d]+=e.duration_ms;durC[d]++}}});
+  C.cInsDuration=mkChart('cInsDuration',{type:'line',data:{labels:Object.keys(durD).map(d=>d.slice(5)),datasets:[{label:'seg',data:Object.keys(durD).map(k=>durC[k]?+(durD[k]/durC[k]/1000).toFixed(1):0),borderColor:'#60a5fa',backgroundColor:'rgba(96,165,250,.1)',fill:true,tension:.3,pointRadius:3}]},options:{...CD,plugins:{legend:{display:false}}}});
+  // Peak hours (all actions: events + extractions)
+  const hrs=Array(24).fill(0);
+  V.forEach(e=>{const h=hourKey(e.occurred_at);if(h!=null)hrs[h]++});
+  E.forEach(e=>{const h=hourKey(e.created_at);if(h!=null)hrs[h]++});
+  C.cInsHours=mkChart('cInsHours',{type:'bar',data:{labels:hrs.map((_,i)=>`${String(i).padStart(2,'0')}h`),datasets:[{data:hrs,backgroundColor:hrs.map((_,i)=>(i>=8&&i<=20)?'rgba(245,197,66,.6)':'rgba(42,46,56,.6)'),borderRadius:3}]},options:{...CD,plugins:{legend:{display:false}}}});
+  // Feature adoption by plan: unique users who used each feature / active users in the plan
+  const planUsers={free:new Set(),pro:new Set()},featureUsers={free:{},pro:{}};
+  V.forEach(e=>{const email=e._email;if(!email)return;const p=(e.plan||'').toLowerCase()==='pro'?'pro':'free',f=e.feature||e.event_name||'?';planUsers[p].add(email);if(!featureUsers[p][f])featureUsers[p][f]=new Set();featureUsers[p][f].add(email)});
+  const allFeat=[...new Set([...Object.keys(featureUsers.free),...Object.keys(featureUsers.pro)])].sort((a,b)=>((featureUsers.free[b]?.size||0)+(featureUsers.pro[b]?.size||0))-((featureUsers.free[a]?.size||0)+(featureUsers.pro[a]?.size||0))).slice(0,10);
+  const adoption=(p,f)=>planUsers[p].size?+(((featureUsers[p][f]?.size||0)/planUsers[p].size)*100).toFixed(1):0;
+  C.cInsPlanFeatures=mkChart('cInsPlanFeatures',{type:'bar',data:{labels:allFeat,datasets:[{label:'Free',data:allFeat.map(f=>adoption('free',f)),backgroundColor:'rgba(90,94,106,.65)',borderRadius:3},{label:'PRO',data:allFeat.map(f=>adoption('pro',f)),backgroundColor:'rgba(52,211,153,.7)',borderRadius:3}]},options:{...CD,plugins:{legend:{labels:{color:'#8b8f9a'}}},scales:{...CD.scales,y:{...CD.scales.y,max:100,ticks:{...CD.scales.y.ticks,callback:v=>v+'%'}}}}});
+}
+
+// Export
+function exportCSV(s){const rows=getF(s)||DATA[s];if(!rows?.length)return alert('Sem dados');const k=Object.keys(rows[0]);const csv=[k.join(',')];rows.forEach(r=>csv.push(k.map(x=>csvCell(r[x])).join(',')));const b=new Blob(['\uFEFF'+csv.join('\n')],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`patogo_${s}_${dayKey(Date.now()/1000)}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+
+// Init
+document.getElementById('loginPassword').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+document.getElementById('loginEmail').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('loginPassword').focus()});
+document.getElementById('cfgExcludeInput').addEventListener('keydown',e=>{if(e.key==='Enter')addExcludedEmail()});
+(function(){
+  // Remove dados administrativos persistidos por versões anteriores.
+  localStorage.removeItem(CFG_KEY);
+  localStorage.removeItem(SK);
+  // Load saved settings into form
+  const c=loadCfg();
+  if(c.pricePro)document.getElementById('cfgPricePro').value=c.pricePro;
+  renderExcludedList();
+  const s=getSession();if(s)enterDash();
+})();
+</script>
+</body>
+</html>
