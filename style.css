@@ -1041,7 +1041,56 @@ section {
   border-color: rgba(102, 126, 234, 0.6);
 }
 
+/* Grade com 4 planos (Free, PRO Mensal, PRO Anual, PRO Voz) */
+.pricing-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1400px;
+  gap: 20px;
+}
+
+.pricing-grid-4 .pricing-card {
+  padding: 40px 24px;
+}
+
+/* PRO Voz */
+.pricing-card-voice {
+  background: rgba(34, 211, 238, 0.05);
+  border: 1px solid rgba(34, 211, 238, 0.45);
+}
+
+.pricing-card-voice:hover {
+  transform: translateY(-5px);
+  border-color: rgba(34, 211, 238, 0.75);
+  box-shadow: 0 0 40px rgba(34, 211, 238, 0.12), 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-badge-voice {
+  background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+  box-shadow: 0 4px 15px rgba(34, 211, 238, 0.35);
+}
+
+.pricing-card-voice .pricing-title {
+  background: linear-gradient(135deg, #22d3ee 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pricing-card-voice .feature-check {
+  color: #22d3ee;
+}
+
+.btn-voice {
+  background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+  box-shadow: 0 10px 30px rgba(34, 211, 238, 0.25);
+}
+
+.btn-voice:hover {
+  box-shadow: 0 15px 40px rgba(34, 211, 238, 0.4);
+}
+
 .pricing-badge {
+  white-space: nowrap;
   position: absolute;
   top: -12px;
   left: 50%;
@@ -2032,6 +2081,12 @@ code {
    ============================================ */
 
 @media (max-width: 1200px) {
+  .pricing-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    row-gap: 36px;
+  }
+
   .hero-section {
     gap: 12px;
   }
